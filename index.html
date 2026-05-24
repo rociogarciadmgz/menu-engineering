@@ -12,35 +12,39 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#F7F6F3;
-  --surface:#FFFFFF;
-  --surface2:#F2F1EE;
-  --border:#E4E2DC;
-  --border2:#D0CEC7;
-  --text:#18181A;
-  --text2:#6E6C67;
-  --text3:#A8A69F;
-  --accent:#C8502A;
-  --accent-bg:#FBF0EC;
-  --star:#1E6641;
-  --star-bg:#EAF7EE;
-  --star-chip:#C6EACF;
-  --horse:#1A4B9E;
-  --horse-bg:#EBF1FD;
-  --horse-chip:#C3D7F9;
-  --puzzle:#8A5A00;
-  --puzzle-bg:#FEF8E8;
-  --puzzle-chip:#FDEDB3;
-  --dog:#5A5852;
-  --dog-bg:#F4F3F0;
-  --dog-chip:#E2E0DA;
-  --fd:'Instrument Serif',serif;
-  --fb:'Inter',sans-serif;
-  --fm:'JetBrains Mono',monospace;
-  --r:12px;
-  --r-sm:8px;
-  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
-  --shadow-md:0 4px 12px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  /* Colores adaptados a un portfolio moderno, limpio y elegante */
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface2: #F1F5F9;
+  --border: #E2E8F0;
+  --border2: #CBD5E1;
+  --text: #0F172A;
+  --text2: #475569;
+  --text3: #94A3B8;
+  --accent: #6366F1; /* Indigo vibrante tipo portfolio */
+  --accent-bg: #EEF2FF;
+  
+  /* Colores categóricos de la matriz mantenidos pero refinados */
+  --star: #059669;
+  --star-bg: #ECFDF5;
+  --star-chip: #A7F3D0;
+  --horse: #2563EB;
+  --horse-bg: #EFF6FF;
+  --horse-chip: #BFDBFE;
+  --puzzle: #D97706;
+  --puzzle-bg: #FFFBEB;
+  --puzzle-chip: #FDE68A;
+  --dog: #64748B;
+  --dog-bg: #F8FAFC;
+  --dog-chip: #E2E8F0;
+  
+  --fd: 'Instrument Serif', serif;
+  --fb: 'Inter', sans-serif;
+  --fm: 'JetBrains Mono', monospace;
+  --r: 16px;
+  --r-sm: 8px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
 }
 
 html{font-size:16px;background:var(--bg)}
@@ -48,43 +52,45 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 
 /* ─── HEADER ─── */
 .hdr{
-  background:var(--surface);
+  background:rgba(255, 255, 255, 0.85);
   border-bottom:1px solid var(--border);
   position:sticky;top:0;z-index:200;
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 }
 .hdr-inner{
-  max-width:1000px;margin:0 auto;
+  max-width:1100px;margin:0 auto;
   display:flex;align-items:center;justify-content:space-between;
-  height:58px;padding:0 2rem;
+  height:64px;padding:0 2rem;
 }
 .logo{
-  font-family:var(--fd);font-size:20px;font-style:italic;
+  font-family:var(--fd);font-size:24px;font-style:italic;
   color:var(--text);text-decoration:none;
-  display:flex;align-items:center;gap:10px;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:12px;letter-spacing:-.01em;
 }
 .logo-mark{
-  width:28px;height:28px;border-radius:50%;
+  width:32px;height:32px;border-radius:10px;
   background:var(--accent);display:flex;align-items:center;justify-content:center;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
 }
-.logo-mark i{color:#fff;font-size:13px}
+.logo-mark i{color:#fff;font-size:16px}
 
 /* step nav */
-.steps{display:flex;align-items:center;gap:0;height:100%}
+.steps{display:flex;align-items:center;gap:4px;height:100%}
 .step-btn{
   display:flex;align-items:center;gap:8px;
-  font-family:var(--fb);font-size:12px;font-weight:500;letter-spacing:.04em;
-  text-transform:uppercase;padding:0 20px;height:100%;
+  font-family:var(--fb);font-size:13px;font-weight:600;letter-spacing:.02em;
+  text-transform:uppercase;padding:0 16px;height:100%;
   background:none;border:none;border-bottom:2px solid transparent;
-  cursor:pointer;color:var(--text3);transition:color .18s,border-color .18s;
+  cursor:pointer;color:var(--text3);transition:color .2s,border-color .2s;
   white-space:nowrap;
 }
 .step-btn .step-num{
-  width:20px;height:20px;border-radius:50%;
+  width:22px;height:22px;border-radius:50%;
   background:var(--surface2);border:1px solid var(--border2);
   display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:600;color:var(--text3);
-  transition:all .18s;
+  font-size:11px;font-weight:700;color:var(--text3);
+  transition:all .2s;
 }
 .step-btn:hover{color:var(--text2)}
 .step-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
@@ -93,26 +99,26 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .step-btn.done .step-num{background:var(--star-bg);border-color:var(--star-chip);color:var(--star)}
 
 /* ─── MAIN ─── */
-.main{max-width:1000px;margin:0 auto;padding:3rem 2rem 6rem}
-.panel{display:none;animation:fadeUp .25s ease}
+.main{max-width:1100px;margin:0 auto;padding:4rem 2rem 6rem}
+.panel{display:none;animation:fadeUp .3s ease-out}
 .panel.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-.page-hd{margin-bottom:2.5rem}
-.page-hd h1{font-family:var(--fd);font-size:36px;font-weight:400;font-style:italic;color:var(--text);letter-spacing:-.02em;margin-bottom:6px}
-.page-hd p{font-size:14px;color:var(--text2);line-height:1.65;max-width:560px}
+.page-hd{margin-bottom:3rem}
+.page-hd h1{font-family:var(--fd);font-size:42px;font-weight:400;font-style:italic;color:var(--text);letter-spacing:-.02em;margin-bottom:8px}
+.page-hd p{font-size:15px;color:var(--text2);line-height:1.65;max-width:600px}
 
 /* ─── INPUT PANEL ─── */
-.input-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:1.25rem}
+.input-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:1.5rem}
 
 .dish-row{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 36px;gap:0;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 40px;gap:0;
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r);overflow:hidden;
   box-shadow:var(--shadow);
-  transition:box-shadow .2s,border-color .2s;
+  transition:box-shadow .2s,border-color .2s, transform .2s;
 }
-.dish-row:focus-within{border-color:var(--border2);box-shadow:var(--shadow-md)}
+.dish-row:focus-within{border-color:var(--accent);box-shadow:var(--shadow-md);transform:translateY(-1px);}
 .dish-row:hover{border-color:var(--border2)}
 
 .dish-row .field{
@@ -121,175 +127,134 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 }
 .dish-row .field:last-of-type{border-right:none}
 .field-lbl{
-  font-size:9.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
-  color:var(--text3);padding:7px 14px 0;
+  font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text3);padding:10px 16px 0;
 }
 .field input{
   width:100%;border:none;background:transparent;
-  font-family:var(--fb);font-size:13.5px;color:var(--text);
-  padding:4px 14px 8px;outline:none;
+  font-family:var(--fb);font-size:14px;color:var(--text);font-weight:500;
+  padding:6px 16px 12px;outline:none;
 }
-.field input::placeholder{color:var(--text3)}
-.field input[type=number]{font-family:var(--fm);font-size:13px}
+.field input::placeholder{color:var(--border2);font-weight:400;}
+.field input[type=number]{font-family:var(--fm);font-size:14px}
 .del-btn{
   display:flex;align-items:center;justify-content:center;
   background:none;border:none;cursor:pointer;
-  color:var(--text3);font-size:16px;
+  color:var(--text3);font-size:18px;
   border-left:1px solid var(--border);
-  transition:color .15s,background .15s;
+  transition:color .2s,background .2s;
   border-radius:0;
 }
-.del-btn:hover{color:var(--accent);background:var(--accent-bg)}
+.del-btn:hover{color:#EF4444;background:#FEF2F2}
 
 .col-headers{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 36px;
-  gap:0;padding:0 0 6px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 40px;
+  gap:0;padding:0 0 8px;
 }
-.col-h{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:0 14px}
+.col-h{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:0 16px}
 
 /* bottom bar */
 .input-actions{
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
-  margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);
+  margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);
 }
-.action-left{display:flex;gap:10px;flex-wrap:wrap}
+.action-left{display:flex;gap:12px;flex-wrap:wrap}
 
 .btn{
-  font-family:var(--fb);font-size:13px;font-weight:500;
-  padding:10px 20px;border-radius:var(--r-sm);cursor:pointer;
-  display:inline-flex;align-items:center;gap:7px;
-  transition:all .15s;border:1px solid var(--border2);
+  font-family:var(--fb);font-size:14px;font-weight:600;
+  padding:12px 24px;border-radius:var(--r-sm);cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s ease;border:1px solid var(--border2);
   background:var(--surface);color:var(--text);
   box-shadow:var(--shadow);
 }
-.btn:hover{background:var(--surface2);border-color:var(--border2)}
+.btn:hover{background:var(--surface2);border-color:var(--border2);transform:translateY(-1px);}
 .btn-primary{
   background:var(--accent);color:#fff;border-color:var(--accent);
-  box-shadow:0 2px 8px rgba(200,80,42,.25);
+  box-shadow:0 4px 12px rgba(99, 102, 241, 0.25);
 }
-.btn-primary:hover{background:#B54525;border-color:#B54525;box-shadow:0 3px 12px rgba(200,80,42,.3)}
+.btn-primary:hover{background:#4F46E5;border-color:#4F46E5;box-shadow:0 6px 16px rgba(99, 102, 241, 0.35);}
 .btn-primary:active{transform:scale(.98)}
-.btn-sm{font-size:12px;padding:8px 14px}
+.btn-sm{font-size:13px;padding:10px 18px}
 
-.err{font-size:12px;color:var(--accent);margin-top:10px;min-height:16px;display:flex;align-items:center;gap:6px}
+.err{font-size:13px;color:#EF4444;margin-top:12px;min-height:16px;display:flex;align-items:center;gap:6px;font-weight:500;}
 
 /* counter */
 .dish-count{
-  font-size:13px;color:var(--text2);
+  font-size:14px;color:var(--text2);
   display:flex;align-items:center;gap:6px;
   font-variant-numeric:tabular-nums;
 }
-.dish-count strong{font-weight:600;color:var(--text)}
+.dish-count strong{font-weight:700;color:var(--text)}
 
 /* ─── DIVIDER ─── */
-.divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
+.divider{border:none;border-top:1px solid var(--border);margin:3rem 0}
 
-/* ─── BCG MATRIX ─── */
-.bcg-wrap{display:grid;grid-template-columns:24px 1fr;gap:0;margin-bottom:2.5rem}
-.axis-y-lbl{
-  writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);
-  font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--text3);text-align:center;padding:8px 0;
-}
-.bcg-col{display:flex;flex-direction:column;gap:0}
-.bcg-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  border:1px solid var(--border);border-radius:var(--r);
-  overflow:hidden;box-shadow:var(--shadow-md);
-}
-.quad{
-  min-height:190px;padding:18px 20px;
-  border-right:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  transition:background .2s;
-}
-.quad:nth-child(2){border-right:none}
-.quad:nth-child(3){border-bottom:none}
-.quad:nth-child(4){border-bottom:none;border-right:none}
-.quad-star  {background:var(--star-bg)}
-.quad-puzzle{background:var(--puzzle-bg)}
-.quad-horse {background:var(--horse-bg)}
-.quad-dog   {background:var(--dog-bg)}
-
-.quad-hd{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.quad-icon{font-size:16px}
-.quad-info{}
-.quad-name{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
-.quad-sub{font-size:10px;opacity:.55;margin-top:1px}
-.quad-star   .quad-name{color:var(--star)}
-.quad-puzzle .quad-name{color:var(--puzzle)}
-.quad-horse  .quad-name{color:var(--horse)}
-.quad-dog    .quad-name{color:var(--dog)}
-
-.chips{display:flex;flex-wrap:wrap;gap:4px}
-.chip{
-  font-size:11px;font-weight:500;padding:4px 9px;
-  border-radius:20px;cursor:default;
-  transition:transform .12s,box-shadow .12s;
-}
-.chip:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.1)}
-.chip-star  {background:var(--star-chip);color:var(--star)}
-.chip-puzzle{background:var(--puzzle-chip);color:var(--puzzle)}
-.chip-horse {background:var(--horse-chip);color:var(--horse)}
-.chip-dog   {background:var(--dog-chip);color:var(--dog)}
-.chip-none  {font-size:11px;color:var(--text3);padding:4px 0;opacity:.5}
-
-.axis-x-lbl{
-  font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--text3);text-align:center;padding:10px 0 0;
+/* ─── SCATTER CHART & LEGEND ─── */
+.scatter-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  height: 500px;
+  position: relative;
 }
 
 /* legend */
-.legend-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2.5rem}
+.legend-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:3rem}
 .leg{
   background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:14px 16px;
-  border-top:3px solid transparent;
+  border-radius:var(--r);padding:18px 20px;
+  border-top:4px solid transparent;
   box-shadow:var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+.leg:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .leg-star  {border-top-color:var(--star)}
-.leg-puzzle{border-top-color:#C89B00}
+.leg-puzzle{border-top-color:var(--puzzle)}
 .leg-horse {border-top-color:var(--horse)}
-.leg-dog   {border-top-color:#888}
-.leg-name{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:5px}
+.leg-dog   {border-top-color:var(--dog)}
+.leg-name{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
 .leg-star  .leg-name{color:var(--star)}
 .leg-puzzle .leg-name{color:var(--puzzle)}
 .leg-horse .leg-name{color:var(--horse)}
 .leg-dog   .leg-name{color:var(--dog)}
-.leg-desc{font-size:12px;color:var(--text2);line-height:1.55}
+.leg-desc{font-size:13px;color:var(--text2);line-height:1.6}
 
 /* class table */
 .tbl-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
-.tbl{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
 .tbl th{
-  background:var(--surface2);font-size:10px;font-weight:600;letter-spacing:.07em;
-  text-transform:uppercase;color:var(--text3);padding:10px 14px;
+  background:var(--surface2);font-size:11px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text3);padding:12px 16px;
   text-align:left;border-bottom:1px solid var(--border);
 }
-.tbl td{padding:11px 14px;border-bottom:1px solid var(--border)}
+.tbl td{padding:14px 16px;border-bottom:1px solid var(--border)}
 .tbl tr:last-child td{border-bottom:none}
-.tbl tbody tr{transition:background .12s}
+.tbl tbody tr{transition:background .15s}
 .tbl tbody tr:hover{background:var(--surface2)}
-.mono{font-family:var(--fm);font-size:12px}
-.badge{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:20px}
+.mono{font-family:var(--fm);font-size:13px}
+.badge{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
 .badge-star  {background:var(--star-chip);color:var(--star)}
 .badge-horse {background:var(--horse-chip);color:var(--horse)}
 .badge-puzzle{background:var(--puzzle-chip);color:var(--puzzle)}
 .badge-dog   {background:var(--dog-chip);color:var(--dog)}
 
 /* sort controls */
-.tbl-controls{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
-.lbl-sm{font-size:11px;font-weight:500;color:var(--text2)}
+.tbl-controls{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.lbl-sm{font-size:12px;font-weight:600;color:var(--text2)}
 .select-sm{
-  font-family:var(--fb);font-size:12px;padding:6px 10px;
+  font-family:var(--fb);font-size:13px;padding:8px 12px;
   border:1px solid var(--border2);border-radius:var(--r-sm);
   background:var(--surface);color:var(--text);cursor:pointer;
-  outline:none;
+  outline:none;font-weight:500;
 }
 .filter-btn{
-  font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;
+  font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;
   border:1px solid var(--border2);background:var(--surface);
-  color:var(--text2);cursor:pointer;transition:all .15s;
+  color:var(--text2);cursor:pointer;transition:all .2s;
 }
 .filter-btn.on-star  {background:var(--star-chip);border-color:var(--star-chip);color:var(--star)}
 .filter-btn.on-horse {background:var(--horse-chip);border-color:var(--horse-chip);color:var(--horse)}
@@ -297,101 +262,101 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .filter-btn.on-dog   {background:var(--dog-chip);border-color:var(--dog-chip);color:var(--dog)}
 
 /* ─── DASHBOARD ─── */
-.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.5rem}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:2rem}
 .kpi{
   background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:20px;
+  border-radius:var(--r);padding:24px;
   box-shadow:var(--shadow);position:relative;overflow:hidden;
 }
 .kpi::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
   background:var(--border);
 }
 .kpi.k-rev::after{background:var(--horse)}
-.kpi.k-cost::after{background:#E57373}
+.kpi.k-cost::after{background:#EF4444}
 .kpi.k-margin::after{background:var(--star)}
 .kpi.k-ticket::after{background:var(--puzzle)}
 .kpi.k-units::after{background:var(--accent)}
 .kpi.k-total::after{background:var(--text3)}
-.kpi-lbl{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
-.kpi-val{font-family:var(--fm);font-size:26px;font-weight:500;color:var(--text);line-height:1}
-.kpi-sub{font-size:11px;color:var(--text3);margin-top:5px}
+.kpi-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.kpi-val{font-family:var(--fm);font-size:32px;font-weight:500;color:var(--text);line-height:1}
+.kpi-sub{font-size:12px;color:var(--text3);margin-top:8px}
 
-.chart-grid{display:grid;grid-template-columns:5fr 4fr;gap:14px;margin-bottom:14px}
+.chart-grid{display:grid;grid-template-columns:5fr 4fr;gap:16px;margin-bottom:16px}
 .chart-card{
   background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:20px;box-shadow:var(--shadow);
+  border-radius:var(--r);padding:24px;box-shadow:var(--shadow);
 }
 .chart-card-full{grid-column:1/-1}
-.chart-lbl{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.chart-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:20px}
 
 /* interactive toggle on dashboard */
-.toggle-group{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.toggle-group{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
 .tog{
-  font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;
+  font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;
   border:1px solid var(--border2);background:var(--surface);
-  color:var(--text2);cursor:pointer;transition:all .15s;
+  color:var(--text2);cursor:pointer;transition:all .2s;
 }
 .tog.active{background:var(--text);border-color:var(--text);color:#fff}
 
-.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.bar-name{font-size:12px;color:var(--text);min-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar-track{flex:1;height:5px;background:var(--surface2);border-radius:3px}
-.bar-fill{height:5px;border-radius:3px;transition:width .4s ease}
-.bar-val{font-size:11px;font-family:var(--fm);color:var(--text2);min-width:60px;text-align:right}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.bar-name{font-size:13px;font-weight:500; color:var(--text);min-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:6px;background:var(--surface2);border-radius:4px}
+.bar-fill{height:6px;border-radius:4px;transition:width .5s cubic-bezier(0.4, 0, 0.2, 1)}
+.bar-val{font-size:12px;font-family:var(--fm);color:var(--text2);min-width:70px;text-align:right}
 
 /* ─── ADVICE ─── */
-.adv-section{margin-bottom:2.5rem}
+.adv-section{margin-bottom:3rem}
 .adv-title{
-  font-family:var(--fd);font-size:22px;font-style:italic;
-  color:var(--text);margin-bottom:14px;
-  padding-bottom:10px;border-bottom:1px solid var(--border);
+  font-family:var(--fd);font-size:26px;font-style:italic;
+  color:var(--text);margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--border);
 }
 .adv-card{
   background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:20px 22px;margin-bottom:10px;
+  border-radius:var(--r);padding:24px;margin-bottom:16px;
   box-shadow:var(--shadow);
 }
 .adv-dish{
-  display:flex;align-items:center;gap:10px;
-  font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;
+  display:flex;align-items:center;gap:12px;
+  font-size:16px;font-weight:600;color:var(--text);margin-bottom:12px;
 }
-.adv-text{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px}
+.adv-text{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
 
 /* simulator */
 .sim-box{
   background:var(--surface2);border:1px solid var(--border);
-  border-radius:var(--r-sm);padding:16px 18px;
+  border-radius:var(--r-sm);padding:20px;
 }
-.sim-title{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
-.sim-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
-.sim-lbl{font-size:12px;color:var(--text2);min-width:120px}
-.sim-slider{flex:1;min-width:100px;accent-color:var(--accent)}
-.sim-val{font-family:var(--fm);font-size:13px;font-weight:500;color:var(--text);min-width:70px}
+.sim-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.sim-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.sim-lbl{font-size:13px;font-weight:500;color:var(--text2);min-width:140px}
+.sim-slider{flex:1;min-width:120px;accent-color:var(--accent)}
+.sim-val{font-family:var(--fm);font-size:14px;font-weight:500;color:var(--text);min-width:80px}
 .sim-result{
-  display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap;
-  padding-top:12px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap;
+  padding-top:16px;border-top:1px solid var(--border);
 }
-.sim-now{font-size:12px;color:var(--text2)}
-.sim-arrow{font-size:18px;color:var(--text3)}
-.sim-after{font-size:13px;font-weight:600;color:var(--star)}
+.sim-now{font-size:13px;color:var(--text2)}
+.sim-arrow{font-size:20px;color:var(--text3)}
+.sim-after{font-size:14px;font-weight:700;color:var(--star)}
 
 /* ─── EMPTY ─── */
 .empty{
-  text-align:center;padding:5rem 2rem;
-  color:var(--text3);font-size:14px;
+  text-align:center;padding:6rem 2rem;
+  color:var(--text3);font-size:15px;
 }
-.empty i{font-size:36px;display:block;margin-bottom:12px;color:var(--border2)}
+.empty i{font-size:42px;display:block;margin-bottom:16px;color:var(--border2)}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:700px){
+@media(max-width:768px){
   .hdr-inner{padding:0 1rem}
   .main{padding:2rem 1rem 4rem}
   .legend-row{grid-template-columns:1fr 1fr}
   .kpi-row{grid-template-columns:1fr 1fr}
   .chart-grid{grid-template-columns:1fr}
   .step-btn span{display:none}
-  .dish-row{grid-template-columns:1fr 36px}
+  .dish-row{grid-template-columns:1fr 40px}
   .field-lbl{display:none}
   .col-headers{display:none}
 }
@@ -462,8 +427,8 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 <!-- ══ PANEL 2: BCG ══ -->
 <section id="panel-bcg" class="panel">
   <div class="page-hd">
-    <h1>Matriz BCG</h1>
-    <p>Clasificación de tus platos según rentabilidad y popularidad relativa dentro de tu carta.</p>
+    <h1>Matriz BCG Exacta</h1>
+    <p>Visualización real de cada plato mediante gráfico de dispersión, basado en popularidad relativa y margen.</p>
   </div>
   <div id="bcgContent">
     <div class="empty"><i class="ti ti-layout-grid"></i>Introduce tus platos y calcula primero.</div>
@@ -496,13 +461,16 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 
 <script>
 /* ═══════════════════════════════════════════
-   STATE
+   STATE & CONFIG
 ═══════════════════════════════════════════ */
 let results = [];
 let charts = {};
 let dashView = 'margin'; // margin | revenue | units
 let tableFilter = 'all';
 let tableSort = 'margin';
+
+Chart.defaults.font.family = 'Inter, sans-serif';
+Chart.defaults.color = '#475569';
 
 /* ═══════════════════════════════════════════
    NAVIGATION
@@ -547,7 +515,7 @@ function addDish(d) {
     </button>`;
   grid.appendChild(div);
   updateCount();
-  div.querySelector('input').focus();
+  if(!d.name) div.querySelector('input').focus();
 }
 
 function delDish(id) {
@@ -629,49 +597,24 @@ function calculate() {
    HELPERS
 ═══════════════════════════════════════════ */
 const fmt = (n, d=0) => n.toLocaleString('es-ES', {minimumFractionDigits:d, maximumFractionDigits:d});
-const fmtEur = n => fmt(n, 0) + ' €';
+const fmtEur = n => fmt(n, 2) + ' €';
 const CAT = {
-  star:   { label:'Estrella',           chip:'chip-star',   badge:'badge-star',   quad:'quad-star',   leg:'leg-star',   icon:'⭐', clr:'#1E6641' },
-  horse:  { label:'Caballo de batalla', chip:'chip-horse',  badge:'badge-horse',  quad:'quad-horse',  leg:'leg-horse',  icon:'🐴', clr:'#1A4B9E' },
-  puzzle: { label:'Enigma',             chip:'chip-puzzle', badge:'badge-puzzle', quad:'quad-puzzle', leg:'leg-puzzle', icon:'❓', clr:'#C89B00' },
-  dog:    { label:'Perro',              chip:'chip-dog',    badge:'badge-dog',    quad:'quad-dog',    leg:'leg-dog',    icon:'🐶', clr:'#888888' },
+  star:   { label:'Estrella',           chip:'chip-star',   badge:'badge-star',   leg:'leg-star',   icon:'⭐', clr:'#059669' },
+  horse:  { label:'Caballo de batalla', chip:'chip-horse',  badge:'badge-horse',  leg:'leg-horse',  icon:'🐴', clr:'#2563EB' },
+  puzzle: { label:'Enigma',             chip:'chip-puzzle', badge:'badge-puzzle', leg:'leg-puzzle', icon:'❓', clr:'#D97706' },
+  dog:    { label:'Perro',              chip:'chip-dog',    badge:'badge-dog',    leg:'leg-dog',    icon:'🐶', clr:'#64748B' },
 };
 
 /* ═══════════════════════════════════════════
-   BCG RENDER
+   BCG RENDER (SCATTER PLOT)
 ═══════════════════════════════════════════ */
 function renderBCG() {
   const cats = { star:[], horse:[], puzzle:[], dog:[] };
   results.forEach(r => cats[r.cat].push(r));
 
-  const quad = (key, label, sub) => `
-    <div class="quad ${CAT[key].quad}">
-      <div class="quad-hd">
-        <span class="quad-icon">${CAT[key].icon}</span>
-        <div class="quad-info">
-          <div class="quad-name">${label}</div>
-          <div class="quad-sub">${sub}</div>
-        </div>
-      </div>
-      <div class="chips">
-        ${cats[key].length
-          ? cats[key].map(d => `<span class="chip ${CAT[key].chip}" title="${d.name} · Margen: ${fmt(d.margin,2)} €">${d.name}</span>`).join('')
-          : '<span class="chip-none">Sin platos</span>'}
-      </div>
-    </div>`;
-
   let html = `
-  <div class="bcg-wrap">
-    <div class="axis-y-lbl">← Baja &nbsp; Rentabilidad &nbsp; Alta →</div>
-    <div class="bcg-col">
-      <div class="bcg-grid">
-        ${quad('puzzle','Enigma','Alta rent. · Baja pop.')}
-        ${quad('star','Estrella','Alta rent. · Alta pop.')}
-        ${quad('dog','Perro','Baja rent. · Baja pop.')}
-        ${quad('horse','Caballo','Baja rent. · Alta pop.')}
-      </div>
-      <div class="axis-x-lbl">← Baja &nbsp;&nbsp;&nbsp; Popularidad &nbsp;&nbsp;&nbsp; Alta →</div>
-    </div>
+  <div class="scatter-wrap">
+    <canvas id="bcgScatterChart" role="img" aria-label="Gráfico de dispersión Matriz BCG"></canvas>
   </div>
 
   <div class="legend-row">
@@ -694,8 +637,8 @@ function renderBCG() {
   </div>
 
   <hr class="divider">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
-    <p style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3)">Clasificación completa</p>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+    <p style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)">Clasificación completa</p>
     <div class="tbl-controls">
       <span class="lbl-sm">Filtrar:</span>
       <button class="filter-btn" id="fb-all" onclick="setFilter('all')">Todos</button>
@@ -703,7 +646,7 @@ function renderBCG() {
       <button class="filter-btn" id="fb-horse" onclick="setFilter('horse')">🐴 Caballos</button>
       <button class="filter-btn" id="fb-puzzle" onclick="setFilter('puzzle')">❓ Enigmas</button>
       <button class="filter-btn" id="fb-dog" onclick="setFilter('dog')">🐶 Perros</button>
-      <span class="lbl-sm" style="margin-left:6px">Ordenar:</span>
+      <span class="lbl-sm" style="margin-left:8px">Ordenar:</span>
       <select class="select-sm" id="sortSel" onchange="setSort(this.value)">
         <option value="margin">Margen total</option>
         <option value="units">Uds. vendidas</option>
@@ -731,11 +674,126 @@ function renderBCG() {
   </div>`;
 
   document.getElementById('bcgContent').innerHTML = html;
+  
+  // Style "All" filter button
   document.getElementById('fb-all').className = 'filter-btn on-star on-horse on-puzzle on-dog';
   document.getElementById('fb-all').style.background='var(--text)';
   document.getElementById('fb-all').style.borderColor='var(--text)';
   document.getElementById('fb-all').style.color='#fff';
+  
+  // Render Scatter Plot Chart
+  renderScatterChart();
+  
+  // Render Table
   renderTable();
+}
+
+function renderScatterChart() {
+    if(charts.bcg) charts.bcg.destroy();
+    
+    const avgMargin = results.reduce((a, r) => a + r.margin, 0) / results.length;
+    const avgUnits  = results.reduce((a, r) => a + r.units, 0) / results.length;
+
+    // Plugin para dibujar las líneas divisorias que forman los 4 cuadrantes
+    const quadrantPlugin = {
+        id: 'quadrants',
+        beforeDraw: (chart) => {
+            const {ctx, chartArea: {top, bottom, left, right}, scales: {x, y}} = chart;
+            const xPos = x.getPixelForValue(avgUnits);
+            const yPos = y.getPixelForValue(avgMargin);
+
+            ctx.save();
+            ctx.strokeStyle = 'rgba(15, 23, 42, 0.15)'; // color sutil
+            ctx.lineWidth = 2;
+            ctx.setLineDash([6, 6]);
+
+            // Línea Vertical (Media de ventas)
+            if (xPos >= left && xPos <= right) {
+                ctx.beginPath();
+                ctx.moveTo(xPos, top);
+                ctx.lineTo(xPos, bottom);
+                ctx.stroke();
+            }
+            // Línea Horizontal (Media de rentabilidad)
+            if (yPos >= top && yPos <= bottom) {
+                ctx.beginPath();
+                ctx.moveTo(left, yPos);
+                ctx.lineTo(right, yPos);
+                ctx.stroke();
+            }
+
+            // Etiquetas de las líneas
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.4)';
+            ctx.font = '500 11px Inter';
+            ctx.fillText('Rentabilidad Media', left + 12, yPos - 12);
+            ctx.fillText('Popularidad Media', xPos + 12, top + 24);
+            
+            ctx.restore();
+        }
+    };
+
+    const scatterData = results.map(r => ({
+        x: r.units,
+        y: r.margin,
+        raw: r
+    }));
+
+    const ctxCanvas = document.getElementById('bcgScatterChart').getContext('2d');
+    
+    charts.bcg = new Chart(ctxCanvas, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Platos',
+                data: scatterData,
+                backgroundColor: results.map(r => CAT[r.cat].clr),
+                borderColor: '#ffffff',
+                borderWidth: 2,
+                pointRadius: 9,
+                pointHoverRadius: 14,
+                hoverBackgroundColor: results.map(r => CAT[r.cat].clr)
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#0F172A',
+                    titleFont: { size: 14, family: 'Inter', weight: 'bold' },
+                    bodyFont: { size: 13, family: 'Inter' },
+                    padding: 14,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            const d = context.raw.raw;
+                            return [
+                                `${CAT[d.cat].icon} ${d.name} (${CAT[d.cat].label})`,
+                                `Rentabilidad (Margen): ${fmtEur(d.margin)}`,
+                                `Popularidad (Ventas): ${fmt(d.units)} uds.`
+                            ];
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Popularidad (Unidades Vendidas)', font: {weight: '600', size: 12} },
+                    grid: { color: 'rgba(0,0,0,0.03)' }
+                },
+                y: {
+                    title: { display: true, text: 'Rentabilidad (Margen de Contribución €)', font: {weight: '600', size: 12} },
+                    grid: { color: 'rgba(0,0,0,0.03)' }
+                }
+            },
+            animation: {
+                duration: 800,
+                easing: 'easeOutQuart'
+            }
+        },
+        plugins: [quadrantPlugin]
+    });
 }
 
 function setFilter(f) {
@@ -768,11 +826,11 @@ function renderTable() {
   document.getElementById('classBody').innerHTML = data.map(r => {
     const pct = totalMargin > 0 ? r.totalMargin / totalMargin * 100 : 0;
     return `<tr>
-      <td style="font-weight:500">${r.name}</td>
+      <td style="font-weight:600">${r.name}</td>
       <td><span class="badge ${CAT[r.cat].badge}">${CAT[r.cat].label}</span></td>
       <td class="mono">${fmt(r.price,2)} €</td>
       <td class="mono">${fmt(r.cost,2)} €</td>
-      <td class="mono">${fmt(r.margin,2)} €</td>
+      <td class="mono" style="font-weight:600">${fmt(r.margin,2)} €</td>
       <td class="mono">${fmt(r.units)}</td>
       <td class="mono">${fmtEur(r.totalMargin)}</td>
       <td class="mono">${fmt(pct,1)}%</td>
@@ -784,8 +842,7 @@ function renderTable() {
    DASHBOARD RENDER
 ═══════════════════════════════════════════ */
 function renderDash() {
-  Object.values(charts).forEach(c => { try{ c.destroy() }catch(e){} });
-  charts = {};
+  Object.values(charts).forEach(c => { try{ if(c && c !== charts.bcg) c.destroy() }catch(e){} });
 
   const tRev    = results.reduce((a,r) => a+r.totalRevenue, 0);
   const tCost   = results.reduce((a,r) => a+r.totalCost, 0);
@@ -838,10 +895,10 @@ function renderDash() {
     </div>
     <div class="chart-card">
       <div class="chart-lbl">Distribución BCG</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;font-size:11px;color:var(--text2)">
-        ${['star','horse','puzzle','dog'].map(k=>`<span style="display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:2px;background:${CAT[k].clr};display:inline-block"></span>${CAT[k].label.split(' ')[0]} <strong style="color:var(--text)">${cats[k]}</strong></span>`).join('')}
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;font-size:12px;font-weight:500;color:var(--text2)">
+        ${['star','horse','puzzle','dog'].map(k=>`<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:${CAT[k].clr};display:inline-block"></span>${CAT[k].label.split(' ')[0]} <strong style="color:var(--text)">${cats[k]}</strong></span>`).join('')}
       </div>
-      <div style="position:relative;height:200px">
+      <div style="position:relative;height:240px">
         <canvas id="donut" role="img" aria-label="Distribución BCG de platos"></canvas>
       </div>
     </div>
@@ -849,12 +906,12 @@ function renderDash() {
 
   <div class="chart-card chart-card-full">
     <div class="chart-lbl">Ingresos · Costes · Margen — comparativa por plato</div>
-    <div style="display:flex;gap:14px;font-size:11px;color:var(--text2);margin-bottom:14px">
-      <span style="display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:2px;background:#93C5FD;display:inline-block"></span>Ingresos</span>
-      <span style="display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:2px;background:#FCA5A5;display:inline-block"></span>Costes</span>
-      <span style="display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:2px;background:#6EE7B7;display:inline-block"></span>Margen</span>
+    <div style="display:flex;gap:16px;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:20px">
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#93C5FD;display:inline-block"></span>Ingresos</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#FCA5A5;display:inline-block"></span>Costes</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#34D399;display:inline-block"></span>Margen</span>
     </div>
-    <div style="position:relative;height:${Math.max(220, results.length*34+60)}px">
+    <div style="position:relative;height:${Math.max(260, results.length*38+60)}px">
       <canvas id="stackChart" role="img" aria-label="Comparativa ingresos costes y margen por plato"></canvas>
     </div>
   </div>`;
@@ -866,10 +923,10 @@ function renderDash() {
     type:'doughnut',
     data:{ labels:['Estrella','Caballo','Enigma','Perro'], datasets:[{
       data:[cats.star,cats.horse,cats.puzzle,cats.dog],
-      backgroundColor:['#1E6641','#1A4B9E','#C89B00','#AAAAAA'],
-      borderWidth:0, hoverOffset:4
+      backgroundColor:['#059669','#2563EB','#D97706','#64748B'],
+      borderWidth:2, borderColor: '#fff', hoverOffset:6
     }]},
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, cutout:'62%' }
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, cutout:'65%' }
   });
 
   const sorted = [...results].sort((a,b) => b.totalRevenue - a.totalRevenue);
@@ -878,17 +935,17 @@ function renderDash() {
     data:{
       labels: sorted.map(r => r.name.length>16 ? r.name.slice(0,15)+'…' : r.name),
       datasets:[
-        { label:'Ingresos', data:sorted.map(r=>Math.round(r.totalRevenue)), backgroundColor:'#93C5FD', borderRadius:3, borderWidth:0 },
-        { label:'Costes',   data:sorted.map(r=>Math.round(r.totalCost)),    backgroundColor:'#FCA5A5', borderRadius:3, borderWidth:0 },
-        { label:'Margen',   data:sorted.map(r=>Math.round(r.totalMargin)),  backgroundColor:'#6EE7B7', borderRadius:3, borderWidth:0 },
+        { label:'Ingresos', data:sorted.map(r=>Math.round(r.totalRevenue)), backgroundColor:'#93C5FD', borderRadius:4, borderWidth:0 },
+        { label:'Costes',   data:sorted.map(r=>Math.round(r.totalCost)),    backgroundColor:'#FCA5A5', borderRadius:4, borderWidth:0 },
+        { label:'Margen',   data:sorted.map(r=>Math.round(r.totalMargin)),  backgroundColor:'#34D399', borderRadius:4, borderWidth:0 },
       ]
     },
     options:{
       responsive:true, maintainAspectRatio:false,
       plugins:{ legend:{display:false} },
       scales:{
-        x:{ grid:{color:'rgba(0,0,0,.05)'}, ticks:{callback:v=>fmt(v)+' €', font:{size:10}} },
-        y:{ ticks:{font:{size:11}} }
+        x:{ grid:{color:'rgba(0,0,0,.03)'}, ticks:{callback:v=>fmt(v)+' €', font:{size:11}} },
+        y:{ ticks:{font:{size:12, weight:'500'}} }
       }
     }
   });
@@ -1102,11 +1159,18 @@ function simPuzz(slider, margin, origMargin, id) {
 }
 
 /* ═══════════════════════════════════════════
-   INIT
+   INIT (DATOS DE EJEMPLO DEL USUARIO)
 ═══════════════════════════════════════════ */
-addDish();
-addDish();
-addDish();
+addDish({ name: "Perrito Caliente", cost: 2.00, price: 8.00, units: 4124 });
+addDish({ name: "Albóndigas", cost: 2.00, price: 8.00, units: 4124 });
+addDish({ name: "Huevos Fritos", cost: 4.00, price: 6.00, units: 5000 });
+addDish({ name: "Hamburguesa", cost: 1.00, price: 9.00, units: 523 });
+addDish({ name: "Tacos", cost: 3.00, price: 7.00, units: 412 });
+addDish({ name: "Pizza", cost: 3.00, price: 7.00, units: 334 });
+addDish({ name: "Pollo a la plancha", cost: 5.00, price: 10.00, units: 900 });
+addDish({ name: "Costillas", cost: 6.00, price: 10.00, units: 120 });
+addDish({ name: "Patatas Fritas", cost: 4.00, price: 6.00, units: 111 });
+addDish({ name: "Fingers", cost: 7.00, price: 10.00, units: 21 });
 </script>
 </body>
 </html>
