@@ -3,60 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menú BCG — Ingeniería de Menús</title>
+<title>Rentabilidad BCG — Ingeniería de Menús</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  /* Colores adaptados a un portfolio moderno, limpio y elegante */
-  --bg: #F8FAFC;
+  /* UI Colors - Clean, Modern Portfolio Style */
+  --bg: #FAFAFA;
   --surface: #FFFFFF;
-  --surface2: #F1F5F9;
-  --border: #E2E8F0;
-  --border2: #CBD5E1;
-  --text: #0F172A;
-  --text2: #475569;
-  --text3: #94A3B8;
-  --accent: #6366F1; /* Indigo vibrante tipo portfolio */
-  --accent-bg: #EEF2FF;
+  --surface2: #F4F4F5;
+  --border: #E4E4E7;
+  --border2: #D4D4D8;
+  --text: #18181B;
+  --text2: #52525B;
+  --text3: #A1A1AA;
   
-  /* Colores categóricos de la matriz mantenidos pero refinados */
-  --star: #059669;
+  /* Primary Brand Color (Blue for interactive elements like sliders) */
+  --accent: #2563EB; 
+  --accent-bg: #EFF6FF;
+  
+  /* Matrix Categories - Modern & Distinct Palette */
+  --star: #10B981;        /* Emerald Green */
   --star-bg: #ECFDF5;
-  --star-chip: #A7F3D0;
-  --horse: #2563EB;
+  --star-chip: #D1FAE5;
+  
+  --horse: #3B82F6;       /* Vibrant Blue */
   --horse-bg: #EFF6FF;
-  --horse-chip: #BFDBFE;
-  --puzzle: #D97706;
+  --horse-chip: #DBEAFE;
+  
+  --puzzle: #F59E0B;      /* Amber/Orange */
   --puzzle-bg: #FFFBEB;
-  --puzzle-chip: #FDE68A;
-  --dog: #64748B;
-  --dog-bg: #F8FAFC;
-  --dog-chip: #E2E8F0;
+  --puzzle-chip: #FEF3C7;
+  
+  --dog: #71717A;         /* Slate/Gray */
+  --dog-bg: #F4F4F5;
+  --dog-chip: #E4E4E7;
   
   --fd: 'Instrument Serif', serif;
   --fb: 'Inter', sans-serif;
   --fm: 'JetBrains Mono', monospace;
-  --r: 16px;
+  --r: 14px;
   --r-sm: 8px;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  --shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.02);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.05), 0 2px 4px rgba(0,0,0,.02);
 }
 
 html{font-size:16px;background:var(--bg)}
 body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100vh}
 
-/* ─── HEADER ─── */
+/* ─── HEADER (Top Navbar) ─── */
 .hdr{
-  background:rgba(255, 255, 255, 0.85);
+  background:rgba(255, 255, 255, 0.9);
   border-bottom:1px solid var(--border);
   position:sticky;top:0;z-index:200;
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
 }
 .hdr-inner{
   max-width:1100px;margin:0 auto;
@@ -71,7 +76,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .logo-mark{
   width:32px;height:32px;border-radius:10px;
   background:var(--accent);display:flex;align-items:center;justify-content:center;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
 }
 .logo-mark i{color:#fff;font-size:16px}
 
@@ -112,7 +117,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .input-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:1.5rem}
 
 .dish-row{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 40px;gap:0;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 44px;gap:0;
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r);overflow:hidden;
   box-shadow:var(--shadow);
@@ -135,7 +140,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
   font-family:var(--fb);font-size:14px;color:var(--text);font-weight:500;
   padding:6px 16px 12px;outline:none;
 }
-.field input::placeholder{color:var(--border2);font-weight:400;}
+.field input::placeholder{color:#D4D4D8;font-weight:400;}
 .field input[type=number]{font-family:var(--fm);font-size:14px}
 .del-btn{
   display:flex;align-items:center;justify-content:center;
@@ -148,7 +153,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .del-btn:hover{color:#EF4444;background:#FEF2F2}
 
 .col-headers{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 40px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 44px;
   gap:0;padding:0 0 8px;
 }
 .col-h{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:0 16px}
@@ -171,9 +176,9 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .btn:hover{background:var(--surface2);border-color:var(--border2);transform:translateY(-1px);}
 .btn-primary{
   background:var(--accent);color:#fff;border-color:var(--accent);
-  box-shadow:0 4px 12px rgba(99, 102, 241, 0.25);
+  box-shadow:0 4px 12px rgba(37, 99, 235, 0.25);
 }
-.btn-primary:hover{background:#4F46E5;border-color:#4F46E5;box-shadow:0 6px 16px rgba(99, 102, 241, 0.35);}
+.btn-primary:hover{background:#1D4ED8;border-color:#1D4ED8;box-shadow:0 6px 16px rgba(37, 99, 235, 0.35);}
 .btn-primary:active{transform:scale(.98)}
 .btn-sm{font-size:13px;padding:10px 18px}
 
@@ -273,7 +278,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
   background:var(--border);
 }
 .kpi.k-rev::after{background:var(--horse)}
-.kpi.k-cost::after{background:#EF4444}
+.kpi.k-cost::after{background:#F43F5E}
 .kpi.k-margin::after{background:var(--star)}
 .kpi.k-ticket::after{background:var(--puzzle)}
 .kpi.k-units::after{background:var(--accent)}
@@ -331,7 +336,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .sim-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
 .sim-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap}
 .sim-lbl{font-size:13px;font-weight:500;color:var(--text2);min-width:140px}
-.sim-slider{flex:1;min-width:120px;accent-color:var(--accent)}
+.sim-slider{flex:1;min-width:120px;accent-color:var(--accent)} /* Blue sliders */
 .sim-val{font-family:var(--fm);font-size:14px;font-weight:500;color:var(--text);min-width:80px}
 .sim-result{
   display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap;
@@ -356,7 +361,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
   .kpi-row{grid-template-columns:1fr 1fr}
   .chart-grid{grid-template-columns:1fr}
   .step-btn span{display:none}
-  .dish-row{grid-template-columns:1fr 40px}
+  .dish-row{grid-template-columns:1fr 44px}
   .field-lbl{display:none}
   .col-headers{display:none}
 }
@@ -368,7 +373,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
   <div class="hdr-inner">
     <a class="logo" href="#">
       <div class="logo-mark"><i class="ti ti-chart-bubble"></i></div>
-      Menú BCG
+      Rentabilidad BCG
     </a>
     <nav class="steps">
       <button class="step-btn active" onclick="goTab('input',this)">
@@ -470,7 +475,7 @@ let tableFilter = 'all';
 let tableSort = 'margin';
 
 Chart.defaults.font.family = 'Inter, sans-serif';
-Chart.defaults.color = '#475569';
+Chart.defaults.color = '#52525B';
 
 /* ═══════════════════════════════════════════
    NAVIGATION
@@ -496,19 +501,19 @@ function addDish(d) {
   div.innerHTML = `
     <div class="field">
       <span class="field-lbl">Nombre del plato</span>
-      <input type="text" placeholder="Ej: Risotto de setas" value="${d.name||''}" oninput="updateCount()">
+      <input type="text" placeholder="Ej: Hamburguesa Clásica" value="${d.name||''}" oninput="updateCount()">
     </div>
     <div class="field">
       <span class="field-lbl">Precio venta (€)</span>
-      <input type="number" min="0" step="0.01" placeholder="14.50" value="${d.price||''}">
+      <input type="number" min="0" step="0.01" placeholder="12.50" value="${d.price||''}">
     </div>
     <div class="field">
       <span class="field-lbl">Coste prod. (€)</span>
-      <input type="number" min="0" step="0.01" placeholder="4.20" value="${d.cost||''}">
+      <input type="number" min="0" step="0.01" placeholder="3.20" value="${d.cost||''}">
     </div>
     <div class="field">
       <span class="field-lbl">Uds. vendidas</span>
-      <input type="number" min="0" step="1" placeholder="180" value="${d.units||''}">
+      <input type="number" min="0" step="1" placeholder="250" value="${d.units||''}">
     </div>
     <button class="del-btn" onclick="delDish(${id})" aria-label="Eliminar plato">
       <i class="ti ti-x"></i>
@@ -599,10 +604,10 @@ function calculate() {
 const fmt = (n, d=0) => n.toLocaleString('es-ES', {minimumFractionDigits:d, maximumFractionDigits:d});
 const fmtEur = n => fmt(n, 2) + ' €';
 const CAT = {
-  star:   { label:'Estrella',           chip:'chip-star',   badge:'badge-star',   leg:'leg-star',   icon:'⭐', clr:'#059669' },
-  horse:  { label:'Caballo de batalla', chip:'chip-horse',  badge:'badge-horse',  leg:'leg-horse',  icon:'🐴', clr:'#2563EB' },
-  puzzle: { label:'Enigma',             chip:'chip-puzzle', badge:'badge-puzzle', leg:'leg-puzzle', icon:'❓', clr:'#D97706' },
-  dog:    { label:'Perro',              chip:'chip-dog',    badge:'badge-dog',    leg:'leg-dog',    icon:'🐶', clr:'#64748B' },
+  star:   { label:'Estrella',           chip:'chip-star',   badge:'badge-star',   leg:'leg-star',   icon:'⭐', clr:'#10B981' },
+  horse:  { label:'Caballo de batalla', chip:'chip-horse',  badge:'badge-horse',  leg:'leg-horse',  icon:'🐴', clr:'#3B82F6' },
+  puzzle: { label:'Enigma',             chip:'chip-puzzle', badge:'badge-puzzle', leg:'leg-puzzle', icon:'❓', clr:'#F59E0B' },
+  dog:    { label:'Perro',              chip:'chip-dog',    badge:'badge-dog',    leg:'leg-dog',    icon:'🐶', clr:'#71717A' },
 };
 
 /* ═══════════════════════════════════════════
@@ -760,7 +765,7 @@ function renderScatterChart() {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: '#0F172A',
+                    backgroundColor: '#18181B',
                     titleFont: { size: 14, family: 'Inter', weight: 'bold' },
                     bodyFont: { size: 13, family: 'Inter' },
                     padding: 14,
@@ -780,11 +785,11 @@ function renderScatterChart() {
             scales: {
                 x: {
                     title: { display: true, text: 'Popularidad (Unidades Vendidas)', font: {weight: '600', size: 12} },
-                    grid: { color: 'rgba(0,0,0,0.03)' }
+                    grid: { color: 'rgba(0,0,0,0.04)' }
                 },
                 y: {
                     title: { display: true, text: 'Rentabilidad (Margen de Contribución €)', font: {weight: '600', size: 12} },
-                    grid: { color: 'rgba(0,0,0,0.03)' }
+                    grid: { color: 'rgba(0,0,0,0.04)' }
                 }
             },
             animation: {
@@ -907,8 +912,8 @@ function renderDash() {
   <div class="chart-card chart-card-full">
     <div class="chart-lbl">Ingresos · Costes · Margen — comparativa por plato</div>
     <div style="display:flex;gap:16px;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:20px">
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#93C5FD;display:inline-block"></span>Ingresos</span>
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#FCA5A5;display:inline-block"></span>Costes</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#60A5FA;display:inline-block"></span>Ingresos</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#FB7185;display:inline-block"></span>Costes</span>
       <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#34D399;display:inline-block"></span>Margen</span>
     </div>
     <div style="position:relative;height:${Math.max(260, results.length*38+60)}px">
@@ -923,7 +928,7 @@ function renderDash() {
     type:'doughnut',
     data:{ labels:['Estrella','Caballo','Enigma','Perro'], datasets:[{
       data:[cats.star,cats.horse,cats.puzzle,cats.dog],
-      backgroundColor:['#059669','#2563EB','#D97706','#64748B'],
+      backgroundColor:[CAT.star.clr, CAT.horse.clr, CAT.puzzle.clr, CAT.dog.clr],
       borderWidth:2, borderColor: '#fff', hoverOffset:6
     }]},
     options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, cutout:'65%' }
@@ -935,8 +940,8 @@ function renderDash() {
     data:{
       labels: sorted.map(r => r.name.length>16 ? r.name.slice(0,15)+'…' : r.name),
       datasets:[
-        { label:'Ingresos', data:sorted.map(r=>Math.round(r.totalRevenue)), backgroundColor:'#93C5FD', borderRadius:4, borderWidth:0 },
-        { label:'Costes',   data:sorted.map(r=>Math.round(r.totalCost)),    backgroundColor:'#FCA5A5', borderRadius:4, borderWidth:0 },
+        { label:'Ingresos', data:sorted.map(r=>Math.round(r.totalRevenue)), backgroundColor:'#60A5FA', borderRadius:4, borderWidth:0 },
+        { label:'Costes',   data:sorted.map(r=>Math.round(r.totalCost)),    backgroundColor:'#FB7185', borderRadius:4, borderWidth:0 },
         { label:'Margen',   data:sorted.map(r=>Math.round(r.totalMargin)),  backgroundColor:'#34D399', borderRadius:4, borderWidth:0 },
       ]
     },
@@ -944,7 +949,7 @@ function renderDash() {
       responsive:true, maintainAspectRatio:false,
       plugins:{ legend:{display:false} },
       scales:{
-        x:{ grid:{color:'rgba(0,0,0,.03)'}, ticks:{callback:v=>fmt(v)+' €', font:{size:11}} },
+        x:{ grid:{color:'rgba(0,0,0,.04)'}, ticks:{callback:v=>fmt(v)+' €', font:{size:11}} },
         y:{ ticks:{font:{size:12, weight:'500'}} }
       }
     }
@@ -1159,18 +1164,9 @@ function simPuzz(slider, margin, origMargin, id) {
 }
 
 /* ═══════════════════════════════════════════
-   INIT (DATOS DE EJEMPLO DEL USUARIO)
+   INIT (EMPIEZA CON UN PLACEHOLDER VACÍO)
 ═══════════════════════════════════════════ */
-addDish({ name: "Perrito Caliente", cost: 2.00, price: 8.00, units: 4124 });
-addDish({ name: "Albóndigas", cost: 2.00, price: 8.00, units: 4124 });
-addDish({ name: "Huevos Fritos", cost: 4.00, price: 6.00, units: 5000 });
-addDish({ name: "Hamburguesa", cost: 1.00, price: 9.00, units: 523 });
-addDish({ name: "Tacos", cost: 3.00, price: 7.00, units: 412 });
-addDish({ name: "Pizza", cost: 3.00, price: 7.00, units: 334 });
-addDish({ name: "Pollo a la plancha", cost: 5.00, price: 10.00, units: 900 });
-addDish({ name: "Costillas", cost: 6.00, price: 10.00, units: 120 });
-addDish({ name: "Patatas Fritas", cost: 4.00, price: 6.00, units: 111 });
-addDish({ name: "Fingers", cost: 7.00, price: 10.00, units: 21 });
+addDish(); // Llama a la función una vez sin datos para crear la primera fila vacía
 </script>
 </body>
 </html>
