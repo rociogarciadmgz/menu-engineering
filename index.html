@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rentabilidad BCG — Ingeniería de Menús</title>
+<title>MENÚ BCG</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
@@ -291,12 +291,12 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .kpi-val{font-family:var(--fm);font-size:32px;font-weight:500;color:var(--text);line-height:1}
 .kpi-sub{font-size:12px;color:var(--text3);margin-top:8px}
 
-.chart-grid{display:grid;grid-template-columns:5fr 4fr;gap:16px;margin-bottom:16px}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .chart-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r);padding:24px;box-shadow:var(--shadow);
 }
-.chart-card-full{grid-column:1/-1}
+.chart-card-full{grid-column:1/-1; margin-bottom: 16px;}
 .chart-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:20px}
 
 /* interactive toggle on dashboard */
@@ -377,7 +377,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
   <div class="hdr-inner">
     <a class="logo" href="#">
       <div class="logo-mark"><i class="ti ti-chart-bubble"></i></div>
-      <span data-i18n="app_title">Rentabilidad BCG</span>
+      <span data-i18n="app_title">MENÚ BCG</span>
     </a>
     <nav class="steps">
       <button class="step-btn active" onclick="goTab('input',this)">
@@ -476,7 +476,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 let currentLang = 'es';
 const dict = {
   es: {
-    app_title: "Rentabilidad BCG", step_1: "Platos", step_2: "Matriz", step_3: "Dashboard", step_4: "Consejos",
+    app_title: "MENÚ BCG", step_1: "Platos", step_2: "Matriz", step_3: "Dashboard", step_4: "Consejos",
     h1_input: "Introduce tus platos", p_input: "Añade cada plato con su precio de venta, coste de producción y unidades vendidas en el periodo que quieras analizar.",
     col_name: "Nombre del plato", col_price: "Precio venta", col_cost: "Coste prod.", col_units: "Uds. vendidas",
     btn_add: "Añadir plato", btn_calc: "Calcular análisis", lbl_added: "platos añadidos",
@@ -491,11 +491,11 @@ const dict = {
     lbl_filter: "Filtrar:", lbl_sort: "Ordenar:", btn_all: "Todos", opt_marg: "Margen total", opt_units: "Uds. vendidas", opt_name: "Nombre", opt_marg_u: "Margen unitario",
     h1_dash: "Dashboard", p_dash: "Métricas clave de tu carta con visualizaciones interactivas.",
     kpi_rev: "Ingresos totales", kpi_cost: "Costes totales", kpi_marg: "Margen bruto", kpi_tix: "Ticket medio", kpi_vol: "Uds. totales vendidas", kpi_tot: "Platos en carta", kpi_sub: "sobre ingresos",
-    chart_rank: "Ranking interactivo de platos", chart_dist: "Distribución BCG", chart_comp: "Ingresos · Costes · Margen",
+    chart_rank: "Ranking interactivo de platos", chart_dist: "Distribución de Platos (Cantidad)", chart_comp: "Ingresos · Costes · Margen", chart_marg_cont: "Contribución al Beneficio Total (€)",
     tog_marg: "Margen total", tog_rev: "Ingresos", tog_units: "Uds. vendidas",
     leg_rev: "Ingresos", leg_cost: "Costes", leg_marg: "Margen", chart_y: "Popularidad (Uds)", chart_x: "Rentabilidad (Margen €)",
     h1_adv: "Consejos de mejora", p_adv: "Recomendaciones personalizadas con simuladores interactivos de impacto económico.",
-    adv_star_hd: "Potencia tus Estrellas", adv_horse_hd: "Optimiza el margen de tus Caballos", adv_puzz_hd: "Convierte Enigmas en Estrellas", adv_dog_hd: "Revisa o elimina los Perros",
+    adv_star_hd: "Potencia tus Estrellas", adv_horse_hd: "Optimiza el margen de tus Caballos", adv_puzz_hd: "Convierte Puzzles en Estrellas", adv_dog_hd: "Revisa o elimina los Perros",
     sim_obj: "Objetivo de ventas", sim_inc: "Incremento de ventas", sim_red: "Reducción de coste", sim_up: "Subida de precio",
     sim_title_star: "Simulador — mejora de visibilidad", sim_title_horse: "Simulador — optimización de coste y precio", sim_title_puzz: "Simulador — unidades para ser Estrella", sim_title_dog: "Impacto de eliminación",
     sim_now: "Margen actual:", sim_now_sh: "Ahora:", sim_ext: "extra", sim_mov: "Mueve los sliders", sim_free: "Eliminar libera operativa y reduce mermas.", sim_cont: "Contribución actual:",
@@ -507,7 +507,7 @@ const dict = {
     lbl_avg_rent: "Rentabilidad Media", lbl_avg_pop: "Popularidad Media"
   },
   en: {
-    app_title: "BCG Profitability", step_1: "Dishes", step_2: "Matrix", step_3: "Dashboard", step_4: "Advice",
+    app_title: "BCG MENU", step_1: "Dishes", step_2: "Matrix", step_3: "Dashboard", step_4: "Advice",
     h1_input: "Enter your dishes", p_input: "Add each dish with its selling price, production cost, and units sold in the period you want to analyze.",
     col_name: "Dish name", col_price: "Selling price", col_cost: "Prod. cost", col_units: "Units sold",
     btn_add: "Add dish", btn_calc: "Calculate analysis", lbl_added: "dishes added",
@@ -522,7 +522,7 @@ const dict = {
     lbl_filter: "Filter:", lbl_sort: "Sort by:", btn_all: "All", opt_marg: "Total Margin", opt_units: "Units sold", opt_name: "Name", opt_marg_u: "Unit margin",
     h1_dash: "Dashboard", p_dash: "Key metrics of your menu with interactive visualizations.",
     kpi_rev: "Total Revenue", kpi_cost: "Total Costs", kpi_marg: "Gross Margin", kpi_tix: "Average Ticket", kpi_vol: "Total Units Sold", kpi_tot: "Dishes in Menu", kpi_sub: "of revenue",
-    chart_rank: "Interactive Dish Ranking", chart_dist: "BCG Distribution", chart_comp: "Revenue · Costs · Margin",
+    chart_rank: "Interactive Dish Ranking", chart_dist: "Dish Distribution (Count)", chart_comp: "Revenue · Costs · Margin", chart_marg_cont: "Margin Contribution (€)",
     tog_marg: "Total Margin", tog_rev: "Revenue", tog_units: "Units Sold",
     leg_rev: "Revenue", leg_cost: "Costs", leg_marg: "Margin", chart_y: "Popularity (Units)", chart_x: "Profitability (Margin €)",
     h1_adv: "Improvement Advice", p_adv: "Personalized recommendations with interactive economic impact simulators.",
@@ -561,7 +561,7 @@ function getCat() {
   return {
     star:   { label: currentLang==='es'?'Estrella':'Star', icon:'⭐', clr:'#ffca2c', chip:'chip-star', badge:'badge-star', leg:'leg-star' },
     horse:  { label: currentLang==='es'?'Caballo':'Plowhorse', icon:'🐴', clr:'#ff5757', chip:'chip-horse', badge:'badge-horse', leg:'leg-horse' },
-    puzzle: { label: currentLang==='es'?'Enigma':'Puzzle', icon:'❓', clr:'#546fff', chip:'chip-puzzle', badge:'badge-puzzle', leg:'leg-puzzle' },
+    puzzle: { label: currentLang==='es'?'Puzzle':'Puzzle', icon:'🧩', clr:'#546fff', chip:'chip-puzzle', badge:'badge-puzzle', leg:'leg-puzzle' },
     dog:    { label: currentLang==='es'?'Perro':'Dog', icon:'🐶', clr:'#6dbd8d', chip:'chip-dog', badge:'badge-dog', leg:'leg-dog' },
   };
 }
@@ -718,7 +718,7 @@ function renderBCG() {
       <div class="leg-desc">${t('leg_star_desc')}</div>
     </div>
     <div class="leg leg-puzzle">
-      <div class="leg-name">❓ ${CAT.puzzle.label}</div>
+      <div class="leg-name">🧩 ${CAT.puzzle.label}</div>
       <div class="leg-desc">${t('leg_puzz_desc')}</div>
     </div>
     <div class="leg leg-horse">
@@ -738,8 +738,8 @@ function renderBCG() {
       <button class="filter-btn" id="fb-all" onclick="setFilter('all')">${t('btn_all')}</button>
       <button class="filter-btn" id="fb-star" onclick="setFilter('star')">⭐ ${CAT.star.label}</button>
       <button class="filter-btn" id="fb-horse" onclick="setFilter('horse')">🐴 ${CAT.horse.label}</button>
-      <button class="filter-btn" id="fb-puzzle" onclick="setFilter('puzzle')">❓ ${CAT.puzzle.label}</button>
-      <button class="filter-btn" id="fb-dog" onclick="setFilter('dog')">🐶 ${CAT.dog.label}</button>
+      <button class="filter-btn" id="fb-puzzle" onclick="setFilter('puzzle')">🧩 ${CAT.puzzle.label}s</button>
+      <button class="filter-btn" id="fb-dog" onclick="setFilter('dog')">🐶 ${CAT.dog.label}s</button>
       <span class="lbl-sm" style="margin-left:8px">${t('lbl_sort')}</span>
       <select class="select-sm" id="sortSel" onchange="setSort(this.value)">
         <option value="margin">${t('opt_marg')}</option>
@@ -913,8 +913,14 @@ function renderDash() {
   const tUnits  = results.reduce((a,r) => a+r.units, 0);
   const ticket  = tRev / tUnits;
   const mPct    = tMargin / tRev * 100;
+  
   const cats = { star:0, horse:0, puzzle:0, dog:0 };
-  results.forEach(r => cats[r.cat]++);
+  const catsMargin = { star:0, horse:0, puzzle:0, dog:0 };
+  
+  results.forEach(r => { 
+      cats[r.cat]++; 
+      catsMargin[r.cat] += r.totalMargin; 
+  });
 
   const html = `
   <div class="kpi-row">
@@ -942,27 +948,40 @@ function renderDash() {
     <div class="kpi k-total">
       <div class="kpi-lbl">${t('kpi_tot')}</div>
       <div class="kpi-val">${results.length}</div>
-      <div class="kpi-sub">⭐${cats.star} 🐴${cats.horse} ❓${cats.puzzle} 🐶${cats.dog}</div>
+      <div class="kpi-sub">⭐${cats.star} 🐴${cats.horse} 🧩${cats.puzzle} 🐶${cats.dog}</div>
     </div>
   </div>
 
-  <div class="chart-grid">
-    <div class="chart-card">
-      <div class="chart-lbl">${t('chart_rank')}</div>
-      <div class="toggle-group" id="dashToggle">
-        <button class="tog active" onclick="setDashView('margin',this)">${t('tog_marg')}</button>
-        <button class="tog" onclick="setDashView('revenue',this)">${t('tog_rev')}</button>
-        <button class="tog" onclick="setDashView('units',this)">${t('tog_units')}</button>
-      </div>
-      <div id="barsArea"></div>
+  <div class="chart-card chart-card-full" style="margin-bottom: 16px;">
+    <div class="chart-lbl">${t('chart_rank')}</div>
+    <div class="toggle-group" id="dashToggle">
+      <button class="tog active" onclick="setDashView('margin',this)">${t('tog_marg')}</button>
+      <button class="tog" onclick="setDashView('revenue',this)">${t('tog_rev')}</button>
+      <button class="tog" onclick="setDashView('units',this)">${t('tog_units')}</button>
     </div>
+    <div id="barsArea"></div>
+  </div>
+
+  <div class="chart-grid">
+    <!-- DONUT 1: Cantidad de platos -->
     <div class="chart-card">
       <div class="chart-lbl">${t('chart_dist')}</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;font-size:12px;font-weight:600;color:var(--text2)">
         ${['star','horse','puzzle','dog'].map(k=>`<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:${CAT[k].clr};display:inline-block"></span>${CAT[k].label.split(' ')[0]} <strong style="color:var(--text)">${cats[k]}</strong></span>`).join('')}
       </div>
-      <div style="position:relative;height:240px">
+      <div style="position:relative;height:220px">
         <canvas id="donut" role="img"></canvas>
+      </div>
+    </div>
+    
+    <!-- DONUT 2: Aporte real al margen (NUEVO) -->
+    <div class="chart-card">
+      <div class="chart-lbl">${t('chart_marg_cont')}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;font-size:12px;font-weight:600;color:var(--text2)">
+        ${['star','horse','puzzle','dog'].map(k=>`<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:${CAT[k].clr};display:inline-block"></span>${CAT[k].label.split(' ')[0]}</span>`).join('')}
+      </div>
+      <div style="position:relative;height:220px">
+        <canvas id="marginDonut" role="img"></canvas>
       </div>
     </div>
   </div>
@@ -990,6 +1009,30 @@ function renderDash() {
       borderWidth:2, borderColor: '#fff', hoverOffset:6
     }]},
     options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, cutout:'65%' }
+  });
+
+  charts.marginDonut = new Chart(document.getElementById('marginDonut'), {
+    type:'doughnut',
+    data:{ labels:[CAT.star.label, CAT.horse.label, CAT.puzzle.label, CAT.dog.label], datasets:[{
+      data:[catsMargin.star, catsMargin.horse, catsMargin.puzzle, catsMargin.dog],
+      backgroundColor:[CAT.star.clr, CAT.horse.clr, CAT.puzzle.clr, CAT.dog.clr],
+      borderWidth:2, borderColor: '#fff', hoverOffset:6
+    }]},
+    options:{ 
+        responsive:true, 
+        maintainAspectRatio:false, 
+        plugins:{ 
+            legend:{display:false},
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return ' ' + context.label + ': ' + fmtEur(context.raw);
+                    }
+                }
+            } 
+        }, 
+        cutout:'65%' 
+    }
   });
 
   const sorted = [...results].sort((a,b) => b.totalRevenue - a.totalRevenue);
@@ -1114,7 +1157,7 @@ function renderAdvice() {
   }
 
   if (cats.puzzle.length) {
-    html += `<div class="adv-section"><div class="adv-title">❓ ${t('adv_puzz_hd')}</div>`;
+    html += `<div class="adv-section"><div class="adv-title">🧩 ${t('adv_puzz_hd')}</div>`;
     cats.puzzle.forEach(r => {
       const simId = 'simPuzz-' + r.name.replace(/\s/g,'_');
       html += `<div class="adv-card">
