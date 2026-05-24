@@ -3,91 +3,490 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi CV Interactivo</title>
+    <title>Menu Engineer PRO - Matriz BCG</title>
+    
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js y Plugins para la Matriz -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        :root {
-            --primary: #2563eb;
-            --dark: #1e293b;
-            --light: #f8fafc;
+        /* Pequeñas animaciones para las transiciones */
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            background: var(--light);
-            color: var(--dark);
-        }
-        header {
-            background: var(--dark);
-            color: white;
-            padding: 3rem 1rem;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: -50px auto 20px;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        h2 {
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 5px;
-            color: var(--primary);
-        }
-        .skill-tag {
-            display: inline-block;
-            background: #e2e8f0;
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin: 5px;
-            transition: transform 0.3s;
-        }
-        .skill-tag:hover {
-            transform: scale(1.1);
-            background: var(--primary);
-            color: white;
-        }
-        .contact-btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 10px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
+        .hidden { display: none !important; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 font-sans pb-12 min-h-screen">
 
-<header>
-    <h1>Tu Nombre Aquí</h1>
-    <p>Tu Profesión o Especialidad</p>
-</header>
-
-<div class="container">
-    <section>
-        <h2>Sobre mí</h2>
-        <p>Hola, soy un profesional apasionado por... (Aquí irá tu descripción).</p>
-    </section>
-
-    <section>
-        <h2>Habilidades</h2>
-        <div id="skills">
-            <span class="skill-tag">Liderazgo</span>
-            <span class="skill-tag">Resolución de problemas</span>
-            <span class="skill-tag">Tecnología</span>
+    <!-- Navbar Superior -->
+    <nav class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-between h-auto py-4 md:py-0 md:h-16 gap-4">
+                <div class="flex items-center">
+                    <i data-lucide="utensils" class="h-8 w-8 text-blue-600 mr-3"></i>
+                    <span class="font-bold text-xl tracking-tight text-slate-800">Menu Engineer PRO</span>
+                </div>
+                <div class="flex space-x-1 md:space-x-2 items-center overflow-x-auto">
+                    <button id="btn-tab-dashboard" onclick="switchTab('dashboard')" class="tab-btn flex items-center px-3 md:px-4 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap text-slate-600 hover:bg-slate-100">
+                        <i data-lucide="layout-dashboard" class="h-4 w-4 mr-2"></i> Dashboard
+                    </button>
+                    <button id="btn-tab-data" onclick="switchTab('data')" class="tab-btn flex items-center px-3 md:px-4 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap bg-blue-50 text-blue-700">
+                        <i data-lucide="table-properties" class="h-4 w-4 mr-2"></i> Ingreso de Datos
+                    </button>
+                    <button id="btn-tab-matrix" onclick="switchTab('matrix')" class="tab-btn flex items-center px-3 md:px-4 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap text-slate-600 hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i data-lucide="line-chart" class="h-4 w-4 mr-2"></i> Matriz BCG
+                    </button>
+                </div>
+            </div>
         </div>
-    </section>
+    </nav>
 
-    <section>
-        <h2>Contacto</h2>
-        <p>¿Te interesa mi perfil? ¡Hablemos!</p>
-        <a href="mailto:tu@correo.com" class="contact-btn">Enviar Correo</a>
-    </section>
-</div>
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- VISTA: DATOS -->
+        <div id="view-data" class="view-section fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="px-6 py-5 border-b border-slate-200 bg-slate-50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-800">Ingreso de Platos</h2>
+                        <p class="text-sm text-slate-500 mt-1">Introduce los datos de tus productos para analizar su rentabilidad.</p>
+                    </div>
+                    <button onclick="calculateMenuEngineering()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center shadow-sm transition-all active:scale-95 w-full md:w-auto justify-center">
+                        <i data-lucide="calculator" class="h-4 w-4 mr-2"></i> Calcular Matriz
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Plato</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Uds. Vendidas</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Precio Venta (€)</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase">Coste MP (€)</th>
+                                <th class="px-6 py-3 text-right text-xs font-semibold text-slate-500 uppercase">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="bg-white divide-y divide-slate-200">
+                            <!-- Filas generadas por JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="px-6 py-4 border-t border-slate-200 bg-slate-50">
+                    <button onclick="addItem()" class="text-blue-600 font-medium text-sm flex items-center hover:text-blue-800 transition-colors">
+                        <i data-lucide="plus" class="h-4 w-4 mr-1"></i> Añadir nuevo plato
+                    </button>
+                </div>
+            </div>
+        </div>
 
+        <!-- VISTA: DASHBOARD -->
+        <div id="view-dashboard" class="view-section hidden fade-in">
+            <div id="dashboard-content" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-slate-800">Visión General</h2>
+                
+                <!-- Tarjetas de Métricas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4 transition-transform hover:scale-105">
+                        <div class="p-3 bg-green-100 text-green-600 rounded-lg"><i data-lucide="dollar-sign" class="h-6 w-6"></i></div>
+                        <div>
+                            <p class="text-sm font-medium text-slate-500">Ingresos Totales</p>
+                            <p id="metric-revenue" class="text-2xl font-bold text-slate-800">0 €</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4 transition-transform hover:scale-105">
+                        <div class="p-3 bg-blue-100 text-blue-600 rounded-lg"><i data-lucide="trending-up" class="h-6 w-6"></i></div>
+                        <div>
+                            <p class="text-sm font-medium text-slate-500">Beneficio Bruto</p>
+                            <p id="metric-profit" class="text-2xl font-bold text-slate-800">0 €</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4 transition-transform hover:scale-105">
+                        <div class="p-3 bg-yellow-100 text-yellow-600 rounded-lg"><i data-lucide="star" class="h-6 w-6"></i></div>
+                        <div class="overflow-hidden">
+                            <p class="text-sm font-medium text-slate-500">Más Popular</p>
+                            <p id="metric-best" class="text-lg font-bold text-slate-800 truncate">-</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4 transition-transform hover:scale-105">
+                        <div class="p-3 bg-emerald-100 text-emerald-600 rounded-lg"><i data-lucide="utensils" class="h-6 w-6"></i></div>
+                        <div class="overflow-hidden">
+                            <p class="text-sm font-medium text-slate-500">Más Rentable</p>
+                            <p id="metric-profitable" class="text-lg font-bold text-slate-800 truncate">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desglose de Categorías -->
+                <h3 class="text-lg font-bold text-slate-800 mt-8 mb-4">Distribución del Menú</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-6 border border-green-200 rounded-xl text-center shadow-sm">
+                        <p class="text-green-600 font-bold mb-2 flex items-center justify-center gap-1"><i data-lucide="star" class="w-4 h-4"></i> ESTRELLAS</p>
+                        <p id="dist-estrella" class="text-4xl font-black text-slate-800">0</p>
+                        <p class="text-xs text-slate-500 mt-3 font-medium">Mantener y promocionar</p>
+                    </div>
+                    <div class="bg-white p-6 border border-blue-200 rounded-xl text-center shadow-sm">
+                        <p class="text-blue-600 font-bold mb-2">🐴 CABALLOS</p>
+                        <p id="dist-caballo" class="text-4xl font-black text-slate-800">0</p>
+                        <p class="text-xs text-slate-500 mt-3 font-medium">Subir precio / Bajar coste</p>
+                    </div>
+                    <div class="bg-white p-6 border border-yellow-200 rounded-xl text-center shadow-sm">
+                        <p class="text-yellow-600 font-bold mb-2">❓ ENIGMAS</p>
+                        <p id="dist-enigma" class="text-4xl font-black text-slate-800">0</p>
+                        <p class="text-xs text-slate-500 mt-3 font-medium">Dar mayor visibilidad</p>
+                    </div>
+                    <div class="bg-white p-6 border border-red-200 rounded-xl text-center shadow-sm">
+                        <p class="text-red-500 font-bold mb-2">🐕 PERROS</p>
+                        <p id="dist-perro" class="text-4xl font-black text-slate-800">0</p>
+                        <p class="text-xs text-slate-500 mt-3 font-medium">Replantear o eliminar</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Estado vacío (Dashboard) -->
+            <div id="dashboard-empty" class="text-center py-32 bg-white rounded-xl shadow-sm border border-slate-200">
+                <i data-lucide="calculator" class="h-20 w-20 text-slate-200 mx-auto mb-4"></i>
+                <h3 class="text-xl font-bold text-slate-700">Aún no hay datos calculados</h3>
+                <p class="text-slate-500 mt-2 max-w-md mx-auto">Ve a la pestaña de "Ingreso de Datos", añade tus platos y haz clic en "Calcular Matriz".</p>
+                <button onclick="switchTab('data')" class="mt-8 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-medium px-6 py-3 rounded-lg shadow-sm">Ir a Ingresar Datos</button>
+            </div>
+        </div>
+
+        <!-- VISTA: MATRIZ BCG -->
+        <div id="view-matrix" class="view-section hidden fade-in">
+            <div id="matrix-content" class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 hidden">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-slate-800">Matriz de Ingeniería de Menús</h2>
+                    <p class="text-slate-500 text-sm">El cruce representa los promedios de tu restaurante. Haz hover sobre los puntos para más detalles.</p>
+                </div>
+                
+                <div class="h-[500px] md:h-[600px] w-full bg-slate-50 rounded-xl p-2 md:p-4 border border-slate-200 relative overflow-hidden">
+                    <!-- Textos de fondo para las áreas -->
+                    <div class="absolute top-4 right-4 md:top-8 md:right-12 text-green-600 font-bold opacity-20 text-xl md:text-3xl pointer-events-none text-right">ESTRELLAS<br/><span class="text-sm">Alta Venta / Alto Margen</span></div>
+                    <div class="absolute bottom-12 right-4 md:bottom-20 md:right-12 text-blue-600 font-bold opacity-20 text-xl md:text-3xl pointer-events-none text-right">CABALLOS<br/><span class="text-sm">Alta Venta / Bajo Margen</span></div>
+                    <div class="absolute top-4 left-16 md:top-8 md:left-24 text-yellow-500 font-bold opacity-20 text-xl md:text-3xl pointer-events-none text-left">ENIGMAS<br/><span class="text-sm">Baja Venta / Alto Margen</span></div>
+                    <div class="absolute bottom-12 left-16 md:bottom-20 md:left-24 text-red-500 font-bold opacity-20 text-xl md:text-3xl pointer-events-none text-left">PERROS<br/><span class="text-sm">Baja Venta / Bajo Margen</span></div>
+
+                    <!-- Contenedor del Canvas de Chart.js -->
+                    <canvas id="bcgChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Estado vacío (Matriz) -->
+            <div id="matrix-empty" class="text-center py-32 bg-white rounded-xl shadow-sm border border-slate-200">
+                <i data-lucide="calculator" class="h-20 w-20 text-slate-200 mx-auto mb-4"></i>
+                <h3 class="text-xl font-bold text-slate-700">Aún no hay datos calculados</h3>
+                <p class="text-slate-500 mt-2 max-w-md mx-auto">Calcula primero los datos para generar la gráfica.</p>
+                <button onclick="switchTab('data')" class="mt-8 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-medium px-6 py-3 rounded-lg shadow-sm">Ir a Ingresar Datos</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+
+        // 1. Estado Global de la App
+        let items = [
+            { id: 1, name: 'Hamburguesa', sold: 523, price: 10, cost: 1 },
+            { id: 2, name: 'Perrito', sold: 4124, price: 10, cost: 2 },
+            { id: 3, name: 'Tacos', sold: 412, price: 10, cost: 3 },
+            { id: 4, name: 'Huevos Fritos', sold: 5000, price: 10, cost: 4 },
+            { id: 5, name: 'Pollo Plancha', sold: 900, price: 10, cost: 5 },
+        ];
+        let calculatedData = [];
+        let metrics = null;
+        let chartInstance = null;
+
+        // Configuración de Colores BCG
+        const COLORS = {
+            'ESTRELLA': '#10b981', // Verde
+            'CABALLO': '#3b82f6',  // Azul
+            'ENIGMA': '#f59e0b',   // Naranja
+            'PERRO': '#ef4444'     // Rojo
+        };
+
+        // 2. Navegación entre pestañas
+        function switchTab(tabId) {
+            // Ocultar todas las vistas
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            // Restablecer estilos de botones
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-50', 'text-blue-700');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            });
+
+            // Mostrar vista activa
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            
+            // Estilo botón activo
+            const activeBtn = document.getElementById(`btn-tab-${tabId}`);
+            activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+            activeBtn.classList.add('bg-blue-50', 'text-blue-700');
+        }
+
+        // 3. Gestión de la Tabla de Datos
+        function renderTable() {
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+            
+            items.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-2"><input type="text" value="${item.name}" onchange="updateItem(${item.id}, 'name', this.value)" class="w-full border-slate-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border" placeholder="Nombre"></td>
+                    <td class="px-6 py-2"><input type="number" value="${item.sold}" onchange="updateItem(${item.id}, 'sold', this.value)" class="w-full border-slate-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"></td>
+                    <td class="px-6 py-2"><input type="number" value="${item.price}" onchange="updateItem(${item.id}, 'price', this.value)" class="w-full border-slate-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"></td>
+                    <td class="px-6 py-2"><input type="number" value="${item.cost}" onchange="updateItem(${item.id}, 'cost', this.value)" class="w-full border-slate-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"></td>
+                    <td class="px-6 py-2 text-right">
+                        <button onclick="removeItem(${item.id})" class="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-50 transition-colors">
+                            <i data-lucide="trash-2" class="h-5 w-5"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            lucide.createIcons();
+        }
+
+        function updateItem(id, field, value) {
+            const item = items.find(i => i.id === id);
+            if(item) {
+                item[field] = field === 'name' ? value : Number(value);
+            }
+        }
+
+        function addItem() {
+            const newId = items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1;
+            items.push({ id: newId, name: '', sold: 0, price: 0, cost: 0 });
+            renderTable();
+        }
+
+        function removeItem(id) {
+            items = items.filter(i => i.id !== id);
+            renderTable();
+        }
+
+        // Formateadores
+        const formatMoney = (value) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(value);
+        const formatPercent = (value) => new Intl.NumberFormat('es-ES', { style: 'percent', maximumFractionDigits: 1 }).format(value);
+
+        // 4. Lógica Matemática BCG
+        function calculateMenuEngineering() {
+            if(items.length === 0) return alert("Añade al menos un plato.");
+
+            let totalSales = 0;
+            
+            // Cálculos base
+            const baseData = items.map(item => {
+                const unitMargin = item.price - item.cost;
+                const totalRevenue = item.sold * item.price;
+                const totalMargin = item.sold * unitMargin;
+                totalSales += item.sold;
+                return { ...item, unitMargin, totalRevenue, totalMargin };
+            });
+
+            // Promedios (Umbrales del cruce central)
+            const avgMargin = baseData.reduce((acc, curr) => acc + curr.unitMargin, 0) / baseData.length;
+            const popThreshold = 1 / baseData.length;
+
+            // Categorización
+            calculatedData = baseData.map(item => {
+                const salesMix = totalSales > 0 ? item.sold / totalSales : 0;
+                const isHighMargin = item.unitMargin >= avgMargin;
+                const isHighPop = salesMix >= popThreshold;
+
+                let category = '';
+                if (isHighMargin && isHighPop) category = 'ESTRELLA';
+                else if (!isHighMargin && isHighPop) category = 'CABALLO';
+                else if (isHighMargin && !isHighPop) category = 'ENIGMA';
+                else category = 'PERRO';
+
+                return { ...item, salesMix, category };
+            });
+
+            // Guardar Métricas
+            metrics = {
+                totalRevenue: calculatedData.reduce((acc, i) => acc + i.totalRevenue, 0),
+                totalProfit: calculatedData.reduce((acc, i) => acc + i.totalMargin, 0),
+                avgMargin: avgMargin,
+                popThreshold: popThreshold,
+                bestSeller: [...calculatedData].sort((a,b) => b.sold - a.sold)[0]?.name || '-',
+                mostProfitable: [...calculatedData].sort((a,b) => b.unitMargin - a.unitMargin)[0]?.name || '-',
+                dist: {
+                    ESTRELLA: calculatedData.filter(i => i.category === 'ESTRELLA').length,
+                    CABALLO: calculatedData.filter(i => i.category === 'CABALLO').length,
+                    ENIGMA: calculatedData.filter(i => i.category === 'ENIGMA').length,
+                    PERRO: calculatedData.filter(i => i.category === 'PERRO').length,
+                }
+            };
+
+            // Habilitar y mostrar resultados
+            document.getElementById('btn-tab-matrix').disabled = false;
+            updateDashboardDOM();
+            drawChart();
+            switchTab('matrix');
+        }
+
+        // 5. Actualizar DOM del Dashboard
+        function updateDashboardDOM() {
+            document.getElementById('dashboard-empty').classList.add('hidden');
+            document.getElementById('matrix-empty').classList.add('hidden');
+            document.getElementById('dashboard-content').classList.remove('hidden');
+            document.getElementById('matrix-content').classList.remove('hidden');
+
+            document.getElementById('metric-revenue').innerText = formatMoney(metrics.totalRevenue);
+            document.getElementById('metric-profit').innerText = formatMoney(metrics.totalProfit);
+            document.getElementById('metric-best').innerText = metrics.bestSeller;
+            document.getElementById('metric-profitable').innerText = metrics.mostProfitable;
+
+            document.getElementById('dist-estrella').innerText = metrics.dist.ESTRELLA;
+            document.getElementById('dist-caballo').innerText = metrics.dist.CABALLO;
+            document.getElementById('dist-enigma').innerText = metrics.dist.ENIGMA;
+            document.getElementById('dist-perro').innerText = metrics.dist.PERRO;
+        }
+
+        // 6. Dibujar la Gráfica con Chart.js
+        function drawChart() {
+            const ctx = document.getElementById('bcgChart').getContext('2d');
+            
+            // Destruir gráfica anterior si existe
+            if(chartInstance) chartInstance.destroy();
+
+            // Preparar datos para Chart.js
+            const chartPoints = calculatedData.map(item => ({
+                x: item.salesMix,
+                y: item.unitMargin,
+                rawItem: item // Guardamos los datos completos para el tooltip
+            }));
+
+            // Determinar color de cada punto
+            const pointColors = calculatedData.map(item => COLORS[item.category]);
+
+            // Registrar Plugins
+            Chart.register(ChartDataLabels);
+
+            chartInstance = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Platos',
+                        data: chartPoints,
+                        backgroundColor: pointColors,
+                        pointRadius: 7,
+                        pointHoverRadius: 9,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        // Plugin de Etiquetas de Texto (Los nombres encima de los puntos)
+                        datalabels: {
+                            align: 'top',
+                            offset: 6,
+                            font: { weight: 'bold', size: 12 },
+                            color: '#334155',
+                            formatter: function(value) {
+                                return value.rawItem.name;
+                            }
+                        },
+                        // Tooltip personalizado al pasar el ratón
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                            titleColor: '#1e293b',
+                            bodyColor: '#475569',
+                            borderColor: '#cbd5e1',
+                            borderWidth: 1,
+                            padding: 12,
+                            titleFont: { size: 16, weight: 'bold' },
+                            callbacks: {
+                                title: function(context) { return context[0].raw.rawItem.name; },
+                                label: function(context) {
+                                    const item = context.raw.rawItem;
+                                    return [
+                                        `Categoría: ${item.category}`,
+                                        `Ventas (Mix): ${formatPercent(item.salesMix)} (${item.sold} ud)`,
+                                        `Margen: ${formatMoney(item.unitMargin)}`
+                                    ];
+                                }
+                            }
+                        },
+                        // Plugin de Anotaciones para pintar la Cruz Central
+                        annotation: {
+                            annotations: {
+                                linePop: {
+                                    type: 'line',
+                                    xMin: metrics.popThreshold,
+                                    xMax: metrics.popThreshold,
+                                    borderColor: '#64748b',
+                                    borderWidth: 2,
+                                    borderDash: [5, 5],
+                                    label: {
+                                        content: `Media Venta (${formatPercent(metrics.popThreshold)})`,
+                                        display: true,
+                                        position: 'start',
+                                        backgroundColor: 'rgba(255,255,255,0.8)',
+                                        color: '#64748b'
+                                    }
+                                },
+                                lineMargin: {
+                                    type: 'line',
+                                    yMin: metrics.avgMargin,
+                                    yMax: metrics.avgMargin,
+                                    borderColor: '#64748b',
+                                    borderWidth: 2,
+                                    borderDash: [5, 5],
+                                    label: {
+                                        content: `Media Margen (${formatMoney(metrics.avgMargin)})`,
+                                        display: true,
+                                        position: 'end',
+                                        backgroundColor: 'rgba(255,255,255,0.8)',
+                                        color: '#64748b'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Popularidad (Mix de Ventas %)', font: { weight: 'bold' } },
+                            ticks: {
+                                callback: function(value) { return (value * 100).toFixed(0) + '%'; }
+                            },
+                            grid: { color: '#e2e8f0', drawBorder: false }
+                        },
+                        y: {
+                            title: { display: true, text: 'Rentabilidad (Margen Unitario €)', font: { weight: 'bold' } },
+                            ticks: {
+                                callback: function(value) { return '€' + value; }
+                            },
+                            grid: { color: '#e2e8f0', drawBorder: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Ejecutar inicialización al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable();
+        });
+
+    </script>
 </body>
 </html>
