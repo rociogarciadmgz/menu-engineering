@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GastroAnalytics - Matriz BCG</title>
+    <title>Calculadora de Ingeniería de Menús - Matriz BCG</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,566 +13,526 @@
     
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        brand: { 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5' },
-                        star: '#fbbf24', // Yellow
-                        workhorse: '#38bdf8', // Blue
-                        puzzle: '#c084fc', // Purple
-                        dog: '#f87171', // Red
+                        brand: {
+                            dark: '#0f172a',    // Slate 900
+                            card: '#1e293b',    // Slate 800
+                            primary: '#3b82f6', // Blue 500
+                            accent: '#10b981',  // Emerald 500
+                            star: '#f59e0b',    // Amber 500
+                            horse: '#3b82f6',   // Blue 500
+                            puzzle: '#8b5cf6',  // Violet 500
+                            dog: '#ef4444'      // Red 500
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         body {
-            background-color: #0f172a; /* Slate 900 */
+            background-color: #0f172a;
             color: #f8fafc;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
-            background-attachment: fixed;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
         }
+
         .glass-panel {
             background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .glass-input {
-            background: rgba(15, 23, 42, 0.6);
+
+        /* Ocultar pestañas no activas */
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilo para tabla */
+        input[type="number"], input[type="text"] {
+            background-color: rgba(15, 23, 42, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
         }
-        .glass-input:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
         
-        .fade-in { animation: fadeIn 0.4s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        input[type="number"]:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
     </style>
 </head>
-<body class="font-sans antialiased flex flex-col md:flex-row h-screen overflow-hidden">
+<body class="h-screen flex overflow-hidden selection:bg-brand-primary selection:text-white">
 
-    <!-- Sidebar Navigation -->
-    <nav class="w-full md:w-64 glass-panel md:rounded-none md:border-y-0 md:border-l-0 flex flex-row md:flex-col p-4 z-20 shrink-0 overflow-x-auto md:overflow-y-auto">
-        <div class="hidden md:flex items-center gap-3 mb-8 px-2">
-            <div class="bg-brand-500 p-2 rounded-lg"><i class="fa-solid fa-utensils text-white"></i></div>
-            <h1 class="text-xl font-bold tracking-tight">Gastro<span class="text-brand-400">Analytics</span></h1>
-        </div>
-        
-        <div class="flex md:flex-col gap-2 w-full">
-            <button onclick="switchTab('tab-input')" id="btn-tab-input" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all bg-brand-600 shadow-lg shadow-brand-500/20 text-white whitespace-nowrap">
-                <i class="fa-solid fa-pen-to-square w-5 text-center"></i> <span>1. Menú y Datos</span>
-            </button>
-            <button onclick="switchTab('tab-matrix')" id="btn-tab-matrix" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 whitespace-nowrap">
-                <i class="fa-solid fa-border-all w-5 text-center"></i> <span>2. Matriz BCG</span>
-            </button>
-            <button onclick="switchTab('tab-dashboard')" id="btn-tab-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 whitespace-nowrap">
-                <i class="fa-solid fa-chart-pie w-5 text-center"></i> <span>3. Dashboard</span>
-            </button>
-            <button onclick="switchTab('tab-advice')" id="btn-tab-advice" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 whitespace-nowrap">
-                <i class="fa-solid fa-lightbulb w-5 text-center"></i> <span>4. Plan de Acción</span>
-            </button>
-        </div>
-        <div class="mt-auto hidden md:block px-2 text-xs text-slate-500">
-            Ingeniería de Menús<br>Basado en Kasavana & Smith
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="flex-1 h-full overflow-y-auto p-4 md:p-8 relative">
-        
-        <!-- TAB 1: INPUT DE DATOS -->
-        <section id="tab-input" class="tab-content fade-in max-w-5xl mx-auto">
-            <header class="mb-8">
-                <h2 class="text-3xl font-bold mb-2">Ingresa tus Platos</h2>
-                <p class="text-slate-400">Añade el coste, el precio de venta y cuántas unidades has vendido en un periodo (ej. último mes).</p>
-            </header>
-
-            <!-- Form -->
-            <div class="glass-panel p-6 mb-8">
-                <form id="dish-form" class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-slate-400 mb-1">Nombre del Plato</label>
-                        <input type="text" id="input-name" required class="glass-input w-full px-4 py-2.5 rounded-lg" placeholder="Ej. Hamburguesa Trufada">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-400 mb-1">Coste (Materia Prima)</label>
-                        <div class="relative">
-                            <span class="absolute left-3 top-2.5 text-slate-400">€</span>
-                            <input type="number" step="0.01" id="input-cost" required class="glass-input w-full pl-8 pr-4 py-2.5 rounded-lg" placeholder="2.50">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-400 mb-1">Precio Venta (Sin IVA)</label>
-                        <div class="relative">
-                            <span class="absolute left-3 top-2.5 text-slate-400">€</span>
-                            <input type="number" step="0.01" id="input-price" required class="glass-input w-full pl-8 pr-4 py-2.5 rounded-lg" placeholder="12.00">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-400 mb-1">Uds. Vendidas</label>
-                        <div class="flex gap-2">
-                            <input type="number" id="input-sold" required class="glass-input w-full px-4 py-2.5 rounded-lg" placeholder="150">
-                            <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2.5 rounded-lg transition-colors shadow-lg shadow-brand-500/30">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <!-- List -->
-            <div class="glass-panel overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-slate-700 bg-slate-800/30 text-sm uppercase text-slate-400">
-                                <th class="px-6 py-4 font-medium">Plato</th>
-                                <th class="px-6 py-4 font-medium text-right">Coste</th>
-                                <th class="px-6 py-4 font-medium text-right">Precio Venta</th>
-                                <th class="px-6 py-4 font-medium text-right">Uds. Vendidas</th>
-                                <th class="px-6 py-4 font-medium text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dishes-list" class="divide-y divide-slate-700/50">
-                            <!-- JS will populate -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="p-6 bg-slate-800/20 border-t border-slate-700 flex justify-between items-center">
-                    <span class="text-slate-400 text-sm" id="dish-count">0 platos registrados</span>
-                    <button onclick="calculateAndGoToMatrix()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2">
-                        <i class="fa-solid fa-calculator"></i> Calcular Rentabilidad BCG
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 2: MATRIZ BCG -->
-        <section id="tab-matrix" class="tab-content hidden fade-in max-w-6xl mx-auto">
-            <header class="mb-6 flex justify-between items-end">
-                <div>
-                    <h2 class="text-3xl font-bold mb-2">Matriz BCG: Ingeniería de Menús</h2>
-                    <p class="text-slate-400">Rentabilidad (Margen de contribución) vs Popularidad (Volumen de ventas).</p>
-                </div>
-            </header>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <!-- Gráfico -->
-                <div class="lg:col-span-2 glass-panel p-6 relative">
-                    <h3 class="text-lg font-semibold mb-4 text-center">Distribución de Platos</h3>
-                    <div class="absolute top-4 right-4 text-xs text-slate-400 flex gap-3 bg-slate-800/80 p-2 rounded-lg border border-slate-700">
-                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-star"></div> Estrella</span>
-                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-workhorse"></div> Vaca/Caballo</span>
-                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-puzzle"></div> Enigma</span>
-                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-dog"></div> Perro</span>
-                    </div>
-                    <div class="h-[400px] w-full">
-                        <canvas id="bcgChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Explicación Categorías -->
-                <div class="flex flex-col gap-4">
-                    <div class="glass-panel p-4 border-l-4 border-star bg-gradient-to-r from-star/10 to-transparent">
-                        <div class="flex items-center gap-2 mb-1"><i class="fa-solid fa-star text-star"></i> <h4 class="font-bold">Estrellas</h4></div>
-                        <p class="text-sm text-slate-300">Alta rentabilidad, Alta popularidad. Tus platos insignia. Mantenlos estables y promuévelos.</p>
-                    </div>
-                    <div class="glass-panel p-4 border-l-4 border-workhorse bg-gradient-to-r from-workhorse/10 to-transparent">
-                        <div class="flex items-center gap-2 mb-1"><i class="fa-solid fa-horse-head text-workhorse"></i> <h4 class="font-bold">Caballos de Batalla</h4></div>
-                        <p class="text-sm text-slate-300">Baja rentabilidad, Alta popularidad. Traen a la gente. Intenta reducir su coste o subir levemente el precio.</p>
-                    </div>
-                    <div class="glass-panel p-4 border-l-4 border-puzzle bg-gradient-to-r from-puzzle/10 to-transparent">
-                        <div class="flex items-center gap-2 mb-1"><i class="fa-solid fa-question-circle text-puzzle"></i> <h4 class="font-bold">Enigmas (Incógnitas)</h4></div>
-                        <p class="text-sm text-slate-300">Alta rentabilidad, Baja popularidad. Gran margen pero no se venden. Dales más visibilidad en la carta.</p>
-                    </div>
-                    <div class="glass-panel p-4 border-l-4 border-dog bg-gradient-to-r from-dog/10 to-transparent">
-                        <div class="flex items-center gap-2 mb-1"><i class="fa-solid fa-bone text-dog"></i> <h4 class="font-bold">Perros</h4></div>
-                        <p class="text-sm text-slate-300">Baja rentabilidad, Baja popularidad. Ocupan espacio. Considera eliminarlos o reinventarlos por completo.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tabla de Clasificación -->
-            <div class="glass-panel overflow-hidden">
-                <div class="p-4 bg-slate-800/40 border-b border-slate-700">
-                    <h3 class="font-semibold text-lg">Clasificación Detallada</h3>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-slate-700 bg-slate-800/20 text-xs uppercase text-slate-400">
-                                <th class="px-6 py-3 font-medium">Plato</th>
-                                <th class="px-6 py-3 font-medium text-right">Margen Uni.</th>
-                                <th class="px-6 py-3 font-medium text-right">Margen Total</th>
-                                <th class="px-6 py-3 font-medium text-right">Mix Ventas</th>
-                                <th class="px-6 py-3 font-medium text-center">Categoría BCG</th>
-                            </tr>
-                        </thead>
-                        <tbody id="classification-list" class="divide-y divide-slate-700/50 text-sm">
-                            <!-- JS will populate -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 3: DASHBOARD -->
-        <section id="tab-dashboard" class="tab-content hidden fade-in max-w-6xl mx-auto">
-            <header class="mb-6">
-                <h2 class="text-3xl font-bold mb-2">Dashboard Financiero</h2>
-                <p class="text-slate-400">Resumen interactivo de ingresos, gastos y rendimiento general de tu menú.</p>
-            </header>
-
-            <!-- KPIs -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div class="glass-panel p-5 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fa-solid fa-coins text-5xl"></i></div>
-                    <p class="text-sm text-slate-400 font-medium mb-1">Ingresos Totales</p>
-                    <h3 class="text-3xl font-bold text-white" id="kpi-revenue">0.00€</h3>
-                </div>
-                <div class="glass-panel p-5 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fa-solid fa-money-bill-wave text-5xl"></i></div>
-                    <p class="text-sm text-slate-400 font-medium mb-1">Costes (Materia Prima)</p>
-                    <h3 class="text-3xl font-bold text-dog" id="kpi-cost">0.00€</h3>
-                </div>
-                <div class="glass-panel p-5 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fa-solid fa-wallet text-5xl"></i></div>
-                    <p class="text-sm text-slate-400 font-medium mb-1">Beneficio Bruto</p>
-                    <h3 class="text-3xl font-bold text-emerald-400" id="kpi-profit">0.00€</h3>
-                </div>
-                <div class="glass-panel p-5 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fa-solid fa-percent text-5xl"></i></div>
-                    <p class="text-sm text-slate-400 font-medium mb-1">Food Cost (%)</p>
-                    <h3 class="text-3xl font-bold text-brand-400" id="kpi-foodcost">0.0%</h3>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Ventas por categoria -->
-                <div class="glass-panel p-6">
-                    <h3 class="text-lg font-semibold mb-4 text-center">Impacto de Ventas por Categoría BCG</h3>
-                    <div class="h-[250px] flex justify-center">
-                        <canvas id="doughnutChart"></canvas>
-                    </div>
-                </div>
-                <!-- Top Platos -->
-                <div class="glass-panel p-6">
-                    <h3 class="text-lg font-semibold mb-4 text-center">Top 5 Platos (Por Beneficio)</h3>
-                    <div class="h-[250px]">
-                        <canvas id="barChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 4: CONSEJOS Y PLAN DE ACCION -->
-        <section id="tab-advice" class="tab-content hidden fade-in max-w-5xl mx-auto">
-            <header class="mb-8">
-                <h2 class="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-emerald-400">Plan de Acción Operativo</h2>
-                <p class="text-slate-400">Basado en tus métricas reales, aquí tienes una guía algorítmica de cómo mejorar tu rentabilidad plato por plato.</p>
-            </header>
-
-            <div class="space-y-6" id="advice-container">
-                <!-- JS will inject advice cards here -->
+    <!-- Menú Lateral -->
+    <aside class="w-20 md:w-64 glass-panel border-r border-slate-700 flex flex-col justify-between transition-all duration-300 z-20 relative">
+        <div>
+            <div class="h-20 flex items-center justify-center md:justify-start md:px-6 border-b border-slate-700">
+                <i class="fas fa-utensils text-brand-primary text-2xl md:mr-3"></i>
+                <h1 class="hidden md:block font-bold text-lg tracking-wide">Gastro<span class="text-brand-primary">Metrics</span></h1>
             </div>
             
-            <!-- Global Simulation Card -->
-            <div class="mt-8 glass-panel p-6 bg-gradient-to-br from-brand-900/40 to-slate-900 border border-brand-500/30">
-                <div class="flex items-start gap-4">
-                    <div class="bg-brand-500/20 text-brand-400 p-3 rounded-full">
-                        <i class="fa-solid fa-rocket text-xl"></i>
-                    </div>
+            <nav class="mt-6 flex flex-col space-y-2 px-2 md:px-4">
+                <button onclick="switchTab('datos')" id="btn-datos" class="tab-btn w-full flex items-center justify-center md:justify-start px-4 py-3 rounded-xl bg-brand-primary text-white shadow-lg shadow-blue-500/20 transition-all">
+                    <i class="fas fa-list-ul w-6"></i>
+                    <span class="hidden md:block font-medium ml-2">1. Tus Platos</span>
+                </button>
+                <button onclick="switchTab('matriz')" id="btn-matriz" class="tab-btn w-full flex items-center justify-center md:justify-start px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                    <i class="fas fa-border-all w-6"></i>
+                    <span class="hidden md:block font-medium ml-2">2. Matriz BCG</span>
+                </button>
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn w-full flex items-center justify-center md:justify-start px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                    <i class="fas fa-chart-pie w-6"></i>
+                    <span class="hidden md:block font-medium ml-2">3. Dashboard</span>
+                </button>
+                <button onclick="switchTab('consejos')" id="btn-consejos" class="tab-btn w-full flex items-center justify-center md:justify-start px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                    <i class="fas fa-lightbulb w-6"></i>
+                    <span class="hidden md:block font-medium ml-2">4. Plan de Acción</span>
+                </button>
+            </nav>
+        </div>
+        <div class="p-4 hidden md:block">
+            <div class="glass-panel p-4 rounded-xl text-xs text-slate-400">
+                <p><i class="fas fa-info-circle text-brand-accent mr-1"></i> Optimiza tu carta basándote en rentabilidad y popularidad real.</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 overflow-y-auto relative bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-fixed">
+        <div class="absolute inset-0 bg-brand-dark/95 z-0"></div> <!-- Overlay -->
+        
+        <div class="relative z-10 p-6 md:p-10 max-w-7xl mx-auto">
+            
+            <!-- TIPO 1: INGRESO DE DATOS -->
+            <section id="tab-datos" class="tab-content active">
+                <div class="flex justify-between items-end mb-8">
                     <div>
-                        <h3 class="text-xl font-bold mb-2">Simulación de Mejora Global</h3>
-                        <p class="text-slate-300 mb-4 text-sm" id="global-simulation-text">Calculando impacto potencial...</p>
+                        <h2 class="text-3xl font-bold mb-2">Ingreso de Platos</h2>
+                        <p class="text-slate-400">Añade los platos de tu carta con sus costes y ventas de un periodo (ej. último mes).</p>
+                    </div>
+                    <button onclick="calculateAndGoToMatrix()" class="bg-brand-accent hover:bg-emerald-400 text-slate-900 font-bold py-3 px-6 rounded-lg shadow-lg shadow-emerald-500/30 transition-all flex items-center">
+                        Analizar Menú <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-6 shadow-xl mb-6">
+                    <form id="add-dish-form" class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                        <div class="md:col-span-1">
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Nombre del Plato</label>
+                            <input type="text" id="input-name" required class="w-full rounded-lg px-4 py-2" placeholder="Ej. Hamburguesa">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Coste Elaboración (€)</label>
+                            <input type="number" id="input-cost" step="0.01" required class="w-full rounded-lg px-4 py-2" placeholder="Ej. 2.50">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Precio Venta (€)</label>
+                            <input type="number" id="input-price" step="0.01" required class="w-full rounded-lg px-4 py-2" placeholder="Ej. 10.00">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Unidades Vendidas</label>
+                            <input type="number" id="input-units" required class="w-full rounded-lg px-4 py-2" placeholder="Ej. 150">
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-slate-700 hover:bg-brand-primary text-white font-medium py-2 px-4 rounded-lg transition-colors border border-slate-600 hover:border-brand-primary h-[42px]">
+                                <i class="fas fa-plus mr-1"></i> Añadir
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="glass-panel rounded-2xl overflow-hidden shadow-xl">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-800/50 text-slate-300">
+                                <tr>
+                                    <th class="px-6 py-4 font-medium">Plato</th>
+                                    <th class="px-6 py-4 font-medium">Coste (MP)</th>
+                                    <th class="px-6 py-4 font-medium">PVP</th>
+                                    <th class="px-6 py-4 font-medium">Margen Unit.</th>
+                                    <th class="px-6 py-4 font-medium">Uds. Vendidas</th>
+                                    <th class="px-6 py-4 font-medium">Ventas Totales</th>
+                                    <th class="px-6 py-4 text-right font-medium">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dishes-table-body" class="divide-y divide-slate-700/50">
+                                <!-- Filas dinámicas -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
+            </section>
 
-        </section>
+            <!-- TIPO 2: MATRIZ BCG -->
+            <section id="tab-matriz" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold mb-2">Matriz de Ingeniería de Menús</h2>
+                    <p class="text-slate-400">Visualiza gráficamente dónde se posiciona cada plato según su rentabilidad (margen) y popularidad (ventas).</p>
+                </div>
 
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Gráfico -->
+                    <div class="lg:col-span-2 glass-panel rounded-2xl p-6 h-[500px] relative">
+                        <canvas id="bcgChart"></canvas>
+                    </div>
+                    
+                    <!-- Explicación de Categorías -->
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-slate-800/50 border-l-4 border-brand-star">
+                            <h3 class="font-bold text-brand-star flex items-center"><i class="fas fa-star mr-2"></i> Estrella</h3>
+                            <p class="text-xs text-slate-300 mt-1">Alta Rentabilidad / Alta Popularidad. Son tus mejores platos. Mantén la calidad y dales máxima visibilidad.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-800/50 border-l-4 border-brand-horse">
+                            <h3 class="font-bold text-brand-horse flex items-center"><i class="fas fa-chess-knight mr-2"></i> Caballo de Batalla</h3>
+                            <p class="text-xs text-slate-300 mt-1">Baja Rentabilidad / Alta Popularidad. Venden mucho pero dejan poco margen. Ideales para ligeras subidas de precio.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-800/50 border-l-4 border-brand-puzzle">
+                            <h3 class="font-bold text-brand-puzzle flex items-center"><i class="fas fa-question-circle mr-2"></i> Enigma</h3>
+                            <p class="text-xs text-slate-300 mt-1">Alta Rentabilidad / Baja Popularidad. Dejan mucho margen pero se venden poco. Necesitan marketing interno o cambio de nombre.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-800/50 border-l-4 border-brand-dog">
+                            <h3 class="font-bold text-brand-dog flex items-center"><i class="fas fa-bone mr-2"></i> Perro</h3>
+                            <p class="text-xs text-slate-300 mt-1">Baja Rentabilidad / Baja Popularidad. No venden ni dejan dinero. Candidatos principales a desaparecer de la carta.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de clasificación -->
+                <div class="glass-panel rounded-2xl overflow-hidden shadow-xl">
+                    <div class="px-6 py-4 border-b border-slate-700 bg-slate-800/30">
+                        <h3 class="font-bold text-lg">Clasificación Detallada</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-800/50 text-slate-300">
+                                <tr>
+                                    <th class="px-6 py-4 font-medium">Plato</th>
+                                    <th class="px-6 py-4 font-medium">Mix Ventas (%)</th>
+                                    <th class="px-6 py-4 font-medium">Margen Unit.</th>
+                                    <th class="px-6 py-4 font-medium">Categoría BCG</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bcg-table-body" class="divide-y divide-slate-700/50">
+                                <!-- Filas dinámicas -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIPO 3: DASHBOARD -->
+            <section id="tab-dashboard" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold mb-2">Dashboard de Rendimiento</h2>
+                    <p class="text-slate-400">Métricas clave de negocio generadas a partir del análisis de tu menú.</p>
+                </div>
+
+                <!-- KPIs -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="glass-panel rounded-2xl p-6 border-t-4 border-blue-500">
+                        <p class="text-slate-400 text-sm font-medium mb-1">Ingresos Totales</p>
+                        <h3 class="text-3xl font-bold text-white" id="kpi-revenue">0 €</h3>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-6 border-t-4 border-emerald-500">
+                        <p class="text-slate-400 text-sm font-medium mb-1">Margen Bruto Total (Beneficio)</p>
+                        <h3 class="text-3xl font-bold text-emerald-400" id="kpi-profit">0 €</h3>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-6 border-t-4 border-purple-500">
+                        <p class="text-slate-400 text-sm font-medium mb-1">Costo de Materia Prima (%)</p>
+                        <h3 class="text-3xl font-bold text-white" id="kpi-foodcost">0%</h3>
+                        <p class="text-xs text-slate-400 mt-2">Lo ideal es estar entre 25% y 33%</p>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-6 border-t-4 border-star">
+                        <p class="text-slate-400 text-sm font-medium mb-1">Platos Estrella</p>
+                        <h3 class="text-3xl font-bold text-brand-star" id="kpi-stars">0</h3>
+                        <p class="text-xs text-slate-400 mt-2" id="kpi-stars-desc">El motor de tu negocio</p>
+                    </div>
+                </div>
+
+                <!-- Gráficos del Dashboard -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="glass-panel rounded-2xl p-6">
+                        <h3 class="font-bold text-lg mb-4 text-center">Top 5 Platos por Beneficio Total Generado</h3>
+                        <div class="h-64 relative">
+                            <canvas id="profitChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-6">
+                        <h3 class="font-bold text-lg mb-4 text-center">Distribución de Categorías</h3>
+                        <div class="h-64 relative flex justify-center">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIPO 4: CONSEJOS Y PLAN DE ACCIÓN -->
+            <section id="tab-consejos" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold mb-2">Plan de Acción y Simulación</h2>
+                    <p class="text-slate-400">Recomendaciones operativas basadas en la matemática de tu menú. Descubre cuánto podrías ganar aplicando cambios.</p>
+                </div>
+
+                <div id="action-plans-container" class="space-y-6 mb-8">
+                    <!-- Se llena dinámicamente -->
+                </div>
+
+                <!-- Simulación de impacto -->
+                <div class="bg-gradient-to-br from-brand-card to-slate-900 border border-brand-primary/30 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i class="fas fa-rocket text-9xl text-brand-primary"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2 relative z-10"><i class="fas fa-chart-line text-brand-accent mr-2"></i> Simulación de Mejora</h3>
+                    <p class="text-slate-300 mb-6 relative z-10">Si aplicas la regla de oro: Subir un 10% el precio a tus "Caballos de Batalla" y logras vender un 15% más de tus "Enigmas".</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+                        <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                            <p class="text-sm text-slate-400">Beneficio Actual</p>
+                            <h4 class="text-2xl font-bold" id="sim-current">0 €</h4>
+                        </div>
+                        <div class="bg-slate-800/80 p-5 rounded-xl border border-slate-700">
+                            <p class="text-sm text-slate-400">Nuevo Beneficio Estimado</p>
+                            <h4 class="text-2xl font-bold text-brand-primary" id="sim-new">0 €</h4>
+                        </div>
+                        <div class="bg-emerald-900/40 p-5 rounded-xl border border-emerald-500/50">
+                            <p class="text-sm text-emerald-400">Impacto Directo</p>
+                            <h4 class="text-2xl font-bold text-emerald-400" id="sim-diff">+ 0 €</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
     </main>
 
-    <!-- Funcionalidad Javascript -->
     <script>
-        // --- 1. ESTADO DE LA APLICACIÓN ---
-        // Datos de ejemplo iniciales (Para que la web no se vea vacía)
+        // --- 1. ESTADO Y DATOS INICIALES ---
+        // Datos de ejemplo pre-cargados (basados en los CSV típicos de restaurante)
         let dishes = [
-            { id: 1, name: "Hamburguesa Trufada", cost: 3.50, price: 14.00, sold: 420 },
-            { id: 2, name: "Patatas Bravas", cost: 1.20, price: 6.50, sold: 850 }, // Caballo de batalla (alta venta, bajo margen total en comparacion a principales)
-            { id: 3, name: "Solomillo al Oporto", cost: 8.50, price: 24.00, sold: 85 }, // Enigma (alto margen, baja venta)
-            { id: 4, name: "Ensalada Simple", cost: 2.00, price: 7.00, sold: 95 }, // Perro (baja venta, bajo margen)
-            { id: 5, name: "Tacos al Pastor", cost: 2.50, price: 11.00, sold: 500 }, // Estrella
-            { id: 6, name: "Nachos con Queso", cost: 2.00, price: 8.50, sold: 600 }
+            { id: 1, name: "Perrito Caliente", cost: 2.00, price: 8.00, units: 4124 },
+            { id: 2, name: "Albóndigas", cost: 2.00, price: 8.00, units: 4124 },
+            { id: 3, name: "Huevos Fritos", cost: 4.00, price: 6.00, units: 5000 },
+            { id: 4, name: "Hamburguesa", cost: 1.00, price: 9.00, units: 523 },
+            { id: 5, name: "Tacos", cost: 3.00, price: 7.00, units: 412 },
+            { id: 6, name: "Pizza", cost: 3.00, price: 7.00, units: 334 },
+            { id: 7, name: "Pollo a la plancha", cost: 5.00, price: 10.00, units: 900 },
+            { id: 8, name: "Costillas", cost: 6.00, price: 10.00, units: 120 },
+            { id: 9, name: "Patatas Fritas", cost: 4.00, price: 6.00, units: 111 },
+            { id: 10, name: "Fingers", cost: 7.00, price: 10.00, units: 21 }
         ];
 
-        let metrics = {
-            totalRevenue: 0,
-            totalCost: 0,
-            totalMargin: 0,
-            totalUnits: 0,
-            avgMargin: 0,
-            avgUnits: 0
-        };
+        let analysisData = {};
+        let charts = { bcg: null, profit: null, category: null };
 
-        // Instancias de gráficos para poder destruirlos y recrearlos
-        let scatterChartInstance = null;
-        let doughnutChartInstance = null;
-        let barChartInstance = null;
-
-        // Categorías BCG Configuración
-        const BCG_CONFIG = {
-            'ESTRELLA': { label: 'Estrella', color: '#fbbf24', icon: 'fa-star', class: 'text-star bg-star/10 border-star' },
-            'CABALLO': { label: 'Caballo de Batalla', color: '#38bdf8', icon: 'fa-horse-head', class: 'text-workhorse bg-workhorse/10 border-workhorse' },
-            'ENIGMA': { label: 'Enigma', color: '#c084fc', icon: 'fa-question-circle', class: 'text-puzzle bg-puzzle/10 border-puzzle' },
-            'PERRO': { label: 'Perro', color: '#f87171', icon: 'fa-bone', class: 'text-dog bg-dog/10 border-dog' }
-        };
-
-        // --- 2. NAVEGACIÓN (TABS) ---
+        // --- 2. CONTROL DE PESTAÑAS ---
         function switchTab(tabId) {
-            // Ocultar todos los tabs
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            // Quitar estilos activos de los botones
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-brand-600', 'shadow-lg', 'shadow-brand-500/20', 'text-white');
-                btn.classList.add('text-slate-400');
+            // Ocultar todas
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-brand-primary', 'text-white', 'shadow-lg', 'shadow-blue-500/20');
+                el.classList.add('text-slate-400');
             });
+            
+            // Mostrar activa
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            const btn = document.getElementById(`btn-${tabId}`);
+            btn.classList.remove('text-slate-400');
+            btn.classList.add('bg-brand-primary', 'text-white', 'shadow-lg', 'shadow-blue-500/20');
 
-            // Mostrar el tab seleccionado
-            document.getElementById(tabId).classList.remove('hidden');
-            // Añadir estilos activos al botón
-            const activeBtn = document.getElementById(`btn-${tabId}`);
-            activeBtn.classList.remove('text-slate-400');
-            activeBtn.classList.add('bg-brand-600', 'shadow-lg', 'shadow-brand-500/20', 'text-white');
-
-            // Si es un tab de analítica, recalcular y dibujar gráficos por si se actualizó el canvas
-            if(tabId !== 'tab-input') {
-                analyzeMenu();
+            // Renderizar datos si se entra a tabs analíticas
+            if(tabId !== 'datos') {
+                performAnalysis();
+                if(tabId === 'matriz') renderBCGMatrix();
+                if(tabId === 'dashboard') renderDashboard();
+                if(tabId === 'consejos') renderActionPlan();
             }
         }
 
-        // --- 3. PESTAÑA 1: GESTIÓN DE PLATOS ---
-        const form = document.getElementById('dish-form');
-        const dishesList = document.getElementById('dishes-list');
-        const dishCount = document.getElementById('dish-count');
-
-        function formatCurrency(num) {
-            return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(num);
+        function calculateAndGoToMatrix() {
+            if(dishes.length === 0) {
+                alert("Añade al menos un plato para analizar.");
+                return;
+            }
+            switchTab('matriz');
         }
 
-        function renderDishesList() {
-            dishesList.innerHTML = '';
-            dishes.forEach(dish => {
+        // --- 3. GESTIÓN DE LA TABLA DE ENTRADA ---
+        function renderInputTable() {
+            const tbody = document.getElementById('dishes-table-body');
+            tbody.innerHTML = '';
+            
+            dishes.forEach((dish, index) => {
+                const margin = dish.price - dish.cost;
+                const totalSales = dish.price * dish.units;
+                
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="px-6 py-4 font-medium">${dish.name}</td>
-                    <td class="px-6 py-4 text-right text-slate-300">${formatCurrency(dish.cost)}</td>
-                    <td class="px-6 py-4 text-right text-slate-300">${formatCurrency(dish.price)}</td>
-                    <td class="px-6 py-4 text-right font-medium text-brand-400">${dish.sold}</td>
-                    <td class="px-6 py-4 text-center">
-                        <button onclick="removeDish(${dish.id})" class="text-slate-400 hover:text-red-400 transition-colors bg-slate-800 hover:bg-slate-700 w-8 h-8 rounded-full">
-                            <i class="fa-solid fa-trash-can text-sm"></i>
+                    <td class="px-6 py-4 text-slate-300">${dish.cost.toFixed(2)} €</td>
+                    <td class="px-6 py-4 text-slate-300">${dish.price.toFixed(2)} €</td>
+                    <td class="px-6 py-4 text-emerald-400">${margin.toFixed(2)} €</td>
+                    <td class="px-6 py-4 text-slate-300">${dish.units}</td>
+                    <td class="px-6 py-4 font-bold text-white">${totalSales.toFixed(2)} €</td>
+                    <td class="px-6 py-4 text-right">
+                        <button onclick="deleteDish(${index})" class="text-slate-400 hover:text-red-500 transition-colors">
+                            <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
                 `;
-                dishesList.appendChild(tr);
+                tbody.appendChild(tr);
             });
-            dishCount.textContent = `${dishes.length} platos registrados`;
         }
 
-        form.addEventListener('submit', (e) => {
+        document.getElementById('add-dish-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('input-name').value;
             const cost = parseFloat(document.getElementById('input-cost').value);
             const price = parseFloat(document.getElementById('input-price').value);
-            const sold = parseInt(document.getElementById('input-sold').value);
+            const units = parseInt(document.getElementById('input-units').value);
 
-            if (price <= cost) {
-                alert("Advertencia: El precio de venta debería ser mayor al coste.");
+            if(cost >= price) {
+                alert("¡Atención! El coste es mayor o igual al precio de venta. Estás perdiendo dinero con este plato.");
             }
 
-            dishes.push({
-                id: Date.now(),
-                name, cost, price, sold
-            });
-
-            form.reset();
-            renderDishesList();
+            dishes.push({ id: Date.now(), name, cost, price, units });
+            this.reset();
+            renderInputTable();
         });
 
-        function removeDish(id) {
-            dishes = dishes.filter(d => d.id !== id);
-            renderDishesList();
-        }
-
-        function calculateAndGoToMatrix() {
-            if(dishes.length < 2) {
-                alert("Por favor, añade al menos 2 platos para poder generar una matriz BCG.");
-                return;
-            }
-            switchTab('tab-matrix');
+        function deleteDish(index) {
+            dishes.splice(index, 1);
+            renderInputTable();
         }
 
         // --- 4. MOTOR MATEMÁTICO BCG ---
-        function analyzeMenu() {
-            if(dishes.length === 0) return;
+        function performAnalysis() {
+            let totalVolume = 0;
+            let totalRevenue = 0;
+            let totalCost = 0;
+            let totalMarginAmount = 0;
 
-            metrics.totalRevenue = 0;
-            metrics.totalCost = 0;
-            metrics.totalMargin = 0;
-            metrics.totalUnits = 0;
-
-            // 1. Cálculos base por plato
-            dishes.forEach(d => {
-                d.unitMargin = d.price - d.cost;
-                d.totalDishMargin = d.unitMargin * d.sold;
-                d.totalDishRevenue = d.price * d.sold;
-                d.totalDishCost = d.cost * d.sold;
-
-                metrics.totalRevenue += d.totalDishRevenue;
-                metrics.totalCost += d.totalDishCost;
-                metrics.totalMargin += d.totalDishMargin;
-                metrics.totalUnits += d.sold;
-            });
-
-            // 2. Calcular Medias del Menú (Los Ejes de la Matriz)
-            // Media de popularidad = Total uds vendidas / nº de platos
-            // (Nota: algunos usan el 70% de esta media, usaremos la media real para ser estrictos)
-            metrics.avgUnits = metrics.totalUnits / dishes.length;
-            
-            // Media de Rentabilidad = Margen total / Total de unidades vendidas
-            metrics.avgMargin = metrics.totalMargin / metrics.totalUnits;
-
-            // 3. Clasificación BCG
-            dishes.forEach(d => {
-                d.mixPercent = ((d.sold / metrics.totalUnits) * 100).toFixed(1);
+            // 1. Cálculos Base
+            dishes.forEach(dish => {
+                totalVolume += dish.units;
+                totalRevenue += (dish.price * dish.units);
+                totalCost += (dish.cost * dish.units);
                 
-                const isHighMargin = d.unitMargin >= metrics.avgMargin;
-                const isHighVolume = d.sold >= metrics.avgUnits;
-
-                if (isHighMargin && isHighVolume) d.bcg = 'ESTRELLA';
-                else if (!isHighMargin && isHighVolume) d.bcg = 'CABALLO';
-                else if (isHighMargin && !isHighVolume) d.bcg = 'ENIGMA';
-                else d.bcg = 'PERRO';
+                dish.margin = dish.price - dish.cost;
+                dish.totalMargin = dish.margin * dish.units;
             });
 
-            // Ordenar platos por margen total aportado (mayor a menor) para las tablas
-            dishes.sort((a, b) => b.totalDishMargin - a.totalDishMargin);
+            // 2. Umbrales (Thresholds)
+            // Umbral de Rentabilidad (Margen Promedio Ponderado)
+            const avgMargin = totalVolume > 0 ? (totalMarginAmount = dishes.reduce((sum, d) => sum + d.totalMargin, 0)) / totalVolume : 0;
+            
+            // Umbral de Popularidad (% Mix ideal * factor de corrección standard 70%)
+            // Si hay N platos, si todos vendieran igual, cada uno vendería 1/N. 
+            // Se exige el 70% de esa media teórica.
+            const N = dishes.length;
+            const thresholdPopularity = N > 0 ? (1 / N) * 0.7 : 0; 
 
-            // Renderizar vistas dependientes
-            renderMatrixTab();
-            renderDashboardTab();
-            renderAdviceTab();
+            const categoryCounts = { star: 0, horse: 0, puzzle: 0, dog: 0 };
+
+            // 3. Clasificación
+            dishes.forEach(dish => {
+                dish.mixPercent = totalVolume > 0 ? dish.units / totalVolume : 0;
+                dish.isHighProfit = dish.margin >= avgMargin;
+                dish.isHighPopular = dish.mixPercent >= thresholdPopularity;
+
+                if (dish.isHighPopular && dish.isHighProfit) {
+                    dish.category = "Estrella";
+                    dish.color = "#f59e0b"; // Amber
+                    categoryCounts.star++;
+                } else if (dish.isHighPopular && !dish.isHighProfit) {
+                    dish.category = "Caballo de Batalla";
+                    dish.color = "#3b82f6"; // Blue
+                    categoryCounts.horse++;
+                } else if (!dish.isHighPopular && dish.isHighProfit) {
+                    dish.category = "Enigma";
+                    dish.color = "#8b5cf6"; // Purple
+                    categoryCounts.puzzle++;
+                } else {
+                    dish.category = "Perro";
+                    dish.color = "#ef4444"; // Red
+                    categoryCounts.dog++;
+                }
+            });
+
+            // Guardar para el dashboard
+            analysisData = {
+                totalVolume, totalRevenue, totalCost, totalMarginAmount,
+                avgMargin, thresholdPopularity, categoryCounts,
+                foodCostPercent: totalRevenue > 0 ? (totalCost / totalRevenue) * 100 : 0
+            };
         }
 
-        // --- 5. RENDERIZADO: MATRIZ BCG ---
-        
-        // Plugin de Chart.js para dibujar los ejes de medias
-        const quadrantLinePlugin = {
-            id: 'quadrantLines',
-            beforeDraw: (chart) => {
-                const { ctx, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
-                const xVal = x.getPixelForValue(metrics.avgUnits);
-                const yVal = y.getPixelForValue(metrics.avgMargin);
-
-                ctx.save();
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-                ctx.setLineDash([5, 5]);
-
-                // Línea vertical (Media Popularidad)
-                if (xVal >= left && xVal <= right) {
-                    ctx.moveTo(xVal, top);
-                    ctx.lineTo(xVal, bottom);
-                }
-                // Línea horizontal (Media Rentabilidad)
-                if (yVal >= top && yVal <= bottom) {
-                    ctx.moveTo(left, yVal);
-                    ctx.lineTo(right, yVal);
-                }
-                
-                ctx.stroke();
-                
-                // Etiquetas de las líneas
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-                ctx.font = '10px Inter';
-                ctx.textAlign = 'right';
-                ctx.fillText(`Media Venta (${metrics.avgUnits.toFixed(0)})`, xVal - 5, top + 15);
-                ctx.textAlign = 'left';
-                ctx.fillText(`Media Margen (${metrics.avgMargin.toFixed(2)}€)`, left + 5, yVal - 5);
-
-                ctx.restore();
-            }
-        };
-
-        function renderMatrixTab() {
-            // Llenar la tabla de clasificación
-            const tbody = document.getElementById('classification-list');
+        // --- 5. RENDERIZADO MATRIZ BCG ---
+        function renderBCGMatrix() {
+            // Actualizar Tabla BCG
+            const tbody = document.getElementById('bcg-table-body');
             tbody.innerHTML = '';
             
-            dishes.forEach(d => {
-                const conf = BCG_CONFIG[d.bcg];
+            // Ordenar por volumen
+            const sortedDishes = [...dishes].sort((a,b) => b.units - a.units);
+            
+            sortedDishes.forEach(dish => {
+                let badgeClass = "";
+                if(dish.category === 'Estrella') badgeClass = "bg-brand-star/20 text-brand-star border border-brand-star/30";
+                if(dish.category === 'Caballo de Batalla') badgeClass = "bg-brand-horse/20 text-brand-horse border border-brand-horse/30";
+                if(dish.category === 'Enigma') badgeClass = "bg-brand-puzzle/20 text-brand-puzzle border border-brand-puzzle/30";
+                if(dish.category === 'Perro') badgeClass = "bg-brand-dog/20 text-brand-dog border border-brand-dog/30";
+
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td class="px-6 py-3 font-medium">${d.name}</td>
-                    <td class="px-6 py-3 text-right">${formatCurrency(d.unitMargin)}</td>
-                    <td class="px-6 py-3 text-right text-emerald-400">${formatCurrency(d.totalDishMargin)}</td>
-                    <td class="px-6 py-3 text-right">${d.mixPercent}%</td>
-                    <td class="px-6 py-3 text-center">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${conf.class}">
-                            <i class="fa-solid ${conf.icon}"></i> ${conf.label}
-                        </span>
+                    <td class="px-6 py-4 font-medium">${dish.name}</td>
+                    <td class="px-6 py-4 text-slate-300">${(dish.mixPercent * 100).toFixed(2)}%</td>
+                    <td class="px-6 py-4 text-slate-300">${dish.margin.toFixed(2)} €</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeClass}">${dish.category}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            // Preparar datos para el Scatter Chart
+            // Destruir chart si existe
+            if(charts.bcg) charts.bcg.destroy();
+
+            const ctx = document.getElementById('bcgChart').getContext('2d');
+            
+            // Preparar datos para Scatter Chart
             const scatterData = dishes.map(d => ({
-                x: d.sold,
-                y: d.unitMargin,
-                raw: d // Guardar obj original para el tooltip
+                x: d.mixPercent * 100, // Eje X: Popularidad %
+                y: d.margin,           // Eje Y: Rentabilidad €
+                dishData: d            // Guardamos el objeto entero para el tooltip
             }));
 
-            const pointBackgroundColors = dishes.map(d => BCG_CONFIG[d.bcg].color);
-
-            if(scatterChartInstance) scatterChartInstance.destroy();
-
-            const ctxScatter = document.getElementById('bcgChart').getContext('2d');
-            scatterChartInstance = new Chart(ctxScatter, {
+            // Dibujar líneas base usando una librería de anotaciones o truco visual
+            charts.bcg = new Chart(ctx, {
                 type: 'scatter',
                 data: {
                     datasets: [{
                         label: 'Platos',
                         data: scatterData,
-                        backgroundColor: pointBackgroundColors,
+                        backgroundColor: scatterData.map(d => d.dishData.color),
+                        borderColor: 'white',
+                        borderWidth: 1,
                         pointRadius: 8,
-                        pointHoverRadius: 10,
-                        borderColor: '#1e293b',
-                        borderWidth: 2
+                        pointHoverRadius: 12
                     }]
                 },
                 options: {
@@ -587,12 +547,12 @@
                             padding: 12,
                             callbacks: {
                                 label: function(context) {
-                                    const dish = context.raw.raw;
+                                    const d = context.raw.dishData;
                                     return [
-                                        dish.name,
-                                        `Clase: ${BCG_CONFIG[dish.bcg].label}`,
-                                        `Margen/ud: ${formatCurrency(dish.unitMargin)}`,
-                                        `Uds. Vendidas: ${dish.sold}`
+                                        `Plato: ${d.name}`,
+                                        `Categoría: ${d.category}`,
+                                        `Ventas: ${d.units} uds.`,
+                                        `Margen: ${d.margin.toFixed(2)} €`
                                     ];
                                 }
                             }
@@ -600,206 +560,215 @@
                     },
                     scales: {
                         x: {
-                            title: { display: true, text: 'Popularidad (Unidades Vendidas)', color: '#94a3b8' },
+                            title: { display: true, text: 'Popularidad (Mix de Ventas %)', color: '#94a3b8' },
                             grid: { color: 'rgba(255, 255, 255, 0.05)' },
                             ticks: { color: '#94a3b8' },
-                            beginAtZero: true
+                            // Dibujar línea vertical de umbral de popularidad
+                            border: {
+                                display: true,
+                                dash: [5, 5],
+                                color: 'rgba(255,255,255,0.2)'
+                            }
                         },
                         y: {
-                            title: { display: true, text: 'Rentabilidad (Margen Unitario €)', color: '#94a3b8' },
+                            title: { display: true, text: 'Rentabilidad (Margen de Contribución €)', color: '#94a3b8' },
                             grid: { color: 'rgba(255, 255, 255, 0.05)' },
                             ticks: { color: '#94a3b8' },
-                            beginAtZero: true
+                        }
+                    },
+                    // Dibujar cruz de medias manualmente (Thresholds)
+                    animation: {
+                        onComplete: function() {
+                            const chart = this;
+                            const ctx = chart.ctx;
+                            const xAxis = chart.scales.x;
+                            const yAxis = chart.scales.y;
+                            
+                            const xPixel = xAxis.getPixelForValue(analysisData.thresholdPopularity * 100);
+                            const yPixel = yAxis.getPixelForValue(analysisData.avgMargin);
+
+                            ctx.save();
+                            ctx.beginPath();
+                            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                            ctx.setLineDash([5, 5]);
+                            ctx.lineWidth = 2;
+
+                            // Línea Vertical (Popularidad Promedio)
+                            ctx.moveTo(xPixel, yAxis.top);
+                            ctx.lineTo(xPixel, yAxis.bottom);
+                            
+                            // Línea Horizontal (Margen Promedio)
+                            ctx.moveTo(xAxis.left, yPixel);
+                            ctx.lineTo(xAxis.right, yPixel);
+                            
+                            ctx.stroke();
+                            ctx.restore();
                         }
                     }
-                },
-                plugins: [quadrantLinePlugin]
+                }
             });
         }
 
-        // --- 6. RENDERIZADO: DASHBOARD ---
-        function renderDashboardTab() {
-            // KPIs
-            const foodCostPercent = (metrics.totalCost / metrics.totalRevenue) * 100;
-            const grossProfit = metrics.totalRevenue - metrics.totalCost; // Equivalent to totalMargin
-
-            document.getElementById('kpi-revenue').textContent = formatCurrency(metrics.totalRevenue);
-            document.getElementById('kpi-cost').textContent = formatCurrency(metrics.totalCost);
-            document.getElementById('kpi-profit').textContent = formatCurrency(grossProfit);
-            document.getElementById('kpi-foodcost').textContent = foodCostPercent.toFixed(1) + '%';
+        // --- 6. RENDERIZADO DASHBOARD ---
+        function renderDashboard() {
+            // Actualizar KPIs numéricos
+            document.getElementById('kpi-revenue').innerText = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(analysisData.totalRevenue);
+            document.getElementById('kpi-profit').innerText = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(analysisData.totalMarginAmount);
             
-            // Color de Alerta para Food Cost (Ideal < 30%)
             const fcElement = document.getElementById('kpi-foodcost');
-            if(foodCostPercent > 33) { fcElement.className = 'text-3xl font-bold text-red-400'; }
-            else if (foodCostPercent < 25) { fcElement.className = 'text-3xl font-bold text-emerald-400'; }
-            else { fcElement.className = 'text-3xl font-bold text-brand-400'; }
+            fcElement.innerText = analysisData.foodCostPercent.toFixed(1) + '%';
+            fcElement.className = `text-3xl font-bold ${analysisData.foodCostPercent > 35 ? 'text-red-400' : 'text-emerald-400'}`;
 
-            // Doughnut Chart (Ventas por Categoría BCG)
-            const catSales = { 'ESTRELLA':0, 'CABALLO':0, 'ENIGMA':0, 'PERRO':0 };
-            dishes.forEach(d => catSales[d.bcg] += d.totalDishRevenue);
+            document.getElementById('kpi-stars').innerText = analysisData.categoryCounts.star;
 
-            if(doughnutChartInstance) doughnutChartInstance.destroy();
-            const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+            // Destruir charts previos
+            if(charts.profit) charts.profit.destroy();
+            if(charts.category) charts.category.destroy();
+
+            // Chart de Beneficios (Top 5)
+            const topProfits = [...dishes].sort((a,b) => b.totalMargin - a.totalMargin).slice(0, 5);
+            const ctxProfit = document.getElementById('profitChart').getContext('2d');
             
-            // Filter out empty categories for the chart
-            const labelsDoughnut = [];
-            const dataDoughnut = [];
-            const bgDoughnut = [];
-            
-            Object.keys(catSales).forEach(k => {
-                if(catSales[k] > 0) {
-                    labelsDoughnut.push(BCG_CONFIG[k].label);
-                    dataDoughnut.push(catSales[k]);
-                    bgDoughnut.push(BCG_CONFIG[k].color);
-                }
-            });
-
-            doughnutChartInstance = new Chart(ctxDoughnut, {
-                type: 'doughnut',
-                data: {
-                    labels: labelsDoughnut,
-                    datasets: [{
-                        data: dataDoughnut,
-                        backgroundColor: bgDoughnut,
-                        borderWidth: 0,
-                        hoverOffset: 10
-                    }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { position: 'right', labels: { color: '#e2e8f0' } },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ` ${formatCurrency(context.raw)}`;
-                                }
-                            }
-                        }
-                    },
-                    cutout: '70%'
-                }
-            });
-
-            // Bar Chart (Top 5 Platos por Margen Total Aportado)
-            if(barChartInstance) barChartInstance.destroy();
-            const top5 = [...dishes].sort((a,b) => b.totalDishMargin - a.totalDishMargin).slice(0, 5);
-            const ctxBar = document.getElementById('barChart').getContext('2d');
-            barChartInstance = new Chart(ctxBar, {
+            charts.profit = new Chart(ctxProfit, {
                 type: 'bar',
                 data: {
-                    labels: top5.map(d => d.name.length > 15 ? d.name.substring(0,15)+'...' : d.name),
+                    labels: topProfits.map(d => d.name),
                     datasets: [{
-                        label: 'Beneficio Total Bruto',
-                        data: top5.map(d => d.totalDishMargin),
-                        backgroundColor: top5.map(d => BCG_CONFIG[d.bcg].color),
+                        label: 'Beneficio Total (€)',
+                        data: topProfits.map(d => d.totalMargin),
+                        backgroundColor: '#10b981',
                         borderRadius: 6
                     }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
                     }
+                }
+            });
+
+            // Chart de Categorías (Doughnut)
+            const ctxCat = document.getElementById('categoryChart').getContext('2d');
+            charts.category = new Chart(ctxCat, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Estrellas', 'Caballos', 'Enigmas', 'Perros'],
+                    datasets: [{
+                        data: [
+                            analysisData.categoryCounts.star,
+                            analysisData.categoryCounts.horse,
+                            analysisData.categoryCounts.puzzle,
+                            analysisData.categoryCounts.dog
+                        ],
+                        backgroundColor: ['#f59e0b', '#3b82f6', '#8b5cf6', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { color: '#fff', font: {family: 'Inter'} } }
+                    },
+                    cutout: '70%'
                 }
             });
         }
 
-        // --- 7. RENDERIZADO: CONSEJOS DINÁMICOS ---
-        function renderAdviceTab() {
-            const container = document.getElementById('advice-container');
+        // --- 7. PLAN DE ACCIÓN Y SIMULACIÓN ---
+        function renderActionPlan() {
+            const container = document.getElementById('action-plans-container');
             container.innerHTML = '';
 
-            const grouped = { 'ESTRELLA': [], 'CABALLO': [], 'ENIGMA': [], 'PERRO': [] };
-            dishes.forEach(d => grouped[d.bcg].push(d));
+            // Filtrar platos
+            const dogs = dishes.filter(d => d.category === 'Perro');
+            const horses = dishes.filter(d => d.category === 'Caballo de Batalla');
+            const puzzles = dishes.filter(d => d.category === 'Enigma');
 
-            // ESTRELLAS
-            if (grouped['ESTRELLA'].length > 0) {
-                const names = grouped['ESTRELLA'].map(d => `<strong>${d.name}</strong>`).join(', ');
-                container.appendChild(createAdviceCard(
-                    'ESTRELLA',
-                    `Mantén la calidad de: ${names}`,
-                    `Estos son tus mejores platos. <strong>No alteres la receta, ni cambies la calidad de los ingredientes, ni subas el precio drásticamente.</strong> Asegúrate de que estén destacados visualmente en la carta y que los camareros los ofrezcan como especialidad de la casa.`
-                ));
+            // Crear tarjetas de consejo
+            if(dogs.length > 0) {
+                container.innerHTML += `
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-brand-dog shadow-lg relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 opacity-10"><i class="fas fa-bone text-8xl text-brand-dog"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-exclamation-triangle text-brand-dog mr-2"></i> Alerta: Elimina los "Perros"</h3>
+                        <p class="text-slate-300 text-sm mb-4">Tienes <strong>${dogs.length}</strong> plato(s) que ni atraen clientes ni dejan margen (Ej. ${dogs.slice(0,2).map(d=>d.name).join(', ')}). Almacenar sus ingredientes te cuesta dinero.</p>
+                        <ul class="list-disc list-inside text-sm text-slate-400 space-y-1">
+                            <li><strong>Solución rápida:</strong> Sácalos del menú hoy mismo.</li>
+                            <li><strong>Alternativa:</strong> Reinvéntalos por completo usando ingredientes que ya tengas para otros platos (reduciendo merma).</li>
+                        </ul>
+                    </div>`;
             }
 
-            // CABALLOS DE BATALLA
-            if (grouped['CABALLO'].length > 0) {
-                const names = grouped['CABALLO'].map(d => `<strong>${d.name}</strong>`).join(', ');
-                container.appendChild(createAdviceCard(
-                    'CABALLO',
-                    `Optimiza el margen de: ${names}`,
-                    `Venden mucho, pero ganas poco por cada uno. <strong>Estrategias:</strong><br>1. Sube el precio ligeramente (ej. un 5% a 10%, el cliente habitual apenas lo notará).<br>2. Reduce levemente el tamaño de la ración.<br>3. Busca proveedores más económicos para la materia prima principal sin perder calidad base.`
-                ));
+            if(horses.length > 0) {
+                container.innerHTML += `
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-brand-horse shadow-lg relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 opacity-10"><i class="fas fa-chess-knight text-8xl text-brand-horse"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-arrow-up text-brand-horse mr-2"></i> Oportunidad: Sube precios a "Caballos"</h3>
+                        <p class="text-slate-300 text-sm mb-4">Platos como <strong>${horses.slice(0,2).map(d=>d.name).join(', ')}</strong> son muy populares. A la gente le encantan, pero el margen es bajo.</p>
+                        <ul class="list-disc list-inside text-sm text-slate-400 space-y-1">
+                            <li>Sube el precio un poco (0.50€ - 1.00€). La demanda no suele bajar por cambios pequeños en estos platos.</li>
+                            <li>Reduce ligeramente el tamaño de la guarnición para bajar el costo de la materia prima.</li>
+                        </ul>
+                    </div>`;
             }
 
-            // ENIGMAS
-            if (grouped['ENIGMA'].length > 0) {
-                const names = grouped['ENIGMA'].map(d => `<strong>${d.name}</strong>`).join(', ');
-                container.appendChild(createAdviceCard(
-                    'ENIGMA',
-                    `Impulsa las ventas de: ${names}`,
-                    `Tienen un margen brutal, pero poca gente los pide. <strong>Estrategias:</strong><br>1. Cámbiales el nombre para hacerlos más atractivos.<br>2. Ubícalos en el centro de tu carta física o ponles un recuadro llamativo.<br>3. Ofrece muestras gratis o combínalos en un menú degustación para que la gente los pruebe.`
-                ));
+            if(puzzles.length > 0) {
+                container.innerHTML += `
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-brand-puzzle shadow-lg relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 opacity-10"><i class="fas fa-question text-8xl text-brand-puzzle"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-bullhorn text-brand-puzzle mr-2"></i> Marketing: Promociona los "Enigmas"</h3>
+                        <p class="text-slate-300 text-sm mb-4">Platos como <strong>${puzzles.slice(0,2).map(d=>d.name).join(', ')}</strong> te dan MUCHO dinero por venta, pero nadie los pide.</p>
+                        <ul class="list-disc list-inside text-sm text-slate-400 space-y-1">
+                            <li>Ponles una recuadro o foto llamativa en el menú físico/digital.</li>
+                            <li>Pide a tus camareros que los recomienden de boca (Sugerencia del Chef).</li>
+                            <li>Cámbiales el nombre por uno más atractivo.</li>
+                        </ul>
+                    </div>`;
             }
 
-            // PERROS
-            if (grouped['PERRO'].length > 0) {
-                const names = grouped['PERRO'].map(d => `<strong>${d.name}</strong>`).join(', ');
-                container.appendChild(createAdviceCard(
-                    'PERRO',
-                    `Decisiones difíciles para: ${names}`,
-                    `No se venden y encima dejan poco dinero. Ocupan espacio en la nevera (generando mermas) y en la carta. <strong>Acción recomendada:</strong> Elimínalos del menú directamente. Si es un plato infantil o vegetariano necesario por cumplir, reinvéntalo con ingredientes más baratos o cámbialo por una alternativa más popular.`
-                ));
+            if(container.innerHTML === '') {
+                container.innerHTML = `
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-brand-star shadow-lg">
+                        <h3 class="text-xl font-bold text-white mb-2"><i class="fas fa-trophy text-brand-star mr-2"></i> ¡Menú Perfecto!</h3>
+                        <p class="text-slate-300">Parece que todos tus platos son estrellas. ¡Mantén esa excelencia operativa!</p>
+                    </div>`;
             }
 
-            // Simulación Global
-            let extraProfit = 0;
-            let simText = "";
+            // Simulación Matemática
+            let currentProfit = analysisData.totalMarginAmount;
+            let simulatedProfit = 0;
+
+            dishes.forEach(d => {
+                if(d.category === 'Caballo de Batalla') {
+                    // Simulación: Sube precio un 10%, unidades se mantienen igual por ser inelásticos
+                    let newPrice = d.price * 1.10;
+                    let newMargin = newPrice - d.cost;
+                    simulatedProfit += (newMargin * d.units);
+                } else if(d.category === 'Enigma') {
+                    // Simulación: Vende un 15% más por promoción, mismo margen
+                    let newUnits = d.units * 1.15;
+                    simulatedProfit += (d.margin * newUnits);
+                } else if(d.category === 'Perro') {
+                    // Simulación: Los eliminamos (margen 0 pero ahorramos complejidad, aquí no suma ni resta)
+                } else {
+                    // Estrella: Se queda igual
+                    simulatedProfit += d.totalMargin;
+                }
+            });
+
+            document.getElementById('sim-current').innerText = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(currentProfit);
+            document.getElementById('sim-new').innerText = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(simulatedProfit);
             
-            // Simular subir precio a Caballos y aumentar venta de Enigmas
-            if(grouped['CABALLO'].length > 0 || grouped['ENIGMA'].length > 0) {
-                let caballoExtra = 0;
-                grouped['CABALLO'].forEach(d => {
-                    const priceIncrease = d.price * 0.05; // 5% increase
-                    caballoExtra += (priceIncrease * d.sold);
-                });
-
-                let enigmaExtra = 0;
-                grouped['ENIGMA'].forEach(d => {
-                    const extraSales = d.sold * 0.20; // 20% more sales
-                    enigmaExtra += (extraSales * d.unitMargin);
-                });
-
-                extraProfit = caballoExtra + enigmaExtra;
-                simText = `Si aplicas una <strong>subida de precio del 5% a tus Caballos de Batalla</strong> y logras <strong>aumentar un 20% las ventas de tus platos Enigma</strong> (con promoción), tu beneficio bruto aumentaría en <span class="text-emerald-400 text-lg font-bold">${formatCurrency(extraProfit)}</span> en el mismo periodo, sin necesidad de atender a más clientes.`;
-            } else {
-                simText = `Actualmente tu menú está muy polarizado. Concéntrate en mantener tus estrellas para asegurar tus beneficios actuales de ${formatCurrency(metrics.totalMargin)}.`;
-            }
-            
-            document.getElementById('global-simulation-text').innerHTML = simText;
+            let diff = simulatedProfit - currentProfit;
+            document.getElementById('sim-diff').innerText = `+ ${new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(diff)}`;
         }
 
-        function createAdviceCard(type, title, text) {
-            const conf = BCG_CONFIG[type];
-            const div = document.createElement('div');
-            div.className = `glass-panel p-5 border-l-4 ${conf.class.split(' ')[2]}`; // get border color class
-            div.innerHTML = `
-                <div class="flex items-center gap-3 mb-2">
-                    <div class="${conf.class} w-10 h-10 rounded-lg flex items-center justify-center border text-lg">
-                        <i class="fa-solid ${conf.icon}"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">${title}</h3>
-                </div>
-                <p class="text-slate-300 text-sm ml-13 pl-13 leading-relaxed">${text}</p>
-            `;
-            return div;
-        }
-
-        // Inicialización
-        renderDishesList();
+        // --- INICIALIZACIÓN ---
+        renderInputTable();
 
     </script>
 </body>
