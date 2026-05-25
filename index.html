@@ -117,6 +117,24 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .page-hd h1{font-family:var(--fb);font-size:38px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:8px}
 .page-hd p{font-size:15px;color:var(--text2);line-height:1.65;max-width:600px}
 
+/* Alert Box */
+.info-alert {
+  background: #FFFBEB;
+  border: 1px solid #FEF3C7;
+  color: #B45309;
+  padding: 14px 18px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 2rem;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: var(--shadow);
+}
+.info-alert i { font-size: 20px; flex-shrink: 0; color: #F59E0B; }
+
 /* ─── INPUT PANEL ─── */
 .input-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:1.5rem}
 
@@ -226,7 +244,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 .leg-horse {border-top-color:var(--horse)}
 .leg-dog   {border-top-color:var(--dog)}
 .leg-name{font-size:13px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;margin-bottom:6px}
-.leg-star  .leg-name{color:#d4a000} /* Slightly darker for readability */
+.leg-star  .leg-name{color:#d4a000}
 .leg-puzzle .leg-name{color:var(--puzzle)}
 .leg-horse .leg-name{color:var(--horse)}
 .leg-dog   .leg-name{color:var(--dog)}
@@ -297,7 +315,8 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
   border-radius:var(--r);padding:24px;box-shadow:var(--shadow);
 }
 .chart-card-full{grid-column:1/-1; margin-bottom: 16px;}
-.chart-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:20px}
+.chart-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.chart-desc{font-size:12.5px;color:var(--text2);margin-bottom:20px;line-height:1.5}
 
 /* interactive toggle on dashboard */
 .toggle-group{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
@@ -402,8 +421,14 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 <!-- ══ PANEL 1: INPUT ══ -->
 <section id="panel-input" class="panel active">
   <div class="page-hd">
-    <h1 data-i18n="h1_input">Introduce tus platos</h1>
+    <h1 data-i18n="h1_input">Añade tus platos</h1>
     <p data-i18n="p_input">Añade cada plato con su precio de venta, coste de producción y unidades vendidas en el periodo que quieras analizar.</p>
+  </div>
+
+  <!-- AVISO DE COSTES INDIRECTOS -->
+  <div class="info-alert">
+    <i class="ti ti-info-circle"></i>
+    <span data-i18n="disclaimer">Atención: Este cálculo se basa en el margen bruto directo. No tiene en cuenta los costes indirectos de tu negocio (alquiler, personal, suministros, etc.).</span>
   </div>
 
   <div class="col-headers">
@@ -437,7 +462,7 @@ body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100
 <!-- ══ PANEL 2: BCG ══ -->
 <section id="panel-bcg" class="panel">
   <div class="page-hd">
-    <h1 data-i18n="h1_bcg">Matriz BCG Exacta</h1>
+    <h1 data-i18n="h1_bcg">Matriz BCG</h1>
     <p data-i18n="p_bcg">Visualización real de cada plato mediante gráfico de dispersión, basado en popularidad relativa y margen.</p>
   </div>
   <div id="bcgContent">
@@ -477,12 +502,13 @@ let currentLang = 'es';
 const dict = {
   es: {
     app_title: "MENÚ BCG", step_1: "Platos", step_2: "Matriz", step_3: "Dashboard", step_4: "Consejos",
-    h1_input: "Introduce tus platos", p_input: "Añade cada plato con su precio de venta, coste de producción y unidades vendidas en el periodo que quieras analizar.",
+    h1_input: "Añade tus platos", p_input: "Añade cada plato con su precio de venta, coste de producción y unidades vendidas en el periodo que quieras analizar.",
+    disclaimer: "Atención: Este cálculo se basa en el margen bruto directo. No tiene en cuenta los costes indirectos de tu negocio (alquiler, personal, suministros, etc.).",
     col_name: "Nombre del plato", col_price: "Precio venta", col_cost: "Coste prod.", col_units: "Uds. vendidas",
     btn_add: "Añadir plato", btn_calc: "Calcular análisis", lbl_added: "platos añadidos",
     ph_name: "Ej: Hamburguesa Clásica",
     err_num: "Todos los campos deben ser números.", err_zero: "Los valores deben ser mayores que 0.", err_cost: "El coste no puede ser igual o mayor que el precio.",
-    h1_bcg: "Matriz BCG Exacta", p_bcg: "Visualización real de cada plato mediante gráfico de dispersión, basado en popularidad relativa y margen.",
+    h1_bcg: "Matriz BCG", p_bcg: "Visualización real de cada plato mediante gráfico de dispersión, basado en popularidad relativa y margen.",
     leg_star_desc: "Alta rentabilidad y alta popularidad. El corazón de tu carta. Protégelos.",
     leg_horse_desc: "Populares pero bajo margen. Generan volumen. Optimiza costes o ajusta el precio.",
     leg_puzz_desc: "Rentables pero poco pedidos. Potencial oculto: pueden convertirse en Estrellas.",
@@ -492,6 +518,10 @@ const dict = {
     h1_dash: "Dashboard", p_dash: "Métricas clave de tu carta con visualizaciones interactivas.",
     kpi_rev: "Ingresos totales", kpi_cost: "Costes totales", kpi_marg: "Margen bruto", kpi_tix: "Ticket medio", kpi_vol: "Uds. totales vendidas", kpi_tot: "Platos en carta", kpi_sub: "sobre ingresos",
     chart_rank: "Ranking interactivo de platos", chart_dist: "Distribución de Platos (Cantidad)", chart_comp: "Ingresos · Costes · Margen", chart_marg_cont: "Contribución al Beneficio Total (€)",
+    desc_rank: "Compara el rendimiento de tus platos según el margen total que aportan, los ingresos brutos o la cantidad de unidades vendidas.",
+    desc_dist: "Muestra el peso de cada categoría en tu menú. Lo ideal es tener pocas opciones 'Perro' y un buen núcleo de 'Estrellas'.",
+    desc_marg_cont: "Ilustra qué categorías sostienen tu negocio. Frecuentemente, unos pocos platos generan la mayor parte del beneficio.",
+    desc_comp: "Desglose financiero: observa visualmente qué parte del precio de venta se va en costes de producción y cuánto queda como margen real.",
     tog_marg: "Margen total", tog_rev: "Ingresos", tog_units: "Uds. vendidas",
     leg_rev: "Ingresos", leg_cost: "Costes", leg_marg: "Margen", chart_y: "Popularidad (Uds)", chart_x: "Rentabilidad (Margen €)",
     h1_adv: "Consejos de mejora", p_adv: "Recomendaciones personalizadas con simuladores interactivos de impacto económico.",
@@ -499,21 +529,26 @@ const dict = {
     sim_obj: "Objetivo de ventas", sim_inc: "Incremento de ventas", sim_red: "Reducción de coste", sim_up: "Subida de precio",
     sim_title_star: "Simulador — mejora de visibilidad", sim_title_horse: "Simulador — optimización de coste y precio", sim_title_puzz: "Simulador — unidades para ser Estrella", sim_title_dog: "Impacto de eliminación",
     sim_now: "Margen actual:", sim_now_sh: "Ahora:", sim_ext: "extra", sim_mov: "Mueve los sliders", sim_free: "Eliminar libera operativa y reduce mermas.", sim_cont: "Contribución actual:",
-    txt_star: "Genera mucho margen y se vende mucho. Está en el cuadrante ideal — la prioridad es mantenerlo y amplificarlo.",
-    txt_horse: "Muy popular pero con margen unitario bajo. Renegocia el coste con el proveedor o sube el precio ligeramente.",
-    txt_puzz: "Margen unitario excelente pero poco vendido. Mejora su visibilidad en carta o recomiéndalo como especial.",
-    txt_dog: "Aporta muy poco margen. Cada plato tiene un coste oculto (stock, merma). Plantéate rediseñarlo o eliminarlo.",
+    adv_dog_bad: "Rentabilidad crítica (Margen: {pct}%). Este plato supone un lastre financiero y operativo considerable. La eliminación directa es la opción más recomendada.",
+    adv_dog_ok: "Aunque es un 'Perro', su rentabilidad porcentual es rescatable ({pct}%). Considera rediseñarlo, cambiarle el nombre o usarlo como 'gancho' antes de descartarlo.",
+    adv_star_top: "¡Estrella indiscutible! Su rentabilidad porcentual es sobresaliente ({pct}%). Dale máxima prioridad, no toques su receta y bríndale la posición más visible en la carta.",
+    adv_star_ok: "Rendimiento excelente con un margen sólido del {pct}%. Mantén la consistencia y prueba a crear combos para aumentar aún más el ticket medio.",
+    adv_horse_bad: "¡Alerta de rentabilidad! Genera mucho volumen, pero su margen es peligrosamente bajo ({pct}%). Subir el precio, reducir la porción o cambiar ingredientes es urgente.",
+    adv_horse_ok: "Atrae clientes y tiene un margen aceptable ({pct}%), pero optimizar ligeramente sus costes (aprovechando su alto volumen) multiplicará tus beneficios generales.",
+    adv_puzz_top: "¡Oro puro oculto! Su rentabilidad es altísima ({pct}%), pero apenas se vende. Necesitas darle máxima visibilidad en carta o promocionarlo agresivamente con tu personal.",
+    adv_puzz_ok: "Buen margen ({pct}%) pero pasa muy desapercibido. Incentiva a tu personal de sala para que lo recomiende activamente como sugerencia del día.",
     empty_bcg: "Introduce tus platos y calcula primero para ver la matriz.", empty_dash: "Introduce tus platos y calcula primero para ver el dashboard.", empty_adv: "Introduce tus platos y calcula primero para ver los consejos.",
     lbl_avg_rent: "Rentabilidad Media", lbl_avg_pop: "Popularidad Media"
   },
   en: {
     app_title: "BCG MENU", step_1: "Dishes", step_2: "Matrix", step_3: "Dashboard", step_4: "Advice",
     h1_input: "Enter your dishes", p_input: "Add each dish with its selling price, production cost, and units sold in the period you want to analyze.",
+    disclaimer: "Attention: This calculation is based on direct gross margin. It does not account for indirect business costs (rent, staff, utilities, etc.).",
     col_name: "Dish name", col_price: "Selling price", col_cost: "Prod. cost", col_units: "Units sold",
     btn_add: "Add dish", btn_calc: "Calculate analysis", lbl_added: "dishes added",
     ph_name: "Ex: Classic Burger",
     err_num: "All fields must be numbers.", err_zero: "Values must be greater than 0.", err_cost: "Cost cannot be greater than or equal to selling price.",
-    h1_bcg: "Exact BCG Matrix", p_bcg: "Real visualization of each dish using a scatter plot, based on relative popularity and margin.",
+    h1_bcg: "BCG Matrix", p_bcg: "Real visualization of each dish using a scatter plot, based on relative popularity and margin.",
     leg_star_desc: "High profitability and popularity. The heart of your menu. Protect them.",
     leg_horse_desc: "Popular but low margin. They generate volume. Optimize costs or adjust pricing.",
     leg_puzz_desc: "Profitable but rarely ordered. Hidden potential to become Stars.",
@@ -523,6 +558,10 @@ const dict = {
     h1_dash: "Dashboard", p_dash: "Key metrics of your menu with interactive visualizations.",
     kpi_rev: "Total Revenue", kpi_cost: "Total Costs", kpi_marg: "Gross Margin", kpi_tix: "Average Ticket", kpi_vol: "Total Units Sold", kpi_tot: "Dishes in Menu", kpi_sub: "of revenue",
     chart_rank: "Interactive Dish Ranking", chart_dist: "Dish Distribution (Count)", chart_comp: "Revenue · Costs · Margin", chart_marg_cont: "Margin Contribution (€)",
+    desc_rank: "Compare the performance of your dishes based on total margin, gross revenue, or units sold.",
+    desc_dist: "Shows the weight of each category in your menu. Ideally, you want few 'Dogs' and a solid core of 'Stars'.",
+    desc_marg_cont: "Illustrates which categories sustain your business. Often, a few dishes generate most of the profit.",
+    desc_comp: "Financial breakdown: visually see what part of the selling price goes to production costs and what remains as actual margin.",
     tog_marg: "Total Margin", tog_rev: "Revenue", tog_units: "Units Sold",
     leg_rev: "Revenue", leg_cost: "Costs", leg_marg: "Margin", chart_y: "Popularity (Units)", chart_x: "Profitability (Margin €)",
     h1_adv: "Improvement Advice", p_adv: "Personalized recommendations with interactive economic impact simulators.",
@@ -530,10 +569,14 @@ const dict = {
     sim_obj: "Sales target", sim_inc: "Sales increase", sim_red: "Cost reduction", sim_up: "Price increase",
     sim_title_star: "Simulator — visibility improvement", sim_title_horse: "Simulator — cost & price optimization", sim_title_puzz: "Simulator — units to become Star", sim_title_dog: "Impact of removal",
     sim_now: "Current margin:", sim_now_sh: "Now:", sim_ext: "extra", sim_mov: "Move the sliders", sim_free: "Removing it frees up operations and reduces waste.", sim_cont: "Current contribution:",
-    txt_star: "Generates high margin and sells a lot. It is in the ideal quadrant — priority is to maintain and amplify it.",
-    txt_horse: "Very popular but with low unit margin. Renegotiate costs with your supplier or raise the price slightly.",
-    txt_puzz: "Excellent unit margin but rarely sold. Improve its visibility on the menu or recommend it as a special.",
-    txt_dog: "Brings very little margin. Each dish has a hidden cost (stock, waste). Consider redesigning or removing it.",
+    adv_dog_bad: "Critical profitability (Margin: {pct}%). This dish is a significant financial and operational drain. Highly recommend immediate removal.",
+    adv_dog_ok: "Although it's a 'Dog', its percentage margin is salvageable ({pct}%). Consider redesigning it, renaming it, or using it as a loss leader before discarding.",
+    adv_star_top: "Undisputed Star! Its percentage margin is outstanding ({pct}%). Give it top priority, protect the recipe, and feature it in the premium spots on your menu.",
+    adv_star_ok: "Excellent performance with a solid {pct}% margin. Maintain consistency and try creating combos to increase the average ticket.",
+    adv_horse_bad: "Profitability alert! Generates high volume, but its margin is dangerously low ({pct}%). Raising the price, reducing portions, or changing ingredients is urgent.",
+    adv_horse_ok: "Attracts customers and has an acceptable margin ({pct}%), but optimizing costs (leveraging its high volume) will multiply your overall profits.",
+    adv_puzz_top: "Pure hidden gold! Its margin is extremely high ({pct}%), but it barely sells. You must give it maximum visibility on the menu or promote it aggressively.",
+    adv_puzz_ok: "Good margin ({pct}%) but goes unnoticed. Incentivize your front-of-house staff to actively recommend it as the daily special.",
     empty_bcg: "Enter your dishes and calculate first to view the matrix.", empty_dash: "Enter your dishes and calculate first to view the dashboard.", empty_adv: "Enter your dishes and calculate first to view the advice.",
     lbl_avg_rent: "Avg Profitability", lbl_avg_pop: "Avg Popularity"
   }
@@ -954,6 +997,7 @@ function renderDash() {
 
   <div class="chart-card chart-card-full" style="margin-bottom: 16px;">
     <div class="chart-lbl">${t('chart_rank')}</div>
+    <div class="chart-desc">${t('desc_rank')}</div>
     <div class="toggle-group" id="dashToggle">
       <button class="tog active" onclick="setDashView('margin',this)">${t('tog_marg')}</button>
       <button class="tog" onclick="setDashView('revenue',this)">${t('tog_rev')}</button>
@@ -966,34 +1010,38 @@ function renderDash() {
     <!-- DONUT 1: Cantidad de platos -->
     <div class="chart-card">
       <div class="chart-lbl">${t('chart_dist')}</div>
+      <div class="chart-desc">${t('desc_dist')}</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;font-size:12px;font-weight:600;color:var(--text2)">
         ${['star','horse','puzzle','dog'].map(k=>`<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:${CAT[k].clr};display:inline-block"></span>${CAT[k].label.split(' ')[0]} <strong style="color:var(--text)">${cats[k]}</strong></span>`).join('')}
       </div>
-      <div style="position:relative;height:220px">
+      <div style="position:relative;height:240px">
         <canvas id="donut" role="img"></canvas>
       </div>
     </div>
     
-    <!-- DONUT 2: Aporte real al margen (NUEVO) -->
+    <!-- DONUT 2: Aporte real al margen -->
     <div class="chart-card">
       <div class="chart-lbl">${t('chart_marg_cont')}</div>
+      <div class="chart-desc">${t('desc_marg_cont')}</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;font-size:12px;font-weight:600;color:var(--text2)">
         ${['star','horse','puzzle','dog'].map(k=>`<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:${CAT[k].clr};display:inline-block"></span>${CAT[k].label.split(' ')[0]}</span>`).join('')}
       </div>
-      <div style="position:relative;height:220px">
+      <div style="position:relative;height:240px">
         <canvas id="marginDonut" role="img"></canvas>
       </div>
     </div>
   </div>
 
+  <!-- BAR CHART: INGRESOS, COSTES, MARGEN -->
   <div class="chart-card chart-card-full">
     <div class="chart-lbl">${t('chart_comp')}</div>
-    <div style="display:flex;gap:16px;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:20px">
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#6695ff;display:inline-block"></span>${t('leg_rev')}</span>
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#ff5757;display:inline-block"></span>${t('leg_cost')}</span>
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#6dbd8d;display:inline-block"></span>${t('leg_marg')}</span>
+    <div class="chart-desc">${t('desc_comp')}</div>
+    <div style="display:flex;gap:16px;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:20px;flex-wrap:wrap;">
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#94A3B8;display:inline-block"></span>${t('leg_cost')}</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#10B981;display:inline-block"></span>${t('leg_marg')}</span>
+      <span style="display:flex;align-items:center;gap:6px; margin-left: auto; color: var(--text3); font-weight: 500;">${currentLang === 'es' ? '(Coste + Margen = Ingresos)' : '(Cost + Margin = Revenue)'}</span>
     </div>
-    <div style="position:relative;height:${Math.max(260, results.length*38+60)}px">
+    <div style="position:relative;height:350px">
       <canvas id="stackChart" role="img"></canvas>
     </div>
   </div>`;
@@ -1001,14 +1049,23 @@ function renderDash() {
   document.getElementById('dashContent').innerHTML = html;
   renderBars();
 
+  // Configuración base para Donuts más modernos
+  const donutOptions = {
+    responsive: true, 
+    maintainAspectRatio: false, 
+    plugins: { legend: { display: false } }, 
+    cutout: '65%',
+    layout: { padding: 10 }
+  };
+
   charts.donut = new Chart(document.getElementById('donut'), {
     type:'doughnut',
     data:{ labels:[CAT.star.label, CAT.horse.label, CAT.puzzle.label, CAT.dog.label], datasets:[{
       data:[cats.star,cats.horse,cats.puzzle,cats.dog],
       backgroundColor:[CAT.star.clr, CAT.horse.clr, CAT.puzzle.clr, CAT.dog.clr],
-      borderWidth:2, borderColor: '#fff', hoverOffset:6
+      borderWidth: 2, borderColor: '#fff', hoverOffset: 6
     }]},
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, cutout:'65%' }
+    options: donutOptions
   });
 
   charts.marginDonut = new Chart(document.getElementById('marginDonut'), {
@@ -1016,42 +1073,50 @@ function renderDash() {
     data:{ labels:[CAT.star.label, CAT.horse.label, CAT.puzzle.label, CAT.dog.label], datasets:[{
       data:[catsMargin.star, catsMargin.horse, catsMargin.puzzle, catsMargin.dog],
       backgroundColor:[CAT.star.clr, CAT.horse.clr, CAT.puzzle.clr, CAT.dog.clr],
-      borderWidth:2, borderColor: '#fff', hoverOffset:6
+      borderWidth: 2, borderColor: '#fff', hoverOffset: 6
     }]},
-    options:{ 
-        responsive:true, 
-        maintainAspectRatio:false, 
-        plugins:{ 
-            legend:{display:false},
+    options: {
+        responsive:true, maintainAspectRatio:false, cutout:'65%',
+        plugins: {
+            legend: { display: false },
             tooltip: {
                 callbacks: {
-                    label: function(context) {
-                        return ' ' + context.label + ': ' + fmtEur(context.raw);
-                    }
+                    label: function(context) { return ' ' + context.label + ': ' + fmtEur(context.raw); }
                 }
             } 
-        }, 
-        cutout:'65%' 
+        }
     }
   });
 
   const sorted = [...results].sort((a,b) => b.totalRevenue - a.totalRevenue);
   charts.stack = new Chart(document.getElementById('stackChart'), {
-    type:'bar', indexAxis:'y',
+    type:'bar', // Al quitar indexAxis:'y', las barras se vuelven verticales
     data:{
-      labels: sorted.map(r => r.name.length>16 ? r.name.slice(0,15)+'…' : r.name),
+      labels: sorted.map(r => r.name.length>15 ? r.name.slice(0,14)+'…' : r.name),
       datasets:[
-        { label:t('leg_rev'), data:sorted.map(r=>Math.round(r.totalRevenue)), backgroundColor:'#6695ff', borderRadius:4, borderWidth:0 },
-        { label:t('leg_cost'),   data:sorted.map(r=>Math.round(r.totalCost)),    backgroundColor:'#ff5757', borderRadius:4, borderWidth:0 },
-        { label:t('leg_marg'),   data:sorted.map(r=>Math.round(r.totalMargin)),  backgroundColor:'#6dbd8d', borderRadius:4, borderWidth:0 },
+        { label:t('leg_cost'),   data:sorted.map(r=>Math.round(r.totalCost)),    backgroundColor:'#94A3B8', borderRadius:0, borderWidth:0 },
+        { label:t('leg_marg'),   data:sorted.map(r=>Math.round(r.totalMargin)),  backgroundColor:'#10B981', borderRadius:4, borderWidth:0 },
       ]
     },
     options:{
       responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false} },
+      plugins:{ 
+        legend:{display:false},
+        tooltip: {
+            mode: 'index',
+            intersect: false,
+            callbacks: {
+                label: function(context) { return context.dataset.label + ': ' + fmtEur(context.raw); },
+                footer: function(items) {
+                    const total = items.reduce((sum, item) => sum + item.raw, 0);
+                    return t('leg_rev') + ': ' + fmtEur(total);
+                }
+            }
+        }
+      },
       scales:{
-        x:{ grid:{color:'rgba(0,0,0,.04)'}, ticks:{callback:v=>fmt(v)+' €', font:{size:11}} },
-        y:{ ticks:{font:{size:12, weight:'600'}} }
+        x:{ stacked: true, grid:{display:false}, ticks:{font:{size:11, weight:'500'}} }, // Eje X ahora muestra Nombres
+        y:{ stacked: true, grid:{color:'rgba(0,0,0,.04)'}, ticks:{callback:v=>fmt(v)+' €', font:{size:12, weight:'500'}} } // Eje Y ahora muestra Dinero
       }
     }
   });
@@ -1102,9 +1167,11 @@ function renderAdvice() {
   if (cats.star.length) {
     html += `<div class="adv-section"><div class="adv-title">⭐ ${t('adv_star_hd')}</div>`;
     cats.star.forEach(r => {
+      const marginPct = (r.price > 0 ? (r.margin / r.price) * 100 : 0).toFixed(1);
+      const adviceText = t(marginPct > 70 ? 'adv_star_top' : 'adv_star_ok').replace('{pct}', marginPct);
       html += `<div class="adv-card">
         <div class="adv-dish"><span class="badge badge-star">${CAT.star.label}</span>${r.name}</div>
-        <div class="adv-text">${t('txt_star')}</div>
+        <div class="adv-text">${adviceText}</div>
         <div class="sim-box">
           <div class="sim-title">${t('sim_title_star')}</div>
           <div class="sim-row">
@@ -1127,10 +1194,12 @@ function renderAdvice() {
   if (cats.horse.length) {
     html += `<div class="adv-section"><div class="adv-title">🐴 ${t('adv_horse_hd')}</div>`;
     cats.horse.forEach(r => {
+      const marginPct = (r.price > 0 ? (r.margin / r.price) * 100 : 0).toFixed(1);
+      const adviceText = t(marginPct < 45 ? 'adv_horse_bad' : 'adv_horse_ok').replace('{pct}', marginPct);
       const simId = 'simHorse-' + r.name.replace(/\s/g,'_');
       html += `<div class="adv-card">
         <div class="adv-dish"><span class="badge badge-horse">${CAT.horse.label}</span>${r.name}</div>
-        <div class="adv-text">${t('txt_horse')}</div>
+        <div class="adv-text">${adviceText}</div>
         <div class="sim-box">
           <div class="sim-title">${t('sim_title_horse')}</div>
           <div class="sim-row">
@@ -1159,10 +1228,12 @@ function renderAdvice() {
   if (cats.puzzle.length) {
     html += `<div class="adv-section"><div class="adv-title">🧩 ${t('adv_puzz_hd')}</div>`;
     cats.puzzle.forEach(r => {
+      const marginPct = (r.price > 0 ? (r.margin / r.price) * 100 : 0).toFixed(1);
+      const adviceText = t(marginPct > 70 ? 'adv_puzz_top' : 'adv_puzz_ok').replace('{pct}', marginPct);
       const simId = 'simPuzz-' + r.name.replace(/\s/g,'_');
       html += `<div class="adv-card">
         <div class="adv-dish"><span class="badge badge-puzzle">${CAT.puzzle.label}</span>${r.name}</div>
-        <div class="adv-text">${t('txt_puzz')}</div>
+        <div class="adv-text">${adviceText}</div>
         <div class="sim-box">
           <div class="sim-title">${t('sim_title_puzz')}</div>
           <div class="sim-row">
@@ -1185,10 +1256,12 @@ function renderAdvice() {
   if (cats.dog.length) {
     html += `<div class="adv-section"><div class="adv-title">🐶 ${t('adv_dog_hd')}</div>`;
     cats.dog.forEach(r => {
+      const marginPct = (r.price > 0 ? (r.margin / r.price) * 100 : 0).toFixed(1);
+      const adviceText = t(marginPct < 50 ? 'adv_dog_bad' : 'adv_dog_ok').replace('{pct}', marginPct);
       const pct = tMargin > 0 ? r.totalMargin/tMargin*100 : 0;
       html += `<div class="adv-card">
         <div class="adv-dish"><span class="badge badge-dog">${CAT.dog.label}</span>${r.name}</div>
-        <div class="adv-text">${t('txt_dog')}</div>
+        <div class="adv-text">${adviceText}</div>
         <div class="sim-box">
           <div class="sim-title">${t('sim_title_dog')}</div>
           <div class="sim-result" style="margin-top:0">
