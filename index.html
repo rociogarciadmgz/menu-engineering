@@ -7,1317 +7,2096 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-SFZGR95S4D');
 </script>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>menu query</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menu query</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;600&family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  /* UI Colors - Clean, Modern Portfolio Style */
-  --bg: #FAFAFA;
-  --surface: #FFFFFF;
-  --surface2: #F4F4F5;
-  --border: #E4E4E7;
-  --border2: #D4D4D8;
-  --text: #18181B;
-  --text2: #52525B;
-  --text3: #A1A1AA;
-  
-  /* Primary Brand Color */
-  --accent: #6695ff; 
-  --accent-bg: #ebf0ff;
-  
-  /* Matrix Categories - User Custom Palette */
-  --star: #ffca2c;
-  --star-bg: #fffcf0;
-  --star-chip: #ffeca3;
-  
-  --horse: #ff5757;
-  --horse-bg: #fff0f0;
-  --horse-chip: #ffb8b8;
-  
-  --puzzle: #546fff;
-  --puzzle-bg: #eff2ff;
-  --puzzle-chip: #bac7ff;
-  
-  --dog: #6dbd8d;
-  --dog-bg: #f1f8f4;
-  --dog-chip: #c5e6d3;
-  
-  --fb: 'Inter', sans-serif;
-  --fm: 'JetBrains Mono', monospace;
-  --r: 14px;
-  --r-sm: 8px;
-  --shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.02);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.05), 0 2px 4px rgba(0,0,0,.02);
+  /* Marca */
+  --papel:#f6f4f0;
+  --superficie:#ffffff;
+  --linea:#e6e3dd;
+  --tinta:#121417;
+  --tinta-suave:#5c6370;
+  --azul:#3b82f6;
+  --azul-suave:#e6eefd;
+  --rosa:#f0446c;
+  --rosa-suave:#fde7ec;
+  --positivo:#1e7f55;
+  --aviso:#a8670f;
+  --negativo:#c0362c;
+
+  /* Categorías de la matriz (paleta original de Menu query) */
+  --c-star:#ffca2c;
+  --c-horse:#ff5757;
+  --c-puzzle:#546fff;
+  --c-dog:#6dbd8d;
+
+  --serif:'Merriweather', Georgia, serif;
+  --mono:'Roboto Mono', 'Courier New', monospace;
+  --label:'IBM Plex Mono', 'Courier New', monospace;
+
+  --r-card:20px;
+  --r-btn:10px;
+  --r-chip:4px;
+  --gap-section:64px;
 }
 
-html{font-size:16px;background:var(--bg)}
-body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100vh}
+html{font-size:16px;background:var(--papel);-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  font-family:var(--mono);background:var(--papel);color:var(--tinta);
+  min-height:100vh;overflow-x:clip;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+button,input,select{font:inherit;color:inherit}
 
-/* ─── HEADER ─── */
+/* ─── ICONOS ─── */
+.ic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ─── CABECERA ─── */
 .hdr{
-  background: var(--accent);
   position:sticky;top:0;z-index:200;
-  box-shadow: 0 2px 8px rgba(102, 149, 255, 0.3);
+  background:var(--papel);border-bottom:1px solid var(--linea);
+  padding-top:env(safe-area-inset-top,0px);
 }
 .hdr-inner{
-  max-width:1100px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  height:64px;padding:0 2rem;
+  max-width:1160px;margin:0 auto;height:72px;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
 }
 .logo{
-  font-family:var(--fb);font-size:20px;font-weight:800;
-  color:#FFFFFF;text-decoration:none;
-  display:flex;align-items:center;gap:12px;letter-spacing:-.02em;
+  font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:-.01em;
+  color:var(--tinta);text-decoration:none;white-space:nowrap;
 }
-.logo-mark{
-  width:32px;height:32px;border-radius:8px;
-  background:#FFFFFF;display:flex;align-items:center;justify-content:center;
-}
-.logo-mark i{color:var(--accent);font-size:18px}
-
-.steps{display:flex;align-items:center;gap:4px;height:100%}
+.logo span{color:var(--azul)}
+.steps{display:flex;align-items:stretch;height:100%;gap:4px;overflow-x:auto;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
 .step-btn{
-  display:flex;align-items:center;gap:8px;
-  font-family:var(--fb);font-size:13px;font-weight:600;letter-spacing:.02em;
-  text-transform:uppercase;padding:0 16px;height:100%;
-  background:none;border:none;border-bottom:3px solid transparent;
-  cursor:pointer;color:rgba(255,255,255,0.7);transition:all .2s;
-  white-space:nowrap;
+  display:flex;align-items:center;gap:10px;padding:0 16px;height:100%;
+  background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;
+  font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tinta-suave);white-space:nowrap;transition:color .15s,border-color .15s;
 }
-.step-btn .step-num{
-  width:22px;height:22px;border-radius:50%;
-  background:rgba(255,255,255,0.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;color:#FFFFFF;
-  transition:all .2s;
-}
-.step-btn:hover{color:#FFFFFF}
-.step-btn.active{color:#FFFFFF;border-bottom-color:#FFFFFF}
-.step-btn.active .step-num{background:#FFFFFF;color:var(--accent)}
-.step-btn.done{color:rgba(255,255,255,0.9)}
-.step-btn.done .step-num{background:rgba(255,255,255,0.3);color:#FFFFFF}
-
+.step-num{font-size:12px;color:var(--tinta-suave)}
+.step-btn:hover{color:var(--tinta)}
+.step-btn.active{color:var(--azul);border-bottom-color:var(--azul)}
+.step-btn.active .step-num{color:var(--azul)}
+.step-btn.done .step-num{color:var(--azul)}
 .lang-toggle{
-  background: transparent; border: 1.5px solid rgba(255,255,255,0.6);
-  color: #fff; border-radius: 6px; padding: 6px 12px; cursor: pointer;
-  font-family: var(--fb); font-weight: 700; font-size: 12px; transition: all 0.2s;
+  font-family:var(--label);font-weight:600;font-size:12px;letter-spacing:.14em;
+  background:var(--superficie);border:1px solid var(--linea);border-radius:var(--r-btn);
+  padding:8px 12px;cursor:pointer;
 }
-.lang-toggle:hover{background: rgba(255,255,255,0.15); border-color: #fff;}
+.lang-toggle:hover{border-color:var(--tinta-suave)}
 
-/* ─── MAIN ─── */
-.main{max-width:1100px;margin:0 auto;padding:4rem 2rem 6rem}
-.panel{display:none;animation:fadeUp .3s ease-out}
-.panel.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* ─── ESTRUCTURA ─── */
+.main{max-width:1160px;margin:0 auto;padding:var(--gap-section) 32px 96px}
+.panel{display:none}
+.panel.active{display:block;animation:enter .25s ease-out}
+@keyframes enter{from{opacity:0}to{opacity:1}}
 
-.page-hd{margin-bottom:3rem}
-.page-hd h1{font-family:var(--fb);font-size:38px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:8px}
-.page-hd p{font-size:15px;color:var(--text2);line-height:1.65;max-width:600px}
+.page-hd{position:relative;margin-bottom:48px;max-width:780px}
+.eyebrow{
+  font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--azul);margin-bottom:16px;
+}
+.page-hd h1{font-family:var(--serif);font-weight:700;font-size:44px;line-height:1.2;letter-spacing:-.01em;margin-bottom:20px}
+.page-hd h1 span{color:var(--azul)}
+.lead{font-size:21px;line-height:34px;color:var(--tinta-suave);max-width:64ch}
 
-.info-alert {
-  background: #FFFBEB;
-  border: 1px solid #FEF3C7;
-  color: #B45309;
-  padding: 14px 18px;
-  border-radius: var(--r-sm);
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 2rem;
-  font-size: 13.5px;
-  font-weight: 500;
-  line-height: 1.5;
-  box-shadow: var(--shadow);
+/* Halos: solo en el hero de la primera pantalla */
+.hero{position:relative;isolation:isolate}
+.hero::before,.hero::after{
+  content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(60px);
 }
-.info-alert i { font-size: 20px; flex-shrink: 0; color: #F59E0B; }
+.hero::before{width:420px;height:420px;right:-260px;top:-120px;background:rgba(59,130,246,.22)}
+.hero::after{width:320px;height:320px;left:-160px;bottom:-200px;background:rgba(240,68,108,.14)}
 
-/* ─── INPUT PANEL ─── */
-.input-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:1.5rem}
+.section{margin-top:var(--gap-section)}
+.section-title{font-family:var(--serif);font-weight:700;font-size:26px;line-height:1.3;margin-bottom:8px}
+.section-desc{font-size:16px;line-height:26px;color:var(--tinta-suave);margin-bottom:24px;max-width:72ch}
 
-.dish-row{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 44px;gap:0;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);overflow:hidden;
-  box-shadow:var(--shadow);
-  transition:box-shadow .2s,border-color .2s, transform .2s;
-}
-.dish-row:focus-within{border-color:var(--accent);box-shadow:var(--shadow-md);transform:translateY(-1px);}
-.dish-row:hover{border-color:var(--border2)}
+.card{background:var(--superficie);border:1px solid var(--linea);border-radius:var(--r-card);padding:40px}
 
-.dish-row .field{
-  display:flex;flex-direction:column;
-  border-right:1px solid var(--border);
+.note{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--azul-suave);border-radius:var(--r-btn);padding:16px 20px;
+  font-size:15px;line-height:24px;color:var(--tinta);margin-bottom:32px;max-width:860px;
 }
-.dish-row .field:last-of-type{border-right:none}
-.field-lbl{
-  font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--text3);padding:10px 16px 0;
-}
-.field input{
-  width:100%;border:none;background:transparent;
-  font-family:var(--fb);font-size:14px;color:var(--text);font-weight:500;
-  padding:6px 16px 12px;outline:none;
-}
-.field input::placeholder{color:#D4D4D8;font-weight:400;}
-.field input[type=number]{font-family:var(--fm);font-size:14px}
-.del-btn{
-  display:flex;align-items:center;justify-content:center;
-  background:none;border:none;cursor:pointer;
-  color:var(--text3);font-size:18px;
-  border-left:1px solid var(--border);
-  transition:color .2s,background .2s;
-  border-radius:0;
-}
-.del-btn:hover{color:#EF4444;background:#FEF2F2}
+.note .ic{color:var(--azul);margin-top:3px}
 
-.col-headers{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 44px;
-  gap:0;padding:0 0 8px;
+/* ─── BOTONES Y CONTROLES ─── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  font-family:var(--label);font-weight:600;font-size:14px;letter-spacing:.02em;
+  padding:12px 18px;border-radius:var(--r-btn);
+  background:var(--superficie);border:1px solid var(--linea);color:var(--tinta);
+  transition:border-color .15s,background .15s;
 }
-.col-h{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:0 16px}
+.btn:hover{border-color:var(--tinta-suave)}
+.btn-primary{background:var(--azul);border-color:var(--azul);color:#fff;font-size:17px;padding:16px 28px}
+.btn-primary:hover{background:#2f74e6;border-color:#2f74e6}
+.btn-quiet{background:transparent;border-color:transparent;color:var(--tinta-suave)}
+.btn-quiet:hover{border-color:var(--linea);color:var(--tinta)}
+.btn-sm{font-size:13px;padding:8px 14px}
+
+.ctrl-lbl{
+  display:block;font-family:var(--label);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tinta-suave);margin-bottom:8px;
+}
+.ctrl{
+  width:100%;font-family:var(--mono);font-size:16px;color:var(--tinta);
+  background:var(--superficie);border:1px solid var(--linea);border-radius:var(--r-btn);
+  padding:12px 14px;outline:none;
+}
+.ctrl:focus{border-color:var(--azul)}
+.ctrl-hint{font-size:13px;line-height:20px;color:var(--tinta-suave);margin-top:8px}
+
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--label);font-weight:600;font-size:12px;letter-spacing:.06em;
+  background:var(--azul-suave);color:var(--tinta);border-radius:var(--r-chip);padding:5px 10px;white-space:nowrap;
+}
+.dot{width:10px;height:10px;border-radius:2px;display:inline-block;flex-shrink:0}
+.d-star{background:var(--c-star)} .d-horse{background:var(--c-horse)}
+.d-puzzle{background:var(--c-puzzle)} .d-dog{background:var(--c-dog)}
+
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg-btn{
+  font-family:var(--label);font-weight:600;font-size:12px;letter-spacing:.06em;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 12px;border-radius:var(--r-chip);cursor:pointer;
+  background:var(--superficie);border:1px solid var(--linea);color:var(--tinta-suave);
+}
+.seg-btn:hover{color:var(--tinta);border-color:var(--tinta-suave)}
+.seg-btn.on{background:var(--azul-suave);border-color:var(--azul);color:var(--tinta)}
+
+/* ─── PANEL 1: PLATOS ─── */
+.settings{display:grid;grid-template-columns:1.2fr 1.4fr 1fr;gap:24px;margin-bottom:32px}
+
+.data-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.data-bar .left,.data-bar .right{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+.dish-list{background:var(--superficie);border:1px solid var(--linea);border-radius:var(--r-card);overflow:hidden}
+.dl-grid{
+  display:grid;
+  grid-template-columns:minmax(170px,2.4fr) minmax(120px,1.4fr) minmax(84px,1fr) minmax(84px,1fr) minmax(80px,.9fr) minmax(96px,1fr) minmax(84px,.9fr) 88px;
+  align-items:center;
+}
+.dl-head{border-bottom:1px solid var(--linea);background:var(--azul-suave)}
+.dl-head > div{
+  font-family:var(--label);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tinta-suave);padding:14px 12px;
+}
+.dl-head > div:first-child{padding-left:24px}
+.dish-row{border-bottom:1px solid var(--linea)}
+.dish-row:last-child{border-bottom:none}
+.dish-row:focus-within{background:#fbfaf8}
+.dish-row.invalid{box-shadow:inset 3px 0 0 var(--negativo)}
+.cell{padding:4px 12px;min-width:0}
+.cell:first-child{padding-left:24px}
+.m-lbl{display:none}
+.cell input{
+  width:100%;border:none;background:transparent;outline:none;
+  font-family:var(--mono);font-size:16px;color:var(--tinta);padding:14px 0;
+  border-bottom:1px solid transparent;
+}
+.cell input:focus{border-bottom-color:var(--azul)}
+.cell input::placeholder{color:#b9b5ad}
+.cell input.num{font-variant-numeric:tabular-nums}
+.out{font-family:var(--label);font-weight:600;font-size:14px;color:var(--tinta);font-variant-numeric:tabular-nums}
+.out.muted{color:#b9b5ad}
+.out.warn{color:var(--aviso)}
+.out.bad{color:var(--negativo)}
+.row-actions{display:flex;justify-content:flex-end;gap:2px;padding-right:12px}
+.icon-btn{
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  background:none;border:none;border-radius:var(--r-btn);cursor:pointer;color:var(--tinta-suave);
+}
+.icon-btn:hover{background:var(--papel);color:var(--tinta)}
+.icon-btn.del:hover{color:var(--negativo)}
+
+.dl-foot{
+  display:flex;gap:32px;flex-wrap:wrap;align-items:baseline;
+  padding:20px 24px;border-top:1px solid var(--linea);background:var(--papel);
+}
+.tot{display:flex;flex-direction:column;gap:4px}
+.tot-lbl{font-family:var(--label);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave)}
+.tot-val{font-family:var(--label);font-weight:600;font-size:18px;font-variant-numeric:tabular-nums}
 
 .input-actions{
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
-  margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:24px;
 }
-.action-left{display:flex;gap:12px;flex-wrap:wrap}
-
-.btn{
-  font-family:var(--fb);font-size:14px;font-weight:600;
-  padding:12px 24px;border-radius:var(--r-sm);cursor:pointer;
-  display:inline-flex;align-items:center;gap:8px;
-  transition:all .2s ease;border:1px solid var(--border2);
-  background:var(--surface);color:var(--text);
-  box-shadow:var(--shadow);
+.err{
+  display:none;align-items:flex-start;gap:10px;margin-top:20px;
+  font-size:15px;line-height:24px;color:var(--negativo);
 }
-.btn:hover{background:var(--surface2);border-color:var(--border2);transform:translateY(-1px);}
-.btn-primary{
-  background:var(--accent);color:#fff;border-color:var(--accent);
-  box-shadow:0 4px 12px rgba(102, 149, 255, 0.3);
-}
-.btn-primary:hover{background:#527FE0;border-color:#527FE0;box-shadow:0 6px 16px rgba(102, 149, 255, 0.4);}
-.btn-primary:active{transform:scale(.98)}
-.btn-sm{font-size:13px;padding:10px 18px}
+.err.show{display:flex}
+.err .ic{margin-top:3px}
 
-.err{font-size:13px;color:#EF4444;margin-top:12px;min-height:16px;display:flex;align-items:center;gap:6px;font-weight:500;}
-
-.dish-count{
-  font-size:14px;color:var(--text2);
-  display:flex;align-items:center;gap:6px;
-  font-variant-numeric:tabular-nums;
-}
-.dish-count strong{font-weight:700;color:var(--text)}
-
-.divider{border:none;border-top:1px solid var(--border);margin:3rem 0}
-
-/* ─── SCATTER CHART & LEGEND ─── */
-.scatter-wrap {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 24px;
-  box-shadow: var(--shadow);
-  margin-bottom: 2rem;
-  height: 500px;
-  position: relative;
+/* ─── BARRA DE ÁMBITO EN RESULTADOS ─── */
+.toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:32px}
+.toolbar .meta{display:flex;gap:8px;flex-wrap:wrap}
+.stale{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border:1px solid var(--linea);border-left:3px solid var(--aviso);background:var(--superficie);
+  border-radius:var(--r-btn);padding:14px 18px;margin-bottom:32px;font-size:15px;line-height:24px;
 }
 
-.legend-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:3rem}
-.leg{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:18px 20px;
-  border-top:4px solid transparent;
-  box-shadow:var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.leg:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.leg-star  {border-top-color:var(--star)}
-.leg-puzzle{border-top-color:var(--puzzle)}
-.leg-horse {border-top-color:var(--horse)}
-.leg-dog   {border-top-color:var(--dog)}
-.leg-name{font-size:13px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;margin-bottom:6px}
-.leg-star  .leg-name{color:#d4a000}
-.leg-puzzle .leg-name{color:var(--puzzle)}
-.leg-horse .leg-name{color:var(--horse)}
-.leg-dog   .leg-name{color:var(--dog)}
-.leg-desc{font-size:13px;color:var(--text2);line-height:1.6}
+/* ─── PANEL 2: MATRIZ ─── */
+.scatter-card{padding:32px 32px 24px}
+.scatter-wrap{position:relative;height:520px}
+.sample-flag{font-family:var(--label);font-weight:600;font-size:12px;letter-spacing:.06em;color:var(--tinta-suave);margin-top:12px}
 
-.tbl-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
-.tbl{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
+.legend-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.leg{background:var(--superficie);border:1px solid var(--linea);border-radius:var(--r-card);padding:24px}
+.leg-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.leg-name{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;font-size:18px}
+.leg-count{font-family:var(--label);font-weight:600;font-size:22px;font-variant-numeric:tabular-nums}
+.leg-desc{font-size:14px;line-height:22px;color:var(--tinta-suave)}
+
+.tbl-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.tbl-controls .group{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.search{position:relative;min-width:220px}
+.search .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--tinta-suave)}
+.search input{padding-left:38px}
+.select-sm{width:auto;font-size:14px;padding:8px 12px}
+
+.tbl-wrap{background:var(--superficie);border:1px solid var(--linea);border-radius:var(--r-card);overflow-x:auto}
+.tbl{width:100%;min-width:1000px;border-collapse:collapse;font-size:15px}
 .tbl th{
-  background:var(--surface2);font-size:11px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--text3);padding:12px 16px;
-  text-align:left;border-bottom:1px solid var(--border);
+  background:var(--azul-suave);text-align:left;white-space:nowrap;
+  font-family:var(--label);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tinta-suave);padding:14px 16px;border-bottom:1px solid var(--linea);
 }
-.tbl td{padding:14px 16px;border-bottom:1px solid var(--border)}
-.tbl tr:last-child td{border-bottom:none}
-.tbl tbody tr{transition:background .15s}
-.tbl tbody tr:hover{background:var(--surface2)}
-.mono{font-family:var(--fm);font-size:13px}
-.badge{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:20px; color:#18181B;}
-.badge-star  {background:var(--star-chip);}
-.badge-horse {background:var(--horse-chip);}
-.badge-puzzle{background:var(--puzzle-chip);}
-.badge-dog   {background:var(--dog-chip);}
+.tbl th.r,.tbl td.r{text-align:right}
+.tbl td{padding:14px 16px;border-bottom:1px solid var(--linea);white-space:nowrap}
+.tbl tbody tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover{background:#fbfaf8}
+.tbl td.name{font-weight:600;white-space:normal;min-width:180px}
+.tbl td.n{font-family:var(--label);font-weight:600;font-variant-numeric:tabular-nums}
+.tbl .sub{color:var(--tinta-suave);font-weight:400;font-family:var(--mono)}
+.tbl-empty{padding:32px;text-align:center;color:var(--tinta-suave)}
 
-.tbl-controls{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-.lbl-sm{font-size:12px;font-weight:600;color:var(--text2)}
-.select-sm{
-  font-family:var(--fb);font-size:13px;padding:8px 12px;
-  border:1px solid var(--border2);border-radius:var(--r-sm);
-  background:var(--surface);color:var(--text);cursor:pointer;
-  outline:none;font-weight:500;
-}
-.filter-btn{
-  font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;
-  border:1px solid var(--border2);background:var(--surface);
-  color:var(--text2);cursor:pointer;transition:all .2s;
-}
-.filter-btn.on-star  {background:var(--star-chip);border-color:var(--star-chip);color:#b38a00;}
-.filter-btn.on-horse {background:var(--horse-chip);border-color:var(--horse-chip);color:#d94343;}
-.filter-btn.on-puzzle{background:var(--puzzle-chip);border-color:var(--puzzle-chip);color:#3e55c7;}
-.filter-btn.on-dog   {background:var(--dog-chip);border-color:var(--dog-chip);color:#4e946a;}
+/* ─── PANEL 3: DASHBOARD (compacto, paleta neutra) ─── */
+.st-pos{color:var(--positivo)} .st-warn{color:var(--aviso)} .st-neg{color:var(--negativo)}
+body.dash-mode .main{padding-top:24px}
+#panel-dash .page-hd{display:none}
 
-/* ─── DASHBOARD ─── */
-.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:2rem}
-.kpi{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;
-  box-shadow:var(--shadow);position:relative;overflow:hidden;
+.dash{
+  --linea:#e4e4e7; --tinta:#18181b; --tinta-suave:#71717a;
+  --azul:#18181b; --azul-suave:#f4f4f5; --papel:#f4f4f5;
+  color:var(--tinta);
 }
-.kpi::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:4px;
-  background:var(--border);
+.dash-top{display:flex;justify-content:space-between;align-items:center;gap:12px 16px;flex-wrap:wrap;margin-bottom:12px}
+.dash-title{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.dash-title h1{font-family:var(--serif);font-weight:700;font-size:26px;line-height:1.2}
+.dash-title .chip{font-size:11px}
+.dash-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dash .seg-btn{padding:6px 10px;font-size:11px;white-space:nowrap}
+.dash .seg-btn.on{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.dash .select-sm{font-size:13px;padding:6px 10px;border-color:var(--linea)}
+.dash .btn-sm{padding:7px 12px;font-size:12px}
+.dash .stale{margin-bottom:12px}
+
+.dgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.dcard{
+  background:#fff;border:1px solid var(--linea);border-radius:14px;padding:16px 18px;
+  display:flex;flex-direction:column;min-width:0;height:272px;
 }
-.kpi.k-rev::after{background:var(--horse)}
-.kpi.k-cost::after{background:var(--puzzle)}
-.kpi.k-margin::after{background:var(--star)}
-.kpi.k-ticket::after{background:var(--accent)}
-.kpi.k-units::after{background:var(--dog)}
-.kpi.k-total::after{background:var(--text3)}
-.kpi-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
-.kpi-val{font-family:var(--fm);font-size:32px;font-weight:500;color:var(--text);line-height:1}
-.kpi-sub{font-size:12px;color:var(--text3);margin-top:8px}
+.dcard-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:12px}
+.dcard-hd h3{font-family:var(--label);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave)}
+.dcard-hd .aside{font-family:var(--label);font-weight:600;font-size:12px;color:var(--tinta);text-align:right}
+.cv{position:relative;flex:1;min-height:0}
+.scroll{flex:1;min-height:0;overflow-y:auto;margin-right:-8px;padding-right:8px}
 
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.chart-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;box-shadow:var(--shadow);
+.c-kpis{grid-column:span 12;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
+.kc{background:#fff;padding:12px 16px}
+.kc-lbl{font-family:var(--label);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kc-val{font-family:var(--label);font-weight:600;font-size:24px;line-height:1.1;color:var(--tinta);font-variant-numeric:tabular-nums;white-space:nowrap}
+.kc-foot{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline;margin-top:6px;font-size:11px;line-height:16px;color:var(--tinta-suave)}
+.kpi-delta{font-family:var(--label);font-weight:600;font-size:11px;font-variant-numeric:tabular-nums}
+
+.c-pareto{grid-column:span 5}
+.c-weight{grid-column:span 3}
+.c-rank{grid-column:span 4;grid-row:span 2;height:556px}
+.c-fc{grid-column:span 5;height:auto;min-height:272px}
+.c-fc.wide{grid-column:span 8}
+.c-chg{grid-column:span 3}
+
+.wbar{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;margin-bottom:8px}
+.wbar-lbl{font-family:var(--label);font-weight:600;font-size:11px;color:var(--tinta-suave)}
+.wbar-track{display:flex;height:18px;border-radius:4px;overflow:hidden;gap:2px}
+.wbar-seg{height:100%}
+.wtable{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.wtable th{font-family:var(--label);font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave);text-align:right;padding:4px 0 6px;border-bottom:1px solid var(--linea)}
+.wtable th:first-child{text-align:left}
+.wtable td{padding:6px 0;border-bottom:1px solid var(--linea);text-align:right;font-family:var(--label);font-weight:600;font-variant-numeric:tabular-nums}
+.wtable td:first-child{text-align:left;font-family:var(--mono);font-weight:400}
+.wtable tr:last-child td{border-bottom:none}
+.wtable .nm{display:inline-flex;align-items:center;gap:6px}
+
+.rank-row{display:grid;grid-template-columns:22px minmax(0,1fr) 84px;gap:4px 10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--linea)}
+.rank-row:last-child{border-bottom:none}
+.rank-n{font-family:var(--label);font-weight:600;font-size:11px;color:var(--tinta-suave)}
+.rank-name{display:flex;align-items:center;gap:8px;font-size:13px;min-width:0}
+.rank-name span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank-val{font-family:var(--label);font-weight:600;font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
+.rank-row .bar-track{grid-column:2 / -1;height:4px;background:#f4f4f5;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;transition:width .4s ease}
+
+.chg{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--linea);font-size:12px}
+.chg:last-child{border-bottom:none}
+.chg > span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chg-move{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.chg .chip{font-size:10px;padding:3px 6px;gap:5px}
+.chg .dot{width:8px;height:8px}
+.chg-arrow{color:var(--tinta-suave);font-size:10px}
+.empty-mini{font-size:13px;line-height:20px;color:var(--tinta-suave)}
+
+/* Historial de periodos (panel 1) */
+.hist{display:flex;flex-direction:column}
+.hist-row{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--linea)}
+.hist-row:last-child{border-bottom:none}
+.hist-name{font-family:var(--serif);font-weight:700;font-size:17px}
+.hist-meta{font-size:13px;line-height:20px;color:var(--tinta-suave);margin-top:4px}
+.hist-acts{display:flex;gap:8px}
+
+@media (max-width:1100px){
+  .c-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .c-pareto,.c-fc,.c-fc.wide{grid-column:span 12}
+  .c-weight,.c-chg{grid-column:span 6}
+  .c-rank{grid-column:span 6;grid-row:auto;height:300px}
 }
-.chart-card-full{grid-column:1/-1; margin-bottom: 16px;}
-.chart-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
-.chart-desc{font-size:12.5px;color:var(--text2);margin-bottom:20px;line-height:1.5}
-
-.toggle-group{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.tog{
-  font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;
-  border:1px solid var(--border2);background:var(--surface);
-  color:var(--text2);cursor:pointer;transition:all .2s;
+@media (max-width:760px){
+  .c-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .c-weight,.c-chg,.c-rank{grid-column:span 12}
+  .c-rank{height:420px}
+  .kc-val{font-size:20px}
 }
-.tog.active{background:var(--text);border-color:var(--text);color:#fff}
 
-.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.bar-name{font-size:13px;font-weight:500; color:var(--text);min-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar-track{flex:1;height:6px;background:var(--surface2);border-radius:4px}
-.bar-fill{height:6px;border-radius:4px;transition:width .5s cubic-bezier(0.4, 0, 0.2, 1)}
-.bar-val{font-size:12px;font-family:var(--fm);color:var(--text2);min-width:70px;text-align:right}
+/* ─── PANEL 4: CONSEJOS ─── */
+.plan{counter-reset:plan}
+.plan-item{
+  display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:baseline;
+  padding:20px 0;border-bottom:1px solid var(--linea);
+}
+.plan-item:first-child{padding-top:0}
+.plan-item:last-child{border-bottom:none;padding-bottom:0}
+.plan-n{font-family:var(--label);font-weight:600;font-size:14px;color:var(--azul)}
+.plan-dish{font-family:var(--serif);font-weight:700;font-size:18px;margin-bottom:4px}
+.plan-act{font-size:15px;line-height:24px;color:var(--tinta-suave)}
+.plan-gain{font-family:var(--label);font-weight:600;font-size:20px;color:var(--positivo);white-space:nowrap}
+.plan-foot{font-size:13px;line-height:20px;color:var(--tinta-suave);margin-top:24px}
 
-/* ─── ADVICE ─── */
-.adv-section{margin-bottom:3rem}
+.adv-section{margin-top:var(--gap-section)}
 .adv-title{
-  font-family:var(--fb);font-size:24px;font-weight:800;
-  color:var(--text);margin-bottom:20px;
-  padding-bottom:12px;border-bottom:1px solid var(--border);
-}
-.adv-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:16px;
-  box-shadow:var(--shadow);
-}
-.adv-dish{
   display:flex;align-items:center;gap:12px;
-  font-size:16px;font-weight:600;color:var(--text);margin-bottom:12px;
+  font-family:var(--serif);font-weight:700;font-size:26px;line-height:1.3;
+  padding-bottom:16px;margin-bottom:24px;border-bottom:1px solid var(--linea);
 }
-.adv-text{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.adv-title .dot{width:14px;height:14px}
+.adv-card{background:var(--superficie);border:1px solid var(--linea);border-radius:var(--r-card);padding:40px;margin-bottom:16px}
+.adv-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.adv-dish{font-family:var(--serif);font-weight:700;font-size:22px;line-height:1.3}
+.adv-metrics{display:flex;gap:8px;flex-wrap:wrap}
+.adv-text{font-size:18px;line-height:30px;color:var(--tinta);margin-bottom:28px;max-width:68ch}
 
-.sim-box{
-  background:var(--surface2);border:1px solid var(--border);
-  border-radius:var(--r-sm);padding:20px;
-}
-.sim-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
-.sim-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap}
-.sim-lbl{font-size:13px;font-weight:500;color:var(--text2);min-width:140px}
-.sim-slider{flex:1;min-width:120px;accent-color:var(--accent)}
-.sim-val{font-family:var(--fm);font-size:14px;font-weight:500;color:var(--text);min-width:80px}
+.sim-box{border:1px solid var(--linea);border-radius:var(--r-btn);padding:24px;background:var(--papel)}
+.sim-title{font-family:var(--label);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave);margin-bottom:20px}
+.sim-row{display:grid;grid-template-columns:200px 1fr 110px;gap:16px;align-items:center;margin-bottom:14px}
+.sim-lbl{font-size:14px;color:var(--tinta-suave)}
+.sim-slider{width:100%;accent-color:var(--azul)}
+.sim-val{font-family:var(--label);font-weight:600;font-size:15px;text-align:right;font-variant-numeric:tabular-nums}
 .sim-result{
-  display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap;
-  padding-top:16px;border-top:1px solid var(--border);
+  display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  margin-top:20px;padding-top:18px;border-top:1px solid var(--linea);font-size:15px;
 }
-.sim-now{font-size:13px;color:var(--text2)}
-.sim-arrow{font-size:20px;color:var(--text3)}
-.sim-after{font-size:14px;font-weight:700;color:var(--star)}
+.sim-now{color:var(--tinta-suave)}
+.sim-now strong{color:var(--tinta);font-family:var(--label);font-weight:600}
+.sim-after{font-family:var(--label);font-weight:600;font-size:18px;color:var(--azul)}
+.sim-after.st-neg{color:var(--negativo)}
+.sim-state{font-size:14px;line-height:22px;margin-top:10px}
+.sim-actions{margin-top:16px}
 
 .empty{
-  text-align:center;padding:6rem 2rem;
-  color:var(--text3);font-size:15px;
+  text-align:left;padding:48px 40px;background:var(--superficie);border:1px solid var(--linea);border-radius:var(--r-card);
 }
-.empty i{font-size:42px;display:block;margin-bottom:16px;color:var(--border2)}
+.empty p{font-size:18px;line-height:30px;color:var(--tinta-suave);margin-bottom:24px;max-width:56ch}
+.empty .acts{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ─── PIE ─── */
+.foot{max-width:1160px;margin:0 auto;padding:32px;border-top:1px solid var(--linea);display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.rg{font-family:var(--label);font-weight:600;font-size:18px;color:var(--tinta);letter-spacing:-.02em}
+.rg b{color:var(--azul);font-weight:600}
+.rg i{font-style:normal;margin-left:-.18em}
+.foot p{font-size:13px;line-height:20px;color:var(--tinta-suave)}
+
+/* ─── AVISO FLOTANTE ─── */
+.toast{
+  position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);
+  background:var(--tinta);color:#fff;border-radius:var(--r-btn);padding:12px 18px;
+  font-size:14px;line-height:22px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:300;max-width:90vw;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:768px){
-  .hdr-inner{padding:0 1rem}
-  .main{padding:2rem 1rem 4rem}
+@media (max-width:960px){
+  .settings{grid-template-columns:1fr 1fr}
   .legend-row{grid-template-columns:1fr 1fr}
-  .kpi-row{grid-template-columns:1fr 1fr}
-  .chart-grid{grid-template-columns:1fr}
-  .step-btn span{display:none}
-  .col-headers{display:none}
-  
-  /* Mejora de la fila de platos para Móvil (Formato Tarjeta) */
-  .dish-row{
-    grid-template-columns: 1fr 1fr 48px;
-  }
-  .dish-row .field:nth-child(1) {
-    grid-column: 1 / 3;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-  .dish-row .field:nth-child(2) {
-    grid-column: 1 / 2;
-    border-bottom: 1px solid var(--border);
-  }
-  .dish-row .field:nth-child(3) {
-    grid-column: 2 / 3;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-  .dish-row .field:nth-child(4) {
-    grid-column: 1 / 3;
-    border-right: none;
-  }
-  .del-btn {
-    grid-column: 3 / 4;
-    grid-row: 1 / 4;
-  }
-  .field-lbl {
-    display: block !important;
-  }
 }
+@media (max-width:760px){
+  .hdr-inner{padding:0 16px;height:64px;gap:12px}
+  .logo{font-size:19px}
+  .step-btn{padding:0 10px;font-size:12px;letter-spacing:.08em}
+  .step-btn .step-txt{display:none}
+  .step-btn.active .step-txt{display:inline}
+  .main{padding:40px 16px 72px}
+  .page-hd h1{font-size:32px}
+  .lead{font-size:18px;line-height:30px}
+  .card,.adv-card{padding:24px}
+  .kpi-cell{padding:24px}
+  .settings{grid-template-columns:1fr}
+  .dl-head{display:none}
+  .dish-row.dl-grid{grid-template-columns:1fr 1fr;padding:16px 8px 8px}
+  .dish-row .cell{padding:4px 12px}
+  .dish-row .cell:nth-child(1),.dish-row .cell:nth-child(2){grid-column:1 / -1}
+  .m-lbl{display:block;font-family:var(--label);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave);padding-top:6px}
+  .cell input{padding:8px 0 10px;border-bottom-color:var(--linea)}
+  .out{display:block;padding:8px 0 10px}
+  .row-actions{grid-column:1 / -1;justify-content:flex-start;padding:4px 4px 0}
+  .legend-row{grid-template-columns:1fr}
+  .scatter-wrap{height:380px}
+  .sim-row{grid-template-columns:1fr auto}
+  .sim-row .sim-slider{grid-column:1 / -1;grid-row:2}
+  .hist-row{grid-template-columns:1fr}
+  .plan-item{grid-template-columns:28px 1fr}
+  .plan-gain{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+}
+
 </style>
 </head>
 <body>
 
 <header class="hdr">
   <div class="hdr-inner">
-    <a class="logo" href="#">
-      <div class="logo-mark"><i class="ti ti-chart-bubble"></i></div>
-      <span data-i18n="app_title">MENU QUERY</span>
-    </a>
-    <nav class="steps">
-      <button class="step-btn active" onclick="goTab('input',this)">
-        <span class="step-num">1</span><span data-i18n="step_1">Platos</span>
+    <a class="logo" href="#" onclick="goTab('input');return false;">Menu <span>query</span></a>
+    <nav class="steps" aria-label="Pasos">
+      <button class="step-btn active" data-tab="input" onclick="goTab('input')">
+        <span class="step-num">01</span><span class="step-txt" data-i18n="step_1">Platos</span>
       </button>
-      <button class="step-btn" onclick="goTab('matrix',this)">
-        <span class="step-num">2</span><span data-i18n="step_2">Matriz</span>
+      <button class="step-btn" data-tab="matrix" onclick="goTab('matrix')">
+        <span class="step-num">02</span><span class="step-txt" data-i18n="step_2">Matriz</span>
       </button>
-      <button class="step-btn" onclick="goTab('dash',this)">
-        <span class="step-num">3</span><span data-i18n="step_3">Dashboard</span>
+      <button class="step-btn" data-tab="dash" onclick="goTab('dash')">
+        <span class="step-num">03</span><span class="step-txt" data-i18n="step_3">Dashboard</span>
       </button>
-      <button class="step-btn" onclick="goTab('advice',this)">
-        <span class="step-num">4</span><span data-i18n="step_4">Consejos</span>
+      <button class="step-btn" data-tab="advice" onclick="goTab('advice')">
+        <span class="step-num">04</span><span class="step-txt" data-i18n="step_4">Consejos</span>
       </button>
     </nav>
-    <button class="lang-toggle" onclick="toggleLang()" id="langBtn">EN</button>
+    <button class="lang-toggle" onclick="toggleLang()" id="langBtn" aria-label="Cambiar idioma">EN</button>
   </div>
 </header>
 
 <main class="main">
 
-<!-- ══ PANEL 1: INPUT ══ -->
+<!-- ══ PANEL 1: PLATOS ══ -->
 <section id="panel-input" class="panel active">
-  <div class="page-hd">
-    <h1 data-i18n="h1_input">Añade tus platos</h1>
-    <p data-i18n="p_input">Añade cada plato con su precio de venta, coste de producción y unidades vendidas en el periodo que quieras analizar.</p>
+  <div class="page-hd hero">
+    <div class="eyebrow" data-i18n="eyebrow_1">01 — Platos</div>
+    <h1 data-i18n="h1_input">Añade tus <span>platos</span></h1>
+    <p class="lead" data-i18n="p_input">Introduce cada plato con su precio de venta, su coste de producción y las unidades vendidas en el periodo que quieras analizar.</p>
   </div>
 
-  <div class="info-alert">
-    <i class="ti ti-info-circle"></i>
-    <span data-i18n="disclaimer">Atención: Este cálculo se basa en el margen bruto directo. No tiene en cuenta los costes indirectos de tu negocio (alquiler, personal, suministros, etc.).</span>
+  <div class="note">
+    <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <span data-i18n="disclaimer">El cálculo usa el margen bruto directo. No incluye costes indirectos del negocio como alquiler, personal o suministros.</span>
   </div>
 
-  <div class="col-headers">
-    <div class="col-h" data-i18n="col_name">Nombre del plato</div>
-    <div class="col-h" data-i18n="col_price">Precio venta</div>
-    <div class="col-h" data-i18n="col_cost">Coste producción</div>
-    <div class="col-h" data-i18n="col_units">Uds. vendidas</div>
-    <div></div>
+  <div class="card settings" style="padding:32px">
+    <div>
+      <label class="ctrl-lbl" for="setPeriod" data-i18n="set_period">Periodo analizado</label>
+      <input class="ctrl" id="setPeriod" type="text" oninput="setSetting('period',this.value)">
+    </div>
+    <div>
+      <label class="ctrl-lbl" for="setMethod" data-i18n="set_method">Método de clasificación</label>
+      <select class="ctrl" id="setMethod" onchange="setSetting('method',this.value)">
+        <option value="simple" data-i18n="m_simple">Media simple</option>
+        <option value="ks" data-i18n="m_ks">Kasavana y Smith (regla del 70 %)</option>
+      </select>
+      <p class="ctrl-hint" id="methodHint"></p>
+    </div>
+    <div>
+      <label class="ctrl-lbl" for="setTarget" data-i18n="set_target">Food cost objetivo</label>
+      <input class="ctrl" id="setTarget" type="text" inputmode="decimal" oninput="setSetting('target',this.value)">
+      <p class="ctrl-hint" data-i18n="set_target_hint">Porcentaje del precio que quieres destinar a materia prima. Se usa para sugerir precios.</p>
+    </div>
   </div>
 
-  <div class="input-grid" id="dishGrid"></div>
+  <div class="data-bar">
+    <div class="left">
+      <button class="btn btn-sm" onclick="loadSample()" data-i18n="btn_sample">Cargar ejemplo</button>
+      <button class="btn btn-sm" onclick="document.getElementById('csvFile').click()">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+        <span data-i18n="btn_import">Importar CSV</span>
+      </button>
+      <button class="btn btn-sm" onclick="exportCSV()">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span data-i18n="btn_export">Exportar CSV</span>
+      </button>
+      <input type="file" id="csvFile" accept=".csv,.txt,text/csv" hidden onchange="importCSV(this)">
+    </div>
+    <div class="right">
+      <button class="btn btn-sm btn-quiet" onclick="clearAll()">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+        <span data-i18n="btn_clear">Vaciar carta</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="dish-list">
+    <div class="dl-grid dl-head">
+      <div data-i18n="col_name">Plato</div>
+      <div data-i18n="col_section">Sección</div>
+      <div data-i18n="col_price">Precio</div>
+      <div data-i18n="col_cost">Coste</div>
+      <div data-i18n="col_units">Uds.</div>
+      <div data-i18n="col_margin">Margen u.</div>
+      <div data-i18n="col_fc">Food cost</div>
+      <div></div>
+    </div>
+    <div id="dishGrid"></div>
+    <div class="dl-foot" id="dishTotals"></div>
+  </div>
+  <datalist id="sectionList"></datalist>
 
   <div class="input-actions">
-    <div class="action-left">
-      <button class="btn btn-sm" onclick="addDish()">
-        <i class="ti ti-plus"></i> <span data-i18n="btn_add">Añadir plato</span>
-      </button>
-      <div class="dish-count">
-        <strong id="countNum">0</strong> <span data-i18n="lbl_added">platos añadidos</span>
-      </div>
-    </div>
-    <button class="btn btn-primary" onclick="calculate()">
-      <span data-i18n="btn_calc">Calcular análisis</span> <i class="ti ti-arrow-right"></i>
+    <button class="btn" onclick="addDish(true)">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+      <span data-i18n="btn_add">Añadir plato</span>
     </button>
+    <button class="btn btn-primary" onclick="calculate()" data-i18n="btn_calc">Calcular análisis</button>
   </div>
-  <div class="err" id="errMsg" style="display:none">
-    <i class="ti ti-alert-circle"></i><span id="errTxt"></span>
+  <div class="err" id="errMsg" role="alert">
+    <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+    <span id="errTxt"></span>
   </div>
+
+  <div class="section" id="historyBox"></div>
 </section>
 
-<!-- ══ PANEL 2: MATRIX ══ -->
+<!-- ══ PANEL 2: MATRIZ ══ -->
 <section id="panel-matrix" class="panel">
   <div class="page-hd">
-    <h1 data-i18n="h1_matrix">Ingeniería de menús</h1>
-    <p data-i18n="p_matrix">Visualización real de cada plato mediante gráfico de dispersión, basado en popularidad relativa y margen.</p>
+    <div class="eyebrow" data-i18n="eyebrow_2">02 — Matriz</div>
+    <h1 data-i18n="h1_matrix">Ingeniería de <span>menús</span></h1>
+    <p class="lead" data-i18n="p_matrix">Cada plato se sitúa según su popularidad y su margen unitario. Las líneas marcan los umbrales que separan las cuatro categorías.</p>
   </div>
-  <div id="matrixContent">
-    <div class="empty"><i class="ti ti-layout-grid"></i><span data-i18n="empty_matrix">Añade tus platos y calcula primero para ver la matriz.</span></div>
-  </div>
+  <div id="matrixContent"></div>
 </section>
 
 <!-- ══ PANEL 3: DASHBOARD ══ -->
 <section id="panel-dash" class="panel">
   <div class="page-hd">
-    <h1 data-i18n="h1_dash">Dashboard</h1>
-    <p data-i18n="p_dash">Métricas clave de tu carta con visualizaciones interactivas.</p>
+    <div class="eyebrow" data-i18n="eyebrow_3">03 — Dashboard</div>
+    <h1 data-i18n="h1_dash">Métricas de la <span>carta</span></h1>
+    <p class="lead" data-i18n="p_dash">Ingresos, costes y margen de tu carta, y qué platos sostienen el beneficio.</p>
   </div>
-  <div id="dashContent">
-    <div class="empty"><i class="ti ti-chart-bar"></i><span data-i18n="empty_dash">Añade tus platos y calcula primero para ver el dashboard.</span></div>
-  </div>
+  <div id="dashContent"></div>
 </section>
 
-<!-- ══ PANEL 4: ADVICE ══ -->
+<!-- ══ PANEL 4: CONSEJOS ══ -->
 <section id="panel-advice" class="panel">
   <div class="page-hd">
-    <h1 data-i18n="h1_adv">Consejos de mejora</h1>
-    <p data-i18n="p_adv">Recomendaciones personalizadas con simuladores interactivos de impacto económico.</p>
+    <div class="eyebrow" data-i18n="eyebrow_4">04 — Consejos</div>
+    <h1 data-i18n="h1_adv">Consejos de <span>mejora</span></h1>
+    <p class="lead" data-i18n="p_adv">Acciones concretas para cada plato, ordenadas por impacto, con simuladores para probar cambios de precio, coste y ventas.</p>
   </div>
-  <div id="adviceContent">
-    <div class="empty"><i class="ti ti-bulb"></i><span data-i18n="empty_adv">Añade tus platos y calcula primero para ver los consejos.</span></div>
-  </div>
+  <div id="adviceContent"></div>
 </section>
 
 </main>
 
+<footer class="foot">
+  <div class="rg"><b>R</b>G<i>.</i></div>
+  <p data-i18n="foot_note">Los datos se guardan solo en este navegador.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
-let currentLang = 'es';
+/* ════════════════ TEXTOS ════════════════ */
 const dict = {
   es: {
-    app_title: "MENU QUERY", step_1: "Platos", step_2: "Matriz", step_3: "Dashboard", step_4: "Consejos",
-    h1_input: "Añade tus platos", p_input: "Añade cada plato con su precio de venta, coste de producción y unidades vendidas en el periodo que quieras analizar.",
-    disclaimer: "Atención: Este cálculo se basa en el margen bruto directo. No tiene en cuenta los costes indirectos de tu negocio (alquiler, personal, suministros, etc.).",
-    col_name: "Nombre del plato", col_price: "Precio venta", col_cost: "Coste prod.", col_units: "Uds. vendidas",
-    btn_add: "Añadir plato", btn_calc: "Calcular análisis", lbl_added: "platos añadidos",
-    ph_name: "Ej: Hamburguesa Clásica",
-    err_num: "Todos los campos deben ser números.", err_zero: "Los valores deben ser mayores que 0.", err_cost: "El coste no puede ser igual o mayor que el precio.",
-    h1_matrix: "Ingeniería de Menús", p_matrix: "Visualización real de cada plato mediante gráfico de dispersión, basado en popularidad relativa y margen.",
-    leg_star_desc: "Alta rentabilidad y alta popularidad. El corazón de tu carta. Protégelos.",
-    leg_horse_desc: "Populares pero bajo margen. Generan volumen. Optimiza costes o ajusta el precio.",
-    leg_puzz_desc: "Rentables pero poco pedidos. Potencial oculto: pueden convertirse en Estrellas.",
-    leg_dog_desc: "Poca rentabilidad y poca venta. Candidatos a revisión o eliminación.",
-    th_dish: "Plato", th_cat: "Categoría", th_price: "Precio", th_cost: "Coste", th_marg_u: "Margen unit.", th_units: "Uds.", th_marg_t: "Margen total", th_pct: "% Carta",
-    lbl_filter: "Filtrar:", lbl_sort: "Ordenar:", btn_all: "Todos", opt_marg: "Margen total", opt_units: "Uds. vendidas", opt_name: "Nombre", opt_marg_u: "Margen unitario",
-    h1_dash: "Dashboard", p_dash: "Métricas clave de tu carta con visualizaciones interactivas.",
-    kpi_rev: "Ingresos totales", kpi_cost: "Costes totales", kpi_marg: "Margen bruto", kpi_tix: "Ticket medio", kpi_vol: "Uds. totales vendidas", kpi_tot: "Platos en carta", kpi_sub: "sobre ingresos",
-    chart_rank: "Ranking interactivo de platos", chart_dist: "Distribución de Platos (Cantidad)", chart_comp: "Ingresos · Costes · Margen", chart_marg_cont: "Contribución al Beneficio Total (€)",
-    desc_rank: "Compara el rendimiento de tus platos según el margen total que aportan, los ingresos brutos o la cantidad de unidades vendidas.",
-    desc_dist: "Muestra el peso de cada categoría en tu menú. Lo ideal es tener pocas opciones 'Perro' y un buen núcleo de 'Estrellas'.",
-    desc_marg_cont: "Ilustra qué categorías sostienen tu negocio. Frecuentemente, unos pocos platos generan la mayor parte del beneficio.",
-    desc_comp: "Desglose financiero: observa visualmente qué parte del precio de venta se va en costes de producción y cuánto queda como margen real.",
-    tog_marg: "Margen total", tog_rev: "Ingresos", tog_units: "Uds. vendidas",
-    leg_rev: "Ingresos", leg_cost: "Coste de Producción", leg_marg: "Margen Bruto", chart_y: "Popularidad (Uds)", chart_x: "Rentabilidad (Margen €)",
-    h1_adv: "Consejos de mejora", p_adv: "Recomendaciones personalizadas con simuladores interactivos de impacto económico.",
-    adv_star_hd: "Potencia tus Estrellas", adv_horse_hd: "Optimiza el margen de tus Caballos", adv_puzz_hd: "Convierte Puzzles en Estrellas", adv_dog_hd: "Revisa o elimina los Perros",
-    sim_obj: "Objetivo de ventas", sim_inc: "Incremento de ventas", sim_red: "Reducción de coste", sim_up: "Subida de precio",
-    sim_title_star: "Simulador — mejora de visibilidad", sim_title_horse: "Simulador — optimización de coste y precio", sim_title_puzz: "Simulador — unidades para ser Estrella", sim_title_dog: "Impacto de eliminación",
-    sim_now: "Margen actual:", sim_now_sh: "Ahora:", sim_ext: "extra", sim_mov: "Mueve los sliders", sim_free: "Eliminar libera operativa y reduce mermas.", sim_cont: "Contribución actual:",
-    adv_dog_bad: "Rentabilidad crítica (Margen: {pct}%). Este plato supone un lastre financiero y operativo considerable. La eliminación directa es la opción más recomendada.",
-    adv_dog_ok: "Aunque es un 'Perro', su rentabilidad porcentual es rescatable ({pct}%). Considera rediseñarlo, cambiarle el nombre o usarlo como 'gancho' antes de descartarlo.",
-    adv_star_top: "¡Estrella indiscutible! Su rentabilidad porcentual es sobresaliente ({pct}%). Dale máxima prioridad, no toques su receta y bríndale la posición más visible en la carta.",
-    adv_star_ok: "Rendimiento excelente con un margen sólido del {pct}%. Mantén la consistencia y prueba a crear combos para aumentar aún más el ticket medio.",
-    adv_horse_bad: "¡Alerta de rentabilidad! Genera mucho volumen, pero su margen es peligrosamente bajo ({pct}%). Subir el precio, reducir la porción o cambiar ingredientes es urgente.",
-    adv_horse_ok: "Atrae clientes y tiene un margen aceptable ({pct}%), pero optimizar ligeramente sus costes (aprovechando su alto volumen) multiplicará tus beneficios generales.",
-    adv_puzz_top: "¡Oro puro oculto! Su rentabilidad es altísima ({pct}%), pero apenas se vende. Necesitas darle máxima visibilidad en carta o promocionarlo agresivamente con tu personal.",
-    adv_puzz_ok: "Buen margen ({pct}%) pero pasa muy desapercibido. Incentiva a tu personal de sala para que lo recomiende activamente como sugerencia del día.",
-    empty_matrix: "Añade tus platos y calcula primero para ver la matriz.", empty_dash: "Añade tus platos y calcula primero para ver el dashboard.", empty_adv: "Añade tus platos y calcula primero para ver los consejos.",
-    lbl_avg_rent: "Rentabilidad Media", lbl_avg_pop: "Popularidad Media"
+    dash_title:"Dashboard", kpi_marg_pct:"Margen %", kpi_fc_eq_s:"En objetivo", kpi_fc_over_s:"+{d} pp sobre objetivo", kpi_fc_under_s:"−{d} pp bajo objetivo",
+    kpi_price_avg_s:"{v}/plato", pareto_aside:"{n}/{t} platos = 80 %",
+    fc_aside_n:"{n} sobre el {t}", fc_aside_1:"1 sobre el {t}", fc_aside_ok:"Todos bajo el {t}", chg_title_s:"Cambios de categoría",
+    btn_save_period:"Guardar periodo", kpi_same:"Sin cambios", cmp_lbl:"Comparar con", cmp_auto:"Último periodo guardado", cmp_none:"Sin comparación",
+    vs:"frente a {p}", this_period:"Este periodo", no_period:"Sin nombre ({d})", kpi_price_avg:"Precio medio por plato: {v}",
+    pareto_title:"Concentración del margen", pareto_cum:"Acumulado",
+    pareto_desc:"Margen total de cada plato, de mayor a menor, con el porcentaje acumulado. La línea discontinua marca el 80 %.",
+    pareto_stmt:"<b>{n} de {t}</b> platos generan el 80 % del margen.", pareto_stmt1:"<b>1 de {t}</b> platos genera el 80 % del margen.",
+    weight_title:"Peso de cada categoría", weight_desc:"Cuántos platos hay en cada categoría frente a lo que venden y el margen que aportan.",
+    w_dishes:"Platos", w_units:"Ventas", w_margin:"Margen",
+    fc_title:"Food cost por plato", fc_desc:"Parte del precio que se va en materia prima. La línea marca tu objetivo ({t}). En azul, los platos que lo superan.",
+    fc_over_n:"{n} platos superan tu food cost objetivo.", fc_over_1:"1 plato supera tu food cost objetivo.", fc_target_lbl:"OBJETIVO {t}",
+    chg_title:"Cambios frente a {p}", chg_desc:"Platos que han cambiado de categoría, platos nuevos y platos retirados.",
+    chg_new:"Nuevo", chg_removed:"Retirado", chg_none:"Ningún plato ha cambiado de categoría.",
+    hist_title:"Periodos guardados", hist_desc:"Guarda cada análisis desde el dashboard para comparar meses o temporadas.",
+    hist_empty:"Aún no has guardado ningún periodo. Calcula el análisis, ponle nombre al periodo y pulsa «Guardar periodo» en el dashboard.",
+    hist_meta:"{n} platos, guardado el {d}", btn_open:"Abrir", btn_delete:"Eliminar",
+    t_saved:"Periodo «{p}» guardado.", t_save_stale:"Recalcula el análisis antes de guardar el periodo.", t_opened:"Periodo «{p}» abierto.", t_deleted:"Periodo eliminado.",
+    confirm_overwrite:"Ya hay un periodo «{p}». ¿Sustituirlo?", confirm_open:"Se sustituirán los platos actuales por los de «{p}». ¿Continuar?",
+    step_1:"Platos", step_2:"Matriz", step_3:"Dashboard", step_4:"Consejos",
+    eyebrow_1:"01 — Platos", eyebrow_2:"02 — Matriz", eyebrow_3:"03 — Dashboard", eyebrow_4:"04 — Consejos",
+    h1_input:"Añade tus <span>platos</span>",
+    p_input:"Introduce cada plato con su precio de venta, su coste de producción y las unidades vendidas en el periodo que quieras analizar.",
+    disclaimer:"El cálculo usa el margen bruto directo. No incluye costes indirectos del negocio como alquiler, personal o suministros.",
+    set_period:"Periodo analizado", ph_period:"Ej.: octubre 2026",
+    set_method:"Método de clasificación", m_simple:"Media simple", m_ks:"Kasavana y Smith (regla del 70 %)",
+    hint_simple:"Compara cada plato con el margen medio y las ventas medias de la carta.",
+    hint_ks:"Margen medio ponderado por ventas. Un plato es popular si supera el 70 % de su cuota esperada.",
+    set_target:"Food cost objetivo", set_target_hint:"Porcentaje del precio que quieres destinar a materia prima. Se usa para sugerir precios.",
+    btn_sample:"Cargar ejemplo", btn_import:"Importar CSV", btn_export:"Exportar CSV", btn_clear:"Vaciar carta",
+    col_name:"Plato", col_section:"Sección", col_price:"Precio", col_cost:"Coste", col_units:"Uds.", col_margin:"Margen u.", col_fc:"Food cost",
+    ph_name:"Ej.: hamburguesa clásica", ph_section:"Ej.: principales",
+    btn_add:"Añadir plato", btn_calc:"Calcular análisis", a_dup:"Duplicar plato", a_del:"Eliminar plato",
+    tot_dishes:"Platos", tot_rev:"Ingresos", tot_margin:"Margen total", tot_fc:"Food cost medio",
+    err_none:"Añade al menos un plato con nombre.",
+    err_num:"«{n}»: precio, coste y unidades tienen que ser números.",
+    err_zero:"«{n}»: precio, coste y unidades tienen que ser mayores que 0.",
+    err_cost:"«{n}»: el coste tiene que ser menor que el precio.",
+    err_target:"El food cost objetivo tiene que estar entre 1 y 99 %.",
+    h1_matrix:"Ingeniería de <span>menús</span>",
+    p_matrix:"Cada plato se sitúa según su popularidad y su margen unitario. Las líneas marcan los umbrales que separan las cuatro categorías.",
+    cat_star:"Estrella", cat_horse:"Caballo", cat_puzzle:"Puzzle", cat_dog:"Perro",
+    cat_star_pl:"Estrellas", cat_horse_pl:"Caballos", cat_puzzle_pl:"Puzzles", cat_dog_pl:"Perros",
+    leg_star_desc:"Margen y popularidad altos. Son el núcleo de la carta: protégelos.",
+    leg_horse_desc:"Se venden mucho pero dejan poco margen. Ajusta coste o precio.",
+    leg_puzzle_desc:"Buen margen pero pocas ventas. Pueden convertirse en Estrellas.",
+    leg_dog_desc:"Margen y ventas bajos. Revísalos o retíralos de la carta.",
+    scope_lbl:"Sección analizada", scope_all:"Toda la carta",
+    chip_sample:"Datos de ejemplo", chip_method_simple:"Media simple", chip_method_ks:"Kasavana y Smith",
+    stale_msg:"Has cambiado la carta desde el último cálculo.", btn_recalc:"Recalcular",
+    sample_flag:"Gráfico con datos de ejemplo.",
+    thr_margin:"Umbral de margen", thr_units:"Umbral de popularidad",
+    ax_x:"Popularidad (uds. vendidas)", ax_y:"Margen unitario (€)",
+    tbl_title:"Clasificación de platos", tbl_desc:"Pasa el cursor por una fila para localizar el plato en la matriz.",
+    th_dish:"Plato", th_section:"Sección", th_cat:"Categoría", th_price:"Precio", th_cost:"Coste", th_fc:"Food cost",
+    th_marg_u:"Margen u.", th_units:"Uds.", th_mix:"Mix", th_marg_t:"Margen total", th_pct:"% margen",
+    ph_search:"Buscar plato", btn_all:"Todos", lbl_sort:"Ordenar por",
+    opt_marg:"Margen total", opt_units:"Uds. vendidas", opt_name:"Nombre", opt_marg_u:"Margen unitario", opt_fc:"Food cost",
+    tbl_none:"Ningún plato coincide con el filtro.",
+    h1_dash:"Métricas de la <span>carta</span>",
+    p_dash:"Ingresos, costes y margen de tu carta, y qué platos sostienen el beneficio.",
+    kpi_rev:"Ingresos", kpi_cost:"Costes de producción", kpi_marg:"Margen bruto", kpi_fc:"Food cost medio",
+    kpi_tix:"Precio medio por plato", kpi_vol:"Uds. vendidas", kpi_sub:"{p} sobre ingresos",
+    kpi_fc_over:"▲ +{d} pp sobre tu objetivo ({t})", kpi_fc_under:"▼ −{d} pp bajo tu objetivo ({t})", kpi_fc_eq:"En tu objetivo ({t})",
+    kpi_dishes:"{n} platos en el análisis",
+    pareto_txt:"{n} de {t} platos generan el 80 % del margen.", pareto_txt1:"1 de {t} platos genera el 80 % del margen.",
+    chart_rank:"Ranking de platos", desc_rank:"Compara tus platos por margen total, ingresos o unidades vendidas.",
+    tog_marg:"Margen total", tog_rev:"Ingresos", tog_units:"Uds. vendidas",
+    chart_dist:"Platos por categoría", desc_dist:"Cuántos platos hay en cada cuadrante. Conviene tener pocos Perros y un núcleo sólido de Estrellas.",
+    chart_marg_cont:"Margen por categoría", desc_marg_cont:"Qué categorías sostienen el beneficio. A menudo unos pocos platos generan casi todo.",
+    chart_comp:"Coste y margen por plato", desc_comp:"Qué parte de los ingresos de cada plato se va en producción y cuánta queda como margen. Coste + margen = ingresos.",
+    leg_rev:"Ingresos", leg_cost:"Coste de producción", leg_marg:"Margen bruto",
+    h1_adv:"Consejos de <span>mejora</span>",
+    p_adv:"Acciones concretas para cada plato, ordenadas por impacto, con simuladores para probar cambios de precio, coste y ventas.",
+    plan_title:"Plan de acción", plan_desc:"Las tres acciones con más impacto estimado en el margen del periodo.",
+    plan_foot:"Estimaciones con las mismas unidades vendidas salvo que la acción sea vender más. Los cambios de precio pueden afectar a la demanda.",
+    plan_none:"No hay acciones con impacto positivo claro. Revisa los simuladores de cada plato.",
+    act_star:"Dale la posición más visible de la carta para vender un 10 % más.",
+    act_price:"Sube el precio a {p} para alcanzar tu food cost objetivo.",
+    act_cost:"Reduce un 10 % el coste de la receta.",
+    act_puzzle:"Vende {u} uds. más para cruzar el umbral de popularidad.",
+    adv_star_hd:"Potencia tus Estrellas", adv_horse_hd:"Mejora el margen de tus Caballos",
+    adv_puzzle_hd:"Convierte tus Puzzles en Estrellas", adv_dog_hd:"Revisa o retira tus Perros",
+    adv_star_top:"Margen del {pct}. Es uno de tus platos más fuertes: no cambies la receta y colócalo en la posición más visible de la carta.",
+    adv_star_ok:"Margen del {pct}. Mantén la consistencia y prueba a incluirlo en combos para subir el ticket medio.",
+    adv_horse_bad:"Se vende mucho, pero su margen es del {pct}. Subir el precio, ajustar la ración o cambiar ingredientes tendrá efecto inmediato por su volumen.",
+    adv_horse_ok:"Atrae clientes con un margen aceptable ({pct}). Por su volumen, cualquier ahorro de coste se multiplica.",
+    adv_puzzle_top:"Margen del {pct}, pero se vende poco. Dale visibilidad en carta y pide al equipo de sala que lo recomiende.",
+    adv_puzzle_ok:"Margen del {pct}, pero pasa desapercibido. Prueba a ofrecerlo como sugerencia del día.",
+    adv_dog_bad:"Margen del {pct} y pocas ventas. Ocupa espacio en carta y en cocina sin aportar: retirarlo es la opción más clara.",
+    adv_dog_ok:"Margen del {pct}, rescatable. Antes de retirarlo, prueba a rediseñarlo, cambiarle el nombre o reubicarlo.",
+    m_chip_margin:"Margen u. {v}", m_chip_fc:"Food cost {v}", m_chip_units:"{v} uds.",
+    sim_title_star:"Simulador de visibilidad", sim_title_horse:"Simulador de coste y precio",
+    sim_title_puzzle:"Simulador de ventas", sim_title_dog:"Impacto de retirarlo",
+    sim_inc:"Incremento de ventas", sim_red:"Reducción de coste", sim_up:"Subida de precio", sim_obj:"Objetivo de ventas",
+    sim_now:"Margen actual", sim_after:"Con el cambio", sim_ext:"más",
+    sim_fc_new:"Food cost resultante: {v}", sim_use_price:"Usar precio sugerido ({p})",
+    sim_cross:"Por encima del umbral ({u} uds.): pasaría a Estrella.", sim_below:"Faltan {u} uds. para el umbral de popularidad ({t} uds.).",
+    sim_cont:"Aporta el {p} del margen", sim_lost:"Margen que dejarías de ingresar: {v}",
+    sim_free:"Retirarlo simplifica la cocina y reduce mermas.", sim_reprice:"Si lo mantienes, el precio para tu food cost objetivo sería {p}.",
+    uds:"uds.",
+    empty_txt:"Todavía no hay análisis. Añade tus platos y pulsa «Calcular análisis», o carga la carta de ejemplo para ver cómo funciona.",
+    btn_go_input:"Ir a platos",
+    foot_note:"Los datos se guardan solo en este navegador.",
+    t_sample:"Carta de ejemplo cargada.", t_import:"{n} platos importados.", t_import_err:"No se ha encontrado ningún plato válido en el archivo.",
+    t_cleared:"Carta vaciada.", t_export:"CSV descargado.", confirm_clear:"¿Vaciar todos los platos de la carta?",
+    confirm_sample:"Se sustituirán tus platos por la carta de ejemplo. ¿Continuar?"
   },
   en: {
-    app_title: "MENU QUERY", step_1: "Dishes", step_2: "Matrix", step_3: "Dashboard", step_4: "Advice",
-    h1_input: "Add your dishes", p_input: "Add each dish with its selling price, production cost, and units sold in the period you want to analyze.",
-    disclaimer: "Attention: This calculation is based on direct gross margin. It does not account for indirect business costs (rent, staff, utilities, etc.).",
-    col_name: "Dish name", col_price: "Selling price", col_cost: "Prod. cost", col_units: "Units sold",
-    btn_add: "Add dish", btn_calc: "Calculate analysis", lbl_added: "dishes added",
-    ph_name: "Ex: Classic Burger",
-    err_num: "All fields must be numbers.", err_zero: "Values must be greater than 0.", err_cost: "Cost cannot be greater than or equal to selling price.",
-    h1_matrix: "Menu Engineering", p_matrix: "Real visualization of each dish using a scatter plot, based on relative popularity and margin.",
-    leg_star_desc: "High profitability and popularity. The heart of your menu. Protect them.",
-    leg_horse_desc: "Popular but low margin. They generate volume. Optimize costs or adjust pricing.",
-    leg_puzz_desc: "Profitable but rarely ordered. Hidden potential to become Stars.",
-    leg_dog_desc: "Low profitability and low sales. Candidates for review or removal.",
-    th_dish: "Dish", th_cat: "Category", th_price: "Price", th_cost: "Cost", th_marg_u: "Unit Margin", th_units: "Units", th_marg_t: "Total Margin", th_pct: "% Menu",
-    lbl_filter: "Filter:", lbl_sort: "Sort by:", btn_all: "All", opt_marg: "Total Margin", opt_units: "Units sold", opt_name: "Name", opt_marg_u: "Unit margin",
-    h1_dash: "Dashboard", p_dash: "Key metrics of your menu with interactive visualizations.",
-    kpi_rev: "Total Revenue", kpi_cost: "Total Costs", kpi_marg: "Gross Margin", kpi_tix: "Average Ticket", kpi_vol: "Total Units Sold", kpi_tot: "Dishes in Menu", kpi_sub: "of revenue",
-    chart_rank: "Interactive Dish Ranking", chart_dist: "Dish Distribution (Count)", chart_comp: "Revenue · Costs · Margin", chart_marg_cont: "Margin Contribution (€)",
-    desc_rank: "Compare the performance of your dishes based on total margin, gross revenue, or units sold.",
-    desc_dist: "Shows the weight of each category in your menu. Ideally, you want few 'Dogs' and a solid core of 'Stars'.",
-    desc_marg_cont: "Illustrates which categories sustain your business. Often, a few dishes generate most of the profit.",
-    desc_comp: "Financial breakdown: visually see what part of the selling price goes to production costs and what remains as actual margin.",
-    tog_marg: "Total Margin", tog_rev: "Revenue", tog_units: "Units Sold",
-    leg_rev: "Revenue", leg_cost: "Production Cost", leg_marg: "Gross Margin", chart_y: "Popularity (Units)", chart_x: "Profitability (Margin €)",
-    h1_adv: "Improvement Advice", p_adv: "Personalized recommendations with interactive economic impact simulators.",
-    adv_star_hd: "Boost your Stars", adv_horse_hd: "Optimize Plowhorses margin", adv_puzz_hd: "Turn Puzzles into Stars", adv_dog_hd: "Review or remove Dogs",
-    sim_obj: "Sales target", sim_inc: "Sales increase", sim_red: "Cost reduction", sim_up: "Price increase",
-    sim_title_star: "Simulator — visibility improvement", sim_title_horse: "Simulator — cost & price optimization", sim_title_puzz: "Simulator — units to become Star", sim_title_dog: "Impact of removal",
-    sim_now: "Current margin:", sim_now_sh: "Now:", sim_ext: "extra", sim_mov: "Move the sliders", sim_free: "Removing it frees up operations and reduces waste.", sim_cont: "Current contribution:",
-    adv_dog_bad: "Critical profitability (Margin: {pct}%). This dish is a significant financial and operational drain. Highly recommend immediate removal.",
-    adv_dog_ok: "Although it's a 'Dog', its percentage margin is salvageable ({pct}%). Consider redesigning it, renaming it, or using it as a loss leader before discarding.",
-    adv_star_top: "Undisputed Star! Its percentage margin is outstanding ({pct}%). Give it top priority, protect the recipe, and feature it in the premium spots on your menu.",
-    adv_star_ok: "Excellent performance with a solid {pct}% margin. Maintain consistency and try creating combos to increase the average ticket.",
-    adv_horse_bad: "Profitability alert! Generates high volume, but its margin is dangerously low ({pct}%). Raising the price, reducing portions, or changing ingredients is urgent.",
-    adv_horse_ok: "Attracts customers and has an acceptable margin ({pct}%), but optimizing costs (leveraging its high volume) will multiply your overall profits.",
-    adv_puzz_top: "Pure hidden gold! Its margin is extremely high ({pct}%), but it barely sells. You must give it maximum visibility on the menu or promote it aggressively.",
-    adv_puzz_ok: "Good margin ({pct}%) but goes unnoticed. Incentivize your front-of-house staff to actively recommend it as the daily special.",
-    empty_matrix: "Enter your dishes and calculate first to view the matrix.", empty_dash: "Enter your dishes and calculate first to view the dashboard.", empty_adv: "Enter your dishes and calculate first to view the advice.",
-    lbl_avg_rent: "Avg Profitability", lbl_avg_pop: "Avg Popularity"
+    dash_title:"Dashboard", kpi_marg_pct:"Margin %", kpi_fc_eq_s:"On target", kpi_fc_over_s:"+{d} pp over target", kpi_fc_under_s:"−{d} pp under target",
+    kpi_price_avg_s:"{v}/dish", pareto_aside:"{n}/{t} dishes = 80 %",
+    fc_aside_n:"{n} dishes above {t}", fc_aside_1:"1 dish above {t}", fc_aside_ok:"All under {t}", chg_title_s:"Category changes",
+    btn_save_period:"Save period", kpi_same:"No change", cmp_lbl:"Compare with", cmp_auto:"Last saved period", cmp_none:"No comparison",
+    vs:"vs {p}", this_period:"This period", no_period:"Untitled ({d})", kpi_price_avg:"Average price per dish: {v}",
+    pareto_title:"Margin concentration", pareto_cum:"Cumulative",
+    pareto_desc:"Total margin per dish, highest first, with the cumulative share. The dashed line marks 80 %.",
+    pareto_stmt:"<b>{n} of {t}</b> dishes generate 80 % of the margin.", pareto_stmt1:"<b>1 of {t}</b> dishes generates 80 % of the margin.",
+    weight_title:"Weight of each category", weight_desc:"How many dishes sit in each category compared with what they sell and the margin they bring.",
+    w_dishes:"Dishes", w_units:"Sales", w_margin:"Margin",
+    fc_title:"Food cost per dish", fc_desc:"Share of the price spent on ingredients. The line marks your target ({t}). Dishes above it are in blue.",
+    fc_over_n:"{n} dishes are above your target food cost.", fc_over_1:"1 dish is above your target food cost.", fc_target_lbl:"TARGET {t}",
+    chg_title:"Changes vs {p}", chg_desc:"Dishes that changed category, new dishes and removed dishes.",
+    chg_new:"New", chg_removed:"Removed", chg_none:"No dish has changed category.",
+    hist_title:"Saved periods", hist_desc:"Save each analysis from the dashboard to compare months or seasons.",
+    hist_empty:"No saved periods yet. Run the analysis, name the period and press “Save period” on the dashboard.",
+    hist_meta:"{n} dishes, saved on {d}", btn_open:"Open", btn_delete:"Delete",
+    t_saved:"Period “{p}” saved.", t_save_stale:"Run the analysis again before saving the period.", t_opened:"Period “{p}” opened.", t_deleted:"Period deleted.",
+    confirm_overwrite:"A period called “{p}” already exists. Replace it?", confirm_open:"Your current dishes will be replaced by “{p}”. Continue?",
+    step_1:"Dishes", step_2:"Matrix", step_3:"Dashboard", step_4:"Advice",
+    eyebrow_1:"01 — Dishes", eyebrow_2:"02 — Matrix", eyebrow_3:"03 — Dashboard", eyebrow_4:"04 — Advice",
+    h1_input:"Add your <span>dishes</span>",
+    p_input:"Enter each dish with its selling price, production cost and units sold in the period you want to analyse.",
+    disclaimer:"The calculation uses direct gross margin. It does not include indirect costs such as rent, staff or utilities.",
+    set_period:"Period analysed", ph_period:"E.g. October 2026",
+    set_method:"Classification method", m_simple:"Simple average", m_ks:"Kasavana & Smith (70 % rule)",
+    hint_simple:"Compares each dish with the menu's average margin and average sales.",
+    hint_ks:"Sales-weighted average margin. A dish is popular if it reaches 70 % of its expected share.",
+    set_target:"Target food cost", set_target_hint:"Share of the price you want to spend on ingredients. Used to suggest prices.",
+    btn_sample:"Load example", btn_import:"Import CSV", btn_export:"Export CSV", btn_clear:"Clear menu",
+    col_name:"Dish", col_section:"Section", col_price:"Price", col_cost:"Cost", col_units:"Units", col_margin:"Unit margin", col_fc:"Food cost",
+    ph_name:"E.g. classic burger", ph_section:"E.g. mains",
+    btn_add:"Add dish", btn_calc:"Run analysis", a_dup:"Duplicate dish", a_del:"Delete dish",
+    tot_dishes:"Dishes", tot_rev:"Revenue", tot_margin:"Total margin", tot_fc:"Average food cost",
+    err_none:"Add at least one dish with a name.",
+    err_num:"“{n}”: price, cost and units must be numbers.",
+    err_zero:"“{n}”: price, cost and units must be greater than 0.",
+    err_cost:"“{n}”: cost must be lower than price.",
+    err_target:"Target food cost must be between 1 and 99 %.",
+    h1_matrix:"Menu <span>engineering</span>",
+    p_matrix:"Each dish is placed by popularity and unit margin. The lines mark the thresholds that split the four categories.",
+    cat_star:"Star", cat_horse:"Plowhorse", cat_puzzle:"Puzzle", cat_dog:"Dog",
+    cat_star_pl:"Stars", cat_horse_pl:"Plowhorses", cat_puzzle_pl:"Puzzles", cat_dog_pl:"Dogs",
+    leg_star_desc:"High margin and high popularity. The core of your menu: protect them.",
+    leg_horse_desc:"They sell a lot but leave little margin. Adjust cost or price.",
+    leg_puzzle_desc:"Good margin but few sales. They can become Stars.",
+    leg_dog_desc:"Low margin and low sales. Review them or take them off the menu.",
+    scope_lbl:"Section analysed", scope_all:"Whole menu",
+    chip_sample:"Example data", chip_method_simple:"Simple average", chip_method_ks:"Kasavana & Smith",
+    stale_msg:"You have changed the menu since the last analysis.", btn_recalc:"Run again",
+    sample_flag:"Chart with example data.",
+    thr_margin:"Margin threshold", thr_units:"Popularity threshold",
+    ax_x:"Popularity (units sold)", ax_y:"Unit margin (€)",
+    tbl_title:"Dish classification", tbl_desc:"Hover a row to find the dish on the matrix.",
+    th_dish:"Dish", th_section:"Section", th_cat:"Category", th_price:"Price", th_cost:"Cost", th_fc:"Food cost",
+    th_marg_u:"Unit margin", th_units:"Units", th_mix:"Mix", th_marg_t:"Total margin", th_pct:"% margin",
+    ph_search:"Search dish", btn_all:"All", lbl_sort:"Sort by",
+    opt_marg:"Total margin", opt_units:"Units sold", opt_name:"Name", opt_marg_u:"Unit margin", opt_fc:"Food cost",
+    tbl_none:"No dish matches the filter.",
+    h1_dash:"Menu <span>metrics</span>",
+    p_dash:"Revenue, costs and margin of your menu, and which dishes carry the profit.",
+    kpi_rev:"Revenue", kpi_cost:"Production costs", kpi_marg:"Gross margin", kpi_fc:"Average food cost",
+    kpi_tix:"Average price per dish", kpi_vol:"Units sold", kpi_sub:"{p} of revenue",
+    kpi_fc_over:"▲ +{d} pp above your target ({t})", kpi_fc_under:"▼ −{d} pp below your target ({t})", kpi_fc_eq:"On your target ({t})",
+    kpi_dishes:"{n} dishes in the analysis",
+    pareto_txt:"{n} of {t} dishes generate 80 % of the margin.", pareto_txt1:"1 of {t} dishes generates 80 % of the margin.",
+    chart_rank:"Dish ranking", desc_rank:"Compare your dishes by total margin, revenue or units sold.",
+    tog_marg:"Total margin", tog_rev:"Revenue", tog_units:"Units sold",
+    chart_dist:"Dishes per category", desc_dist:"How many dishes sit in each quadrant. Aim for few Dogs and a solid core of Stars.",
+    chart_marg_cont:"Margin per category", desc_marg_cont:"Which categories carry the profit. Often a few dishes produce almost all of it.",
+    chart_comp:"Cost and margin per dish", desc_comp:"How much of each dish's revenue goes to production and how much remains as margin. Cost + margin = revenue.",
+    leg_rev:"Revenue", leg_cost:"Production cost", leg_marg:"Gross margin",
+    h1_adv:"Improvement <span>advice</span>",
+    p_adv:"Concrete actions for each dish, sorted by impact, with simulators to test price, cost and sales changes.",
+    plan_title:"Action plan", plan_desc:"The three actions with the highest estimated impact on the period's margin.",
+    plan_foot:"Estimates assume the same units sold unless the action is to sell more. Price changes can affect demand.",
+    plan_none:"No action has a clear positive impact. Check each dish's simulator.",
+    act_star:"Give it the most visible spot on the menu to sell 10 % more.",
+    act_price:"Raise the price to {p} to reach your target food cost.",
+    act_cost:"Cut the recipe cost by 10 %.",
+    act_puzzle:"Sell {u} more units to cross the popularity threshold.",
+    adv_star_hd:"Boost your Stars", adv_horse_hd:"Improve your Plowhorses' margin",
+    adv_puzzle_hd:"Turn your Puzzles into Stars", adv_dog_hd:"Review or remove your Dogs",
+    adv_star_top:"{pct} margin. One of your strongest dishes: keep the recipe and give it the most visible spot on the menu.",
+    adv_star_ok:"{pct} margin. Keep it consistent and try it in combos to raise the average ticket.",
+    adv_horse_bad:"It sells a lot, but its margin is {pct}. Raising the price, adjusting the portion or changing ingredients pays off fast at this volume.",
+    adv_horse_ok:"It draws customers with an acceptable margin ({pct}). At this volume any cost saving multiplies.",
+    adv_puzzle_top:"{pct} margin, but it sells little. Make it more visible and ask front-of-house staff to recommend it.",
+    adv_puzzle_ok:"{pct} margin, but it goes unnoticed. Try offering it as the daily special.",
+    adv_dog_bad:"{pct} margin and few sales. It takes menu and kitchen space without paying back: removing it is the clearest option.",
+    adv_dog_ok:"{pct} margin, worth saving. Before removing it, try redesigning, renaming or moving it.",
+    m_chip_margin:"Unit margin {v}", m_chip_fc:"Food cost {v}", m_chip_units:"{v} units",
+    sim_title_star:"Visibility simulator", sim_title_horse:"Cost and price simulator",
+    sim_title_puzzle:"Sales simulator", sim_title_dog:"Impact of removing it",
+    sim_inc:"Sales increase", sim_red:"Cost reduction", sim_up:"Price increase", sim_obj:"Sales target",
+    sim_now:"Current margin", sim_after:"With the change", sim_ext:"more",
+    sim_fc_new:"Resulting food cost: {v}", sim_use_price:"Use suggested price ({p})",
+    sim_cross:"Above the threshold ({u} units): it would become a Star.", sim_below:"{u} more units to reach the popularity threshold ({t} units).",
+    sim_cont:"Contributes {p} of margin", sim_lost:"Margin you would stop earning: {v}",
+    sim_free:"Removing it simplifies the kitchen and cuts waste.", sim_reprice:"If you keep it, the price for your target food cost would be {p}.",
+    uds:"units",
+    empty_txt:"No analysis yet. Add your dishes and press “Run analysis”, or load the example menu to see how it works.",
+    btn_go_input:"Go to dishes",
+    foot_note:"Your data is stored only in this browser.",
+    t_sample:"Example menu loaded.", t_import:"{n} dishes imported.", t_import_err:"No valid dish found in the file.",
+    t_cleared:"Menu cleared.", t_export:"CSV downloaded.", confirm_clear:"Clear every dish from the menu?",
+    confirm_sample:"Your dishes will be replaced by the example menu. Continue?"
   }
 };
-const t = (k) => dict[currentLang][k] || k;
 
-let results = [];
+/* ════════════════ ESTADO ════════════════ */
+const LS_KEY = 'menuquery:v2';
+const CATS = ['star','horse','puzzle','dog'];
+const CLR = { star:'#ffca2c', horse:'#ff5757', puzzle:'#546fff', dog:'#6dbd8d' };
+// Versión oscura de cada color para texto sobre fondo claro
+const CLR_TXT = { star:'#a87f00', horse:'#d94343', puzzle:'#3e55c7', dog:'#3f8a5e' };
+
+let lang = 'es';
+let dishes = [];            // datos tal y como se escriben
+let settings = { period:'', method:'simple', target:'30' };
+let isSample = false;
+let analysis = null;        // filas validadas del último cálculo
+let view = null;            // clasificación del ámbito actual
+let scope = 'all';
+let stale = false;
 let charts = {};
-let dashView = 'margin'; // margin | revenue | units
-let tableFilter = 'all';
-let tableSort = 'margin';
+let nextId = 1;
+let dashView = 'margin', tableFilter = 'all', tableSort = 'margin', tableQuery = '';
+let simData = {};
 
-Chart.defaults.font.family = 'Inter, sans-serif';
-Chart.defaults.color = '#52525B';
+const t = (k, vars) => {
+  let s = (dict[lang] && dict[lang][k]) || dict.es[k] || k;
+  if (vars) Object.keys(vars).forEach(v => { s = s.split('{'+v+'}').join(vars[v]); });
+  return s;
+};
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-function toggleLang() {
-  currentLang = currentLang === 'es' ? 'en' : 'es';
-  document.getElementById('langBtn').textContent = currentLang === 'es' ? 'EN' : 'ES';
-  updateStaticLang();
-  if (results.length > 0) { renderMatrix(); renderDash(); renderAdvice(); }
+/* ════════════════ FORMATO ════════════════ */
+function fmt(n, d = 0) {
+  if (!isFinite(n)) return '—';
+  const neg = n < 0;
+  let [i, f] = Math.abs(n).toFixed(d).split('.');
+  i = i.replace(/\B(?=(\d{3})+(?!\d))/g, lang === 'es' ? '.' : ',');
+  return (neg ? '−' : '') + i + (f ? (lang === 'es' ? ',' : '.') + f : '');
+}
+const fmtEur = (n, d = 2) => lang === 'es' ? fmt(n, d) + ' €' : (n < 0 ? '−€' + fmt(-n, d) : '€' + fmt(n, d));
+const fmtPct = (n, d = 1) => lang === 'es' ? fmt(n, d) + ' %' : fmt(n, d) + '%';
+function parseNum(v) {
+  if (v === null || v === undefined) return NaN;
+  let s = String(v).trim().replace(/\s|€|%/g, '');
+  if (!s) return NaN;
+  if (s.includes(',')) s = s.replace(/\./g, '').replace(',', '.');
+  return Number(s);
 }
 
-function updateStaticLang() {
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (dict[currentLang][key]) {
-      if(el.tagName === 'INPUT' && el.hasAttribute('placeholder')) el.placeholder = dict[currentLang][key];
-      else el.innerHTML = dict[currentLang][key];
+/* ════════════════ ICONOS ════════════════ */
+const ICONS = {
+  copy:'<rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+  x:'<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>'
+};
+const icon = n => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+
+/* ════════════════ GUARDADO ════════════════ */
+function save() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify({ dishes, settings, isSample, lang })); } catch (e) {}
+}
+function load() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return false;
+    const d = JSON.parse(raw);
+    if (Array.isArray(d.dishes)) {
+      dishes = d.dishes.map(x => ({ id: nextId++, name:x.name||'', section:x.section||'', price:x.price||'', cost:x.cost||'', units:x.units||'' }));
     }
+    if (d.settings) settings = Object.assign(settings, d.settings);
+    isSample = !!d.isSample;
+    if (d.lang === 'en' || d.lang === 'es') lang = d.lang;
+    return dishes.length > 0;
+  } catch (e) { return false; }
+}
+
+/* ════════════════ IDIOMA ════════════════ */
+function toggleLang() {
+  lang = lang === 'es' ? 'en' : 'es';
+  save();
+  applyLang();
+  renderDishList();
+  renderHistory();
+  if (analysis) renderAll();
+  else renderEmpty();
+}
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.getElementById('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (dict[lang][k]) el.innerHTML = dict[lang][k];
   });
+  document.getElementById('setPeriod').placeholder = t('ph_period');
+  document.getElementById('methodHint').textContent = t(settings.method === 'ks' ? 'hint_ks' : 'hint_simple');
 }
 
-function getCat() {
-  return {
-    star:   { label: currentLang==='es'?'Estrella':'Star', icon:'⭐', clr:'#ffca2c', chip:'chip-star', badge:'badge-star', leg:'leg-star' },
-    horse:  { label: currentLang==='es'?'Caballo':'Plowhorse', icon:'🐴', clr:'#ff5757', chip:'chip-horse', badge:'badge-horse', leg:'leg-horse' },
-    puzzle: { label: currentLang==='es'?'Puzzle':'Puzzle', icon:'🧩', clr:'#546fff', chip:'chip-puzzle', badge:'badge-puzzle', leg:'leg-puzzle' },
-    dog:    { label: currentLang==='es'?'Perro':'Dog', icon:'🐶', clr:'#6dbd8d', chip:'chip-dog', badge:'badge-dog', leg:'leg-dog' },
-  };
-}
-
-// THE MISSING goTab FUNCTION IS HERE
-function goTab(name, btn) {
+/* ════════════════ NAVEGACIÓN ════════════════ */
+function goTab(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.getElementById('panel-' + name).classList.add('active');
-  btn.classList.add('active');
+  document.body.classList.toggle('dash-mode', name === 'dash');
+  window.scrollTo({ top: 0 });
+  // Chart.js necesita redimensionar cuando el panel pasa a ser visible
+  requestAnimationFrame(() => Object.values(charts).forEach(c => { try { c.resize(); } catch (e) {} }));
 }
 
-let rowId = 0;
-function addDish() {
-  const id = ++rowId;
-  const grid = document.getElementById('dishGrid');
-  const div = document.createElement('div');
-  div.className = 'dish-row';
-  div.dataset.id = id;
-  div.innerHTML = `
-    <div class="field">
-      <span class="field-lbl" data-i18n="col_name">${t('col_name')}</span>
-      <input type="text" data-i18n="ph_name" placeholder="${t('ph_name')}" oninput="updateCount()">
-    </div>
-    <div class="field">
-      <span class="field-lbl" data-i18n="col_price">${t('col_price')}</span>
-      <input type="number" min="0" step="0.01" placeholder="12.50">
-    </div>
-    <div class="field">
-      <span class="field-lbl" data-i18n="col_cost">${t('col_cost')}</span>
-      <input type="number" min="0" step="0.01" placeholder="3.20">
-    </div>
-    <div class="field">
-      <span class="field-lbl" data-i18n="col_units">${t('col_units')}</span>
-      <input type="number" min="0" step="1" placeholder="250">
-    </div>
-    <button class="del-btn" onclick="delDish(${id})" aria-label="Eliminar">
-      <i class="ti ti-x"></i>
-    </button>`;
-  grid.appendChild(div);
-  updateCount();
+/* ════════════════ AJUSTES ════════════════ */
+function setSetting(k, v) {
+  settings[k] = v;
+  if (k === 'method') document.getElementById('methodHint').textContent = t(v === 'ks' ? 'hint_ks' : 'hint_simple');
+  save();
+  if (k === 'target') { refreshAllRowPreviews(); }
+  if (analysis && (k === 'method' || k === 'target')) {
+    const tg = parseNum(settings.target);
+    if (k === 'target' && !(tg > 0 && tg < 100)) return;
+    renderAll();
+  } else if (analysis && k === 'period') {
+    renderAll();
+  }
+}
+function targetFC() {
+  const v = parseNum(settings.target);
+  return v > 0 && v < 100 ? v / 100 : 0.3;
 }
 
+/* ════════════════ LISTA DE PLATOS ════════════════ */
+function newDish(o = {}) {
+  return { id: nextId++, name:o.name||'', section:o.section||'', price:o.price??'', cost:o.cost??'', units:o.units??'' };
+}
+function addDish(focus) {
+  const last = dishes[dishes.length - 1];
+  dishes.push(newDish({ section: last ? last.section : '' }));
+  markChanged();
+  renderDishList();
+  if (focus) {
+    const rows = document.querySelectorAll('.dish-row');
+    const inp = rows[rows.length - 1]?.querySelector('input');
+    if (inp) inp.focus();
+  }
+}
+function dupDish(id) {
+  const i = dishes.findIndex(d => d.id === id);
+  if (i < 0) return;
+  const copy = newDish(dishes[i]);
+  copy.name = dishes[i].name ? dishes[i].name + (lang === 'es' ? ' (copia)' : ' (copy)') : '';
+  dishes.splice(i + 1, 0, copy);
+  markChanged();
+  renderDishList();
+}
 function delDish(id) {
-  const el = document.querySelector(`.dish-row[data-id="${id}"]`);
-  if (el) { el.remove(); updateCount(); }
+  dishes = dishes.filter(d => d.id !== id);
+  if (!dishes.length) dishes.push(newDish());
+  markChanged();
+  renderDishList();
+}
+function editDish(id, field, value) {
+  const d = dishes.find(x => x.id === id);
+  if (!d) return;
+  d[field] = value;
+  markChanged();
+  updateRowPreview(id);
+  updateTotals();
+  if (field === 'section') updateSectionList();
+}
+function markChanged() {
+  isSample = false;
+  if (analysis) { stale = true; showStale(); }
+  save();
 }
 
-function updateCount() {
-  const rows = document.querySelectorAll('.dish-row');
-  const filled = Array.from(rows).filter(r => r.querySelector('input').value.trim()).length;
-  document.getElementById('countNum').textContent = filled;
+function parsedDish(d) {
+  return { id:d.id, name:String(d.name).trim(), section:String(d.section).trim(),
+           price:parseNum(d.price), cost:parseNum(d.cost), units:parseNum(d.units) };
 }
 
-function getRows() {
-  return Array.from(document.querySelectorAll('.dish-row')).map(div => {
-    const inputs = div.querySelectorAll('input');
-    return {
-      name:  inputs[0].value.trim(),
-      price: parseFloat(inputs[1].value),
-      cost:  parseFloat(inputs[2].value),
-      units: parseInt(inputs[3].value)
-    };
+function renderDishList() {
+  const g = document.getElementById('dishGrid');
+  g.innerHTML = dishes.map(d => `
+    <div class="dish-row dl-grid" data-id="${d.id}">
+      <div class="cell"><span class="m-lbl">${t('col_name')}</span>
+        <input type="text" value="${esc(d.name)}" placeholder="${esc(t('ph_name'))}" aria-label="${esc(t('col_name'))}"
+          oninput="editDish(${d.id},'name',this.value)"></div>
+      <div class="cell"><span class="m-lbl">${t('col_section')}</span>
+        <input type="text" list="sectionList" value="${esc(d.section)}" placeholder="${esc(t('ph_section'))}" aria-label="${esc(t('col_section'))}"
+          oninput="editDish(${d.id},'section',this.value)"></div>
+      <div class="cell"><span class="m-lbl">${t('col_price')} (€)</span>
+        <input class="num" type="text" inputmode="decimal" value="${esc(d.price)}" placeholder="12,50" aria-label="${esc(t('col_price'))}"
+          oninput="editDish(${d.id},'price',this.value)"></div>
+      <div class="cell"><span class="m-lbl">${t('col_cost')} (€)</span>
+        <input class="num" type="text" inputmode="decimal" value="${esc(d.cost)}" placeholder="3,20" aria-label="${esc(t('col_cost'))}"
+          oninput="editDish(${d.id},'cost',this.value)"></div>
+      <div class="cell"><span class="m-lbl">${t('col_units')}</span>
+        <input class="num" type="text" inputmode="numeric" value="${esc(d.units)}" placeholder="250" aria-label="${esc(t('col_units'))}"
+          oninput="editDish(${d.id},'units',this.value)"></div>
+      <div class="cell"><span class="m-lbl">${t('col_margin')}</span><span class="out" data-out="margin"></span></div>
+      <div class="cell"><span class="m-lbl">${t('col_fc')}</span><span class="out" data-out="fc"></span></div>
+      <div class="row-actions">
+        <button class="icon-btn" onclick="dupDish(${d.id})" title="${esc(t('a_dup'))}" aria-label="${esc(t('a_dup'))}">${icon('copy')}</button>
+        <button class="icon-btn del" onclick="delDish(${d.id})" title="${esc(t('a_del'))}" aria-label="${esc(t('a_del'))}">${icon('x')}</button>
+      </div>
+    </div>`).join('');
+  refreshAllRowPreviews();
+  updateTotals();
+  updateSectionList();
+}
+function refreshAllRowPreviews() { dishes.forEach(d => updateRowPreview(d.id)); }
+function updateRowPreview(id) {
+  const row = document.querySelector(`.dish-row[data-id="${id}"]`);
+  const d = dishes.find(x => x.id === id);
+  if (!row || !d) return;
+  const p = parsedDish(d);
+  const mEl = row.querySelector('[data-out="margin"]'), fEl = row.querySelector('[data-out="fc"]');
+  if (p.price > 0 && p.cost >= 0 && isFinite(p.cost)) {
+    const m = p.price - p.cost, fc = p.cost / p.price;
+    mEl.textContent = fmtEur(m);
+    mEl.className = 'out' + (m <= 0 ? ' bad' : '');
+    fEl.textContent = fmtPct(fc * 100);
+    fEl.className = 'out' + (fc >= 1 ? ' bad' : fc > targetFC() ? ' warn' : '');
+  } else {
+    mEl.textContent = '—'; mEl.className = 'out muted';
+    fEl.textContent = '—'; fEl.className = 'out muted';
+  }
+  row.classList.remove('invalid');
+}
+function updateTotals() {
+  const ok = dishes.map(parsedDish).filter(p => p.name && p.price > 0 && p.cost >= 0 && p.units > 0);
+  const rev = ok.reduce((a, p) => a + p.price * p.units, 0);
+  const cost = ok.reduce((a, p) => a + p.cost * p.units, 0);
+  const named = dishes.filter(d => String(d.name).trim()).length;
+  document.getElementById('dishTotals').innerHTML = `
+    <div class="tot"><span class="tot-lbl">${t('tot_dishes')}</span><span class="tot-val">${fmt(named)}</span></div>
+    <div class="tot"><span class="tot-lbl">${t('tot_rev')}</span><span class="tot-val">${ok.length ? fmtEur(rev) : '—'}</span></div>
+    <div class="tot"><span class="tot-lbl">${t('tot_margin')}</span><span class="tot-val">${ok.length ? fmtEur(rev - cost) : '—'}</span></div>
+    <div class="tot"><span class="tot-lbl">${t('tot_fc')}</span><span class="tot-val">${rev > 0 ? fmtPct(cost / rev * 100) : '—'}</span></div>`;
+}
+function updateSectionList() {
+  const base = lang === 'es' ? ['Entrantes','Principales','Postres','Bebidas'] : ['Starters','Mains','Desserts','Drinks'];
+  const used = dishes.map(d => String(d.section).trim()).filter(Boolean);
+  const all = [...new Set([...used, ...base])];
+  document.getElementById('sectionList').innerHTML = all.map(s => `<option value="${esc(s)}">`).join('');
+}
+
+/* ════════════════ DATOS: EJEMPLO, CSV, VACIAR ════════════════ */
+const SAMPLE = {
+  es: [
+    ['Croquetas de jamón','Entrantes','9,50','2,40','420'],
+    ['Ensalada de burrata','Entrantes','13,00','4,60','180'],
+    ['Pulpo a la brasa','Entrantes','19,50','7,90','140'],
+    ['Patatas bravas','Entrantes','7,00','1,30','510'],
+    ['Hamburguesa de la casa','Principales','15,50','5,80','460'],
+    ['Arroz meloso de setas','Principales','17,00','4,10','150'],
+    ['Lomo bajo madurado','Principales','26,00','11,20','210'],
+    ['Merluza en salsa verde','Principales','21,00','8,90','95'],
+    ['Tarta de queso','Postres','6,50','1,60','390'],
+    ['Coulant de chocolate','Postres','7,00','1,90','120'],
+    ['Fruta de temporada','Postres','5,00','1,70','60']
+  ],
+  en: [
+    ['Ham croquettes','Starters','9.50','2.40','420'],
+    ['Burrata salad','Starters','13.00','4.60','180'],
+    ['Grilled octopus','Starters','19.50','7.90','140'],
+    ['Patatas bravas','Starters','7.00','1.30','510'],
+    ['House burger','Mains','15.50','5.80','460'],
+    ['Creamy mushroom rice','Mains','17.00','4.10','150'],
+    ['Aged sirloin','Mains','26.00','11.20','210'],
+    ['Hake in green sauce','Mains','21.00','8.90','95'],
+    ['Cheesecake','Desserts','6.50','1.60','390'],
+    ['Chocolate coulant','Desserts','7.00','1.90','120'],
+    ['Seasonal fruit','Desserts','5.00','1.70','60']
+  ]
+};
+function hasUserData() { return dishes.some(d => String(d.name).trim()); }
+function loadSample() {
+  if (hasUserData() && !isSample && !confirm(t('confirm_sample'))) return;
+  dishes = SAMPLE[lang].map(r => newDish({ name:r[0], section:r[1], price:r[2], cost:r[3], units:r[4] }));
+  renderDishList();
+  isSample = true;
+  save();
+  toast(t('t_sample'));
+  calculate();
+}
+function clearAll() {
+  if (hasUserData() && !confirm(t('confirm_clear'))) return;
+  dishes = [newDish()];
+  isSample = false;
+  analysis = null; view = null; stale = false; scope = 'all';
+  destroyCharts();
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('done'));
+  renderDishList();
+  renderEmpty();
+  save();
+  toast(t('t_cleared'));
+}
+
+function splitCSVLine(line, sep) {
+  const out = []; let cur = '', q = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { if (q && line[i+1] === '"') { cur += '"'; i++; } else q = !q; }
+    else if (c === sep && !q) { out.push(cur); cur = ''; }
+    else cur += c;
+  }
+  out.push(cur);
+  return out.map(s => s.trim());
+}
+function importCSV(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = String(e.target.result).replace(/^\uFEFF/, '');
+    const lines = text.split(/\r?\n/).filter(l => l.trim());
+    if (!lines.length) { toast(t('t_import_err')); return; }
+    const sep = lines[0].includes(';') ? ';' : lines[0].includes('\t') ? '\t' : ',';
+    const parsed = [];
+    lines.forEach(l => {
+      const c = splitCSVLine(l, sep);
+      let row = null;
+      if (c.length >= 5) row = { name:c[0], section:c[1], price:c[2], cost:c[3], units:c[4] };
+      else if (c.length === 4) row = { name:c[0], section:'', price:c[1], cost:c[2], units:c[3] };
+      // Con coma como separador los decimales vienen con punto
+      if (row && sep === ',') ['price','cost','units'].forEach(k => row[k] = String(row[k]).replace(',', '.'));
+      if (row && row.name && isFinite(parseNum(row.price))) parsed.push(row);
+    });
+    if (!parsed.length) { toast(t('t_import_err')); input.value = ''; return; }
+    const onlyEmpty = !hasUserData() || isSample;
+    const newRows = parsed.map(r => newDish(r));
+    dishes = onlyEmpty ? newRows : dishes.filter(d => String(d.name).trim()).concat(newRows);
+    markChanged();
+    renderDishList();
+    toast(t('t_import', { n: parsed.length }));
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+function csvCell(v) {
+  const s = String(v ?? '');
+  return /[;"\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function exportCSV() {
+  const num = (n, d = 2) => isFinite(n) ? n.toFixed(d).replace('.', ',') : '';
+  let rows;
+  rows = [[t('th_dish'), t('th_section'), t('th_price'), t('th_cost'), t('th_units')]];
+  dishes.filter(d => String(d.name).trim()).forEach(d => {
+    const p = parsedDish(d);
+    rows.push([p.name, p.section, num(p.price), num(p.cost), isFinite(p.units) ? p.units : '']);
   });
+  const csv = '\uFEFF' + rows.map(r => r.map(csvCell).join(';')).join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'menu-query' + (settings.period ? '-' + settings.period.toLowerCase().replace(/[^a-z0-9áéíóúñ]+/gi, '-') : '') + '.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast(t('t_export'));
 }
 
-function showErr(msg) {
-  document.getElementById('errTxt').textContent = msg;
-  document.getElementById('errMsg').style.display = msg ? 'flex' : 'none';
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+/* ════════════════ CÁLCULO ════════════════ */
+function showErr(msg, id) {
+  const box = document.getElementById('errMsg');
+  document.getElementById('errTxt').textContent = msg || '';
+  box.classList.toggle('show', !!msg);
+  document.querySelectorAll('.dish-row.invalid').forEach(r => r.classList.remove('invalid'));
+  if (id) {
+    const row = document.querySelector(`.dish-row[data-id="${id}"]`);
+    if (row) { row.classList.add('invalid'); row.scrollIntoView({ block:'center', behavior:'smooth' }); }
+  }
 }
 
 function calculate() {
   showErr('');
-  const rows = getRows().filter(r => r.name);
-
-  if (!rows.length) { showErr(currentLang==='es' ? 'Añade al menos un plato.' : 'Add at least one dish.'); return; }
-
+  const tg = parseNum(settings.target);
+  if (!(tg > 0 && tg < 100)) { showErr(t('err_target')); return; }
+  const rows = dishes.map(parsedDish).filter(r => r.name);
+  if (!rows.length) { showErr(t('err_none')); return; }
   for (const r of rows) {
-    if (isNaN(r.price) || isNaN(r.cost) || isNaN(r.units)) {
-      showErr(`"${r.name}": ${t('err_num')}`); return;
-    }
-    if (r.price <= 0 || r.cost <= 0 || r.units <= 0) { 
-      showErr(`"${r.name}": ${t('err_zero')}`); return; 
-    }
-    if (r.cost >= r.price) {
-      showErr(`"${r.name}": ${t('err_cost')}`); return;
-    }
+    if (isNaN(r.price) || isNaN(r.cost) || isNaN(r.units)) { showErr(t('err_num', { n: r.name }), r.id); return; }
+    if (r.price <= 0 || r.cost <= 0 || r.units <= 0) { showErr(t('err_zero', { n: r.name }), r.id); return; }
+    if (r.cost >= r.price) { showErr(t('err_cost', { n: r.name }), r.id); return; }
   }
-
-  const avgMargin = rows.reduce((a, r) => a + (r.price - r.cost), 0) / rows.length;
-  const avgUnits  = rows.reduce((a, r) => a + r.units, 0) / rows.length;
-
-  results = rows.map(r => {
-    const margin = r.price - r.cost;
-    const cat = (margin >= avgMargin ? 'h' : 'l') + (r.units >= avgUnits ? 'H' : 'L');
-    const catKey = { hH:'star', lH:'horse', hL:'puzzle', lL:'dog' }[cat];
-    return {
-      ...r,
-      margin,
-      totalMargin:  margin * r.units,
-      totalRevenue: r.price * r.units,
-      totalCost:    r.cost  * r.units,
-      cat: catKey
-    };
-  });
-
+  analysis = rows;
+  stale = false;
+  const secs = sections();
+  if (scope !== 'all' && !secs.includes(scope)) scope = 'all';
   document.querySelectorAll('.step-btn').forEach(b => b.classList.add('done'));
+  renderAll();
+  goTab('matrix');
+}
 
+function sections() {
+  if (!analysis) return [];
+  return [...new Set(analysis.map(r => r.section).filter(Boolean))];
+}
+
+function classify(rows) {
+  const n = rows.length;
+  const U = rows.reduce((a, r) => a + r.units, 0);
+  const base = rows.map(r => {
+    const margin = r.price - r.cost;
+    return { ...r, margin, totalMargin: margin * r.units, totalRevenue: r.price * r.units,
+             totalCost: r.cost * r.units, fc: r.cost / r.price, mix: U ? r.units / U : 0 };
+  });
+  const M = base.reduce((a, r) => a + r.totalMargin, 0);
+  let mThr, uThr;
+  if (settings.method === 'ks') { mThr = M / U; uThr = (U / n) * 0.7; }
+  else { mThr = base.reduce((a, r) => a + r.margin, 0) / n; uThr = U / n; }
+  const out = base.map(r => {
+    const hiM = r.margin >= mThr, hiU = r.units >= uThr;
+    return { ...r, cat: hiM && hiU ? 'star' : !hiM && hiU ? 'horse' : hiM ? 'puzzle' : 'dog' };
+  });
+  const R = out.reduce((a, r) => a + r.totalRevenue, 0);
+  const C = out.reduce((a, r) => a + r.totalCost, 0);
+  return { rows: out, mThr, uThr, U, M, R, C, n };
+}
+
+function renderAll() {
+  if (!analysis) { renderEmpty(); return; }
+  const rows = scope === 'all' ? analysis : analysis.filter(r => r.section === scope);
+  view = classify(rows.length ? rows : analysis);
+  simData = {};
+  view.rows.forEach(r => simData[r.id] = r);
   renderMatrix();
   renderDash();
   renderAdvice();
-  document.querySelectorAll('.step-btn')[1].click(); // Switches to Matrix panel
+}
+function setScope(s) { scope = s; renderAll(); }
+
+function destroyCharts() {
+  Object.values(charts).forEach(c => { try { c.destroy(); } catch (e) {} });
+  charts = {};
 }
 
-const fmt = (n, d=0) => n.toLocaleString(currentLang==='es'?'es-ES':'en-US', {minimumFractionDigits:d, maximumFractionDigits:d});
-const fmtEur = n => fmt(n, 2) + ' €';
+/* ════════════════ PIEZAS COMUNES ════════════════ */
+function emptyHTML() {
+  return `<div class="empty">
+    <p>${t('empty_txt')}</p>
+    <div class="acts">
+      <button class="btn" onclick="goTab('input')">${t('btn_go_input')}</button>
+      <button class="btn btn-quiet" onclick="loadSample()">${t('btn_sample')}</button>
+    </div></div>`;
+}
+function renderEmpty() {
+  ['matrixContent','dashContent','adviceContent'].forEach(id => document.getElementById(id).innerHTML = emptyHTML());
+}
+function catChip(k) { return `<span class="chip"><span class="dot d-${k}"></span>${t('cat_' + k)}</span>`; }
 
+function toolbar() {
+  const secs = sections();
+  const scopeHTML = secs.length > 1 ? `
+    <div>
+      <span class="ctrl-lbl">${t('scope_lbl')}</span>
+      <div class="seg">
+        <button class="seg-btn ${scope === 'all' ? 'on' : ''}" onclick="setScope('all')">${t('scope_all')}</button>
+        ${secs.map(s => `<button class="seg-btn ${scope === s ? 'on' : ''}" onclick="setScope(decodeURIComponent('${encodeURIComponent(s)}'))">${esc(s)}</button>`).join('')}
+      </div>
+    </div>` : '<div></div>';
+  const meta = [];
+  if (settings.period.trim()) meta.push(`<span class="chip">${esc(settings.period.trim())}</span>`);
+  meta.push(`<span class="chip">${t(settings.method === 'ks' ? 'chip_method_ks' : 'chip_method_simple')}</span>`);
+  if (isSample) meta.push(`<span class="chip">${t('chip_sample')}</span>`);
+  return `<div class="toolbar">${scopeHTML}<div class="meta">${meta.join('')}</div></div>
+    <div class="stale-slot">${stale ? staleHTML() : ''}</div>`;
+}
+function staleHTML() {
+  return `<div class="stale no-print"><span>${t('stale_msg')}</span><button class="btn btn-sm" onclick="calculate()">${t('btn_recalc')}</button></div>`;
+}
+function showStale() {
+  document.querySelectorAll('.stale-slot').forEach(s => s.innerHTML = staleHTML());
+}
+
+/* ════════════════ PANEL 2: MATRIZ ════════════════ */
 function renderMatrix() {
-  const CAT = getCat();
-  const cats = { star:[], horse:[], puzzle:[], dog:[] };
-  results.forEach(r => cats[r.cat].push(r));
+  const counts = { star:0, horse:0, puzzle:0, dog:0 };
+  view.rows.forEach(r => counts[r.cat]++);
+  const order = ['star','puzzle','horse','dog'];
 
-  let html = `
-  <div class="scatter-wrap">
-    <canvas id="matrixScatterChart" role="img"></canvas>
+  document.getElementById('matrixContent').innerHTML = `
+  ${toolbar()}
+  <div class="card scatter-card">
+    <div class="scatter-wrap"><canvas id="matrixScatterChart" role="img" aria-label="${esc(t('h1_matrix').replace(/<[^>]+>/g,''))}"></canvas></div>
+    ${isSample ? `<p class="sample-flag">${t('sample_flag')}</p>` : ''}
   </div>
 
   <div class="legend-row">
-    <div class="leg leg-star">
-      <div class="leg-name">⭐ ${CAT.star.label}</div>
-      <div class="leg-desc">${t('leg_star_desc')}</div>
-    </div>
-    <div class="leg leg-puzzle">
-      <div class="leg-name">🧩 ${CAT.puzzle.label}</div>
-      <div class="leg-desc">${t('leg_puzz_desc')}</div>
-    </div>
-    <div class="leg leg-horse">
-      <div class="leg-name">🐴 ${CAT.horse.label}</div>
-      <div class="leg-desc">${t('leg_horse_desc')}</div>
-    </div>
-    <div class="leg leg-dog">
-      <div class="leg-name">🐶 ${CAT.dog.label}</div>
-      <div class="leg-desc">${t('leg_dog_desc')}</div>
-    </div>
+    ${order.map(k => `
+      <div class="leg">
+        <div class="leg-hd">
+          <div class="leg-name"><span class="dot d-${k}"></span>${t('cat_' + k + '_pl')}</div>
+          <div class="leg-count">${counts[k]}</div>
+        </div>
+        <div class="leg-desc">${t('leg_' + k + '_desc')}</div>
+      </div>`).join('')}
   </div>
 
-  <hr class="divider">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+  <div class="section">
+    <h2 class="section-title">${t('tbl_title')}</h2>
+    <p class="section-desc">${t('tbl_desc')}</p>
     <div class="tbl-controls">
-      <span class="lbl-sm">${t('lbl_filter')}</span>
-      <button class="filter-btn" id="fb-all" onclick="setFilter('all')">${t('btn_all')}</button>
-      <button class="filter-btn" id="fb-star" onclick="setFilter('star')">⭐ ${CAT.star.label}</button>
-      <button class="filter-btn" id="fb-horse" onclick="setFilter('horse')">🐴 ${CAT.horse.label}</button>
-      <button class="filter-btn" id="fb-puzzle" onclick="setFilter('puzzle')">🧩 ${CAT.puzzle.label}s</button>
-      <button class="filter-btn" id="fb-dog" onclick="setFilter('dog')">🐶 ${CAT.dog.label}s</button>
-      <span class="lbl-sm" style="margin-left:8px">${t('lbl_sort')}</span>
-      <select class="select-sm" id="sortSel" onchange="setSort(this.value)">
-        <option value="margin">${t('opt_marg')}</option>
-        <option value="units">${t('opt_units')}</option>
-        <option value="name">${t('opt_name')}</option>
-        <option value="marginUnit">${t('opt_marg_u')}</option>
-      </select>
+      <div class="group seg">
+        <button class="seg-btn" data-f="all" onclick="setFilter('all')">${t('btn_all')}</button>
+        ${CATS.map(k => `<button class="seg-btn" data-f="${k}" onclick="setFilter('${k}')"><span class="dot d-${k}"></span>${t('cat_' + k + '_pl')}</button>`).join('')}
+      </div>
+      <div class="group">
+        <div class="search">${icon('search')}<input class="ctrl select-sm" style="width:100%" type="search" placeholder="${esc(t('ph_search'))}" aria-label="${esc(t('ph_search'))}" value="${esc(tableQuery)}" oninput="tableQuery=this.value;renderTable()"></div>
+        <label class="ctrl-lbl" for="sortSel" style="margin:0">${t('lbl_sort')}</label>
+        <select class="ctrl select-sm" id="sortSel" onchange="tableSort=this.value;renderTable()">
+          <option value="margin">${t('opt_marg')}</option>
+          <option value="units">${t('opt_units')}</option>
+          <option value="marginUnit">${t('opt_marg_u')}</option>
+          <option value="fc">${t('opt_fc')}</option>
+          <option value="name">${t('opt_name')}</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="tbl-wrap">
-    <table class="tbl" id="classTable">
-      <thead>
-        <tr>
-          <th style="width:26%">${t('th_dish')}</th>
-          <th style="width:14%">${t('th_cat')}</th>
-          <th style="width:10%">${t('th_price')}</th>
-          <th style="width:10%">${t('th_cost')}</th>
-          <th style="width:12%">${t('th_marg_u')}</th>
-          <th style="width:10%">${t('th_units')}</th>
-          <th style="width:14%">${t('th_marg_t')}</th>
-          <th style="width:8%">${t('th_pct')}</th>
-        </tr>
-      </thead>
-      <tbody id="classBody"></tbody>
-    </table>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr>
+          <th>${t('th_dish')}</th><th>${t('th_cat')}</th>
+          <th class="r">${t('th_price')}</th><th class="r">${t('th_cost')}</th><th class="r">${t('th_fc')}</th>
+          <th class="r">${t('th_marg_u')}</th><th class="r">${t('th_units')}</th><th class="r">${t('th_mix')}</th>
+          <th class="r">${t('th_marg_t')}</th><th class="r">${t('th_pct')}</th>
+        </tr></thead>
+        <tbody id="classBody"></tbody>
+      </table>
+    </div>
   </div>`;
-
-  document.getElementById('matrixContent').innerHTML = html;
-  
-  document.getElementById('fb-all').className = 'filter-btn on-star on-horse on-puzzle on-dog';
-  document.getElementById('fb-all').style.background='var(--text)';
-  document.getElementById('fb-all').style.borderColor='var(--text)';
-  document.getElementById('fb-all').style.color='#fff';
-  
+  document.getElementById('sortSel').value = tableSort;
+  setFilter(tableFilter);
   renderScatterChart();
-  renderTable();
 }
 
 function renderScatterChart() {
-    if(charts.matrix) charts.matrix.destroy();
-    const CAT = getCat();
-    const avgMargin = results.reduce((a, r) => a + r.margin, 0) / results.length;
-    const avgUnits  = results.reduce((a, r) => a + r.units, 0) / results.length;
+  if (charts.matrix) { charts.matrix.destroy(); delete charts.matrix; }
+  const { mThr, uThr } = view;
 
-    const quadrantPlugin = {
-        id: 'quadrants',
-        beforeDraw: (chart) => {
-            const {ctx, chartArea: {top, bottom, left, right}, scales: {x, y}} = chart;
-            const xPos = x.getPixelForValue(avgUnits);
-            const yPos = y.getPixelForValue(avgMargin);
-            ctx.save();
-            ctx.strokeStyle = 'rgba(24, 24, 27, 0.15)'; 
-            ctx.lineWidth = 2;
-            ctx.setLineDash([6, 6]);
+  const quadrantPlugin = {
+    id: 'quadrants',
+    beforeDatasetsDraw(chart) {
+      const { ctx, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
+      const xPos = x.getPixelForValue(uThr), yPos = y.getPixelForValue(mThr);
+      ctx.save();
+      ctx.strokeStyle = '#5c6370'; ctx.globalAlpha = .55; ctx.lineWidth = 1; ctx.setLineDash([5, 5]);
+      ctx.beginPath(); ctx.moveTo(xPos, top); ctx.lineTo(xPos, bottom); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(left, yPos); ctx.lineTo(right, yPos); ctx.stroke();
+      ctx.setLineDash([]); ctx.globalAlpha = 1;
+      ctx.font = '600 11px "IBM Plex Mono", "Courier New", monospace';
+      ctx.fillStyle = '#5c6370';
+      ctx.textAlign = 'left';
+      ctx.fillText(t('thr_margin').toUpperCase() + '  ' + fmtEur(mThr), left + 10, yPos - 8);
+      ctx.save(); ctx.translate(xPos + 14, bottom - 10); ctx.rotate(-Math.PI / 2);
+      ctx.fillText(t('thr_units').toUpperCase() + '  ' + fmt(uThr, 0), 0, 0); ctx.restore();
+      // Nombre de cada cuadrante en su esquina
+      ctx.font = '600 12px "IBM Plex Mono", "Courier New", monospace';
+      const pad = 12;
+      const q = (k, tx, ty, align) => { ctx.fillStyle = CLR_TXT[k]; ctx.textAlign = align; ctx.fillText(t('cat_' + k + '_pl').toUpperCase(), tx, ty); };
+      q('star', right - pad, top + 20, 'right');
+      q('puzzle', left + pad, top + 20, 'left');
+      q('horse', right - pad, bottom - pad, 'right');
+      q('dog', left + pad, bottom - pad, 'left');
+      ctx.restore();
+    }
+  };
+  const namesPlugin = {
+    id: 'names',
+    afterDatasetsDraw(chart) {
+      if (view.rows.length > 24) return;
+      const { ctx } = chart;
+      ctx.save();
+      ctx.font = '400 11px "Roboto Mono", "Courier New", monospace';
+      ctx.fillStyle = '#5c6370'; ctx.textAlign = 'left';
+      chart.data.datasets.forEach((ds, di) => {
+        chart.getDatasetMeta(di).data.forEach((pt, i) => {
+          const name = ds.data[i].r.name;
+          ctx.fillText(name.length > 22 ? name.slice(0, 21) + '…' : name, pt.x + 12, pt.y + 4);
+        });
+      });
+      ctx.restore();
+    }
+  };
 
-            if (xPos >= left && xPos <= right) {
-                ctx.beginPath(); ctx.moveTo(xPos, top); ctx.lineTo(xPos, bottom); ctx.stroke();
+  const datasets = CATS.map(k => ({
+    label: t('cat_' + k + '_pl'),
+    data: view.rows.filter(r => r.cat === k).map(r => ({ x: r.units, y: r.margin, r })),
+    backgroundColor: CLR[k], borderColor: '#ffffff', borderWidth: 2,
+    pointRadius: 8, pointHoverRadius: 12, pointHoverBorderWidth: 2
+  }));
+  const maxX = Math.max(...view.rows.map(r => r.units), uThr) * 1.15;
+  const maxY = Math.max(...view.rows.map(r => r.margin), mThr) * 1.15;
+
+  charts.matrix = new Chart(document.getElementById('matrixScatterChart'), {
+    type: 'scatter',
+    data: { datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      layout: { padding: { right: 8, top: 4 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#121417', padding: 14, displayColors: false, cornerRadius: 10,
+          titleFont: { family: 'Merriweather', weight: '700', size: 14 },
+          bodyFont: { family: 'Roboto Mono', size: 12 },
+          callbacks: {
+            title: items => items[0].raw.r.name,
+            label: c => {
+              const d = c.raw.r;
+              return [t('cat_' + d.cat), `${t('th_marg_u')}: ${fmtEur(d.margin)}`, `${t('th_units')}: ${fmt(d.units)}`, `${t('th_fc')}: ${fmtPct(d.fc * 100)}`];
             }
-            if (yPos >= top && yPos <= bottom) {
-                ctx.beginPath(); ctx.moveTo(left, yPos); ctx.lineTo(right, yPos); ctx.stroke();
-            }
-
-            ctx.fillStyle = 'rgba(24, 24, 27, 0.5)';
-            ctx.font = '600 11px Inter';
-            ctx.fillText(t('lbl_avg_rent'), left + 12, yPos - 12);
-            ctx.fillText(t('lbl_avg_pop'), xPos + 12, top + 24);
-            ctx.restore();
+          }
         }
-    };
-
-    const scatterData = results.map(r => ({ x: r.units, y: r.margin, raw: r }));
-    const ctxCanvas = document.getElementById('matrixScatterChart').getContext('2d');
-    
-    charts.matrix = new Chart(ctxCanvas, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Platos',
-                data: scatterData,
-                backgroundColor: results.map(r => CAT[r.cat].clr),
-                borderColor: '#ffffff',
-                borderWidth: 2,
-                pointRadius: 9,
-                pointHoverRadius: 14,
-                hoverBackgroundColor: results.map(r => CAT[r.cat].clr)
-            }]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: '#18181B',
-                    titleFont: { size: 14, family: 'Inter', weight: 'bold' },
-                    bodyFont: { size: 13, family: 'Inter' },
-                    padding: 14, displayColors: false,
-                    callbacks: {
-                        label: function(context) {
-                            const d = context.raw.raw;
-                            return [
-                                `${CAT[d.cat].icon} ${d.name} (${CAT[d.cat].label})`,
-                                `${t('th_marg_u')}: ${fmtEur(d.margin)}`,
-                                `${t('th_units')}: ${fmt(d.units)}`
-                            ];
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: { title: { display: true, text: t('chart_y'), font: {weight: '700', size: 12} }, grid: { color: 'rgba(0,0,0,0.04)' } },
-                y: { title: { display: true, text: t('chart_x'), font: {weight: '700', size: 12} }, grid: { color: 'rgba(0,0,0,0.04)' } }
-            }
-        },
-        plugins: [quadrantPlugin]
-    });
+      },
+      scales: {
+        x: { min: 0, suggestedMax: maxX, title: { display: true, text: t('ax_x') }, grid: { color: '#e6e3dd' }, border: { display: false },
+             ticks: { callback: v => fmt(v) } },
+        y: { min: 0, suggestedMax: maxY, title: { display: true, text: t('ax_y') }, grid: { color: '#e6e3dd' }, border: { display: false },
+             ticks: { callback: v => fmt(v, v % 1 ? 1 : 0) } }
+      }
+    },
+    plugins: [quadrantPlugin, namesPlugin]
+  });
+}
+function highlightPoint(id) {
+  const ch = charts.matrix; if (!ch) return;
+  if (id === null) { ch.setActiveElements([]); ch.tooltip.setActiveElements([], { x: 0, y: 0 }); ch.update(); return; }
+  for (let di = 0; di < ch.data.datasets.length; di++) {
+    const i = ch.data.datasets[di].data.findIndex(p => p.r.id === id);
+    if (i >= 0) {
+      const el = [{ datasetIndex: di, index: i }];
+      const pt = ch.getDatasetMeta(di).data[i];
+      ch.setActiveElements(el); ch.tooltip.setActiveElements(el, { x: pt.x, y: pt.y }); ch.update();
+      return;
+    }
+  }
 }
 
 function setFilter(f) {
   tableFilter = f;
-  ['all','star','horse','puzzle','dog'].forEach(k => {
-    const b = document.getElementById('fb-'+k);
-    if (!b) return;
-    b.style.background=''; b.style.borderColor=''; b.style.color='';
-    b.className = 'filter-btn';
-  });
-  const active = document.getElementById('fb-'+f);
-  if (f === 'all') {
-    active.style.background='var(--text)'; active.style.borderColor='var(--text)'; active.style.color='#fff';
-  } else {
-    active.className = 'filter-btn on-'+f;
-  }
+  document.querySelectorAll('.tbl-controls .seg-btn').forEach(b => b.classList.toggle('on', b.dataset.f === f));
   renderTable();
 }
-
-function setSort(v) { tableSort = v; renderTable(); }
-
 function renderTable() {
-  const CAT = getCat();
-  const totalMargin = results.reduce((a,r) => a+r.totalMargin, 0);
-  let data = tableFilter === 'all' ? [...results] : results.filter(r => r.cat === tableFilter);
-  if (tableSort === 'margin')     data.sort((a,b) => b.totalMargin - a.totalMargin);
-  if (tableSort === 'units')      data.sort((a,b) => b.units - a.units);
-  if (tableSort === 'name')       data.sort((a,b) => a.name.localeCompare(b.name));
-  if (tableSort === 'marginUnit') data.sort((a,b) => b.margin - a.margin);
-
-  document.getElementById('classBody').innerHTML = data.map(r => {
-    const pct = totalMargin > 0 ? r.totalMargin / totalMargin * 100 : 0;
-    return `<tr>
-      <td style="font-weight:600">${r.name}</td>
-      <td><span class="badge ${CAT[r.cat].badge}">${CAT[r.cat].label}</span></td>
-      <td class="mono">${fmt(r.price,2)} €</td>
-      <td class="mono">${fmt(r.cost,2)} €</td>
-      <td class="mono" style="font-weight:700">${fmt(r.margin,2)} €</td>
-      <td class="mono">${fmt(r.units)}</td>
-      <td class="mono">${fmtEur(r.totalMargin)}</td>
-      <td class="mono">${fmt(pct,1)}%</td>
+  const body = document.getElementById('classBody');
+  if (!body) return;
+  const q = tableQuery.trim().toLowerCase();
+  let data = view.rows.filter(r => (tableFilter === 'all' || r.cat === tableFilter) && (!q || r.name.toLowerCase().includes(q) || r.section.toLowerCase().includes(q)));
+  const sorters = {
+    margin: (a, b) => b.totalMargin - a.totalMargin,
+    units: (a, b) => b.units - a.units,
+    marginUnit: (a, b) => b.margin - a.margin,
+    fc: (a, b) => b.fc - a.fc,
+    name: (a, b) => a.name.localeCompare(b.name, lang)
+  };
+  data.sort(sorters[tableSort] || sorters.margin);
+  if (!data.length) { body.innerHTML = `<tr><td colspan="10" class="tbl-empty">${t('tbl_none')}</td></tr>`; return; }
+  const tg = targetFC();
+  body.innerHTML = data.map(r => {
+    const pct = view.M > 0 ? r.totalMargin / view.M * 100 : 0;
+    const fcCls = r.fc > tg ? ' st-warn' : '';
+    return `<tr onmouseenter="highlightPoint(${r.id})" onmouseleave="highlightPoint(null)">
+      <td class="name">${esc(r.name)}${r.section && scope === 'all' ? `<div class="sub">${esc(r.section)}</div>` : ''}</td>
+      <td>${catChip(r.cat)}</td>
+      <td class="n r">${fmtEur(r.price)}</td>
+      <td class="n r">${fmtEur(r.cost)}</td>
+      <td class="n r${fcCls}">${fmtPct(r.fc * 100)}</td>
+      <td class="n r">${fmtEur(r.margin)}</td>
+      <td class="n r">${fmt(r.units)}</td>
+      <td class="n r">${fmtPct(r.mix * 100)}</td>
+      <td class="n r">${fmtEur(r.totalMargin)}</td>
+      <td class="n r">${fmtPct(pct)}</td>
     </tr>`;
   }).join('');
 }
 
+/* ════════════════ PERIODOS GUARDADOS ════════════════ */
+const LS_PERIODS = 'menuquery:periods';
+let periods = [];
+let compareId = 'auto';
+
+function loadPeriods() {
+  try { const p = JSON.parse(localStorage.getItem(LS_PERIODS) || '[]'); if (Array.isArray(p)) periods = p; } catch (e) {}
+}
+function savePeriods() { try { localStorage.setItem(LS_PERIODS, JSON.stringify(periods)); } catch (e) {} }
+function periodName(p) { return p.period || t('no_period', { d: fmtDate(p.savedAt) }); }
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return isNaN(d) ? '' : d.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function currentPeriodName() { return settings.period.trim() || t('this_period'); }
+
+function savePeriod() {
+  if (!analysis || stale) { toast(t('t_save_stale')); return; }
+  const name = settings.period.trim();
+  const existing = name ? periods.find(p => p.period.toLowerCase() === name.toLowerCase()) : null;
+  if (existing && !confirm(t('confirm_overwrite', { p: name }))) return;
+  const snap = {
+    id: existing ? existing.id : Date.now(),
+    period: name, savedAt: new Date().toISOString(), sample: isSample,
+    rows: analysis.map(r => ({ name: r.name, section: r.section, price: r.price, cost: r.cost, units: r.units }))
+  };
+  if (existing) periods[periods.indexOf(existing)] = snap; else periods.push(snap);
+  savePeriods();
+  toast(t('t_saved', { p: periodName(snap) }));
+  renderHistory();
+  renderDash();
+}
+function openPeriod(id) {
+  const p = periods.find(x => x.id === id); if (!p) return;
+  if (hasUserData() && !isSample && !confirm(t('confirm_open', { p: periodName(p) }))) return;
+  const s = n => lang === 'es' ? String(n).replace('.', ',') : String(n);
+  dishes = p.rows.map(r => newDish({ name: r.name, section: r.section, price: s(r.price), cost: s(r.cost), units: String(r.units) }));
+  settings.period = p.period;
+  document.getElementById('setPeriod').value = p.period;
+  markChanged();
+  renderDishList();
+  calculate();
+  toast(t('t_opened', { p: periodName(p) }));
+}
+function deletePeriod(id) {
+  periods = periods.filter(x => x.id !== id);
+  if (compareId === id) compareId = 'auto';
+  savePeriods();
+  renderHistory();
+  if (analysis) renderDash();
+  toast(t('t_deleted'));
+}
+function renderHistory() {
+  const box = document.getElementById('historyBox');
+  if (!box) return;
+  const list = [...periods].sort((a, b) => b.savedAt.localeCompare(a.savedAt));
+  box.innerHTML = `
+    <h2 class="section-title">${t('hist_title')}</h2>
+    <p class="section-desc">${t('hist_desc')}</p>
+    <div class="card" style="padding:8px 32px">
+      ${list.length ? `<div class="hist">${list.map(p => `
+        <div class="hist-row">
+          <div>
+            <div class="hist-name">${esc(periodName(p))}</div>
+            <div class="hist-meta">${t('hist_meta', { n: p.rows.length, d: fmtDate(p.savedAt) })}</div>
+          </div>
+          <div class="hist-acts">
+            <button class="btn btn-sm" onclick="openPeriod(${p.id})">${t('btn_open')}</button>
+            <button class="btn btn-sm btn-quiet" onclick="deletePeriod(${p.id})">${t('btn_delete')}</button>
+          </div>
+        </div>`).join('')}</div>`
+      : `<p class="section-desc" style="margin:24px 0">${t('hist_empty')}</p>`}
+    </div>`;
+}
+function comparePeriod() {
+  const cur = settings.period.trim().toLowerCase();
+  if (compareId === 'none') return null;
+  if (compareId === 'auto') {
+    const others = periods.filter(p => p.period.toLowerCase() !== cur || !cur).sort((a, b) => b.savedAt.localeCompare(a.savedAt));
+    return others.find(p => p.period.toLowerCase() !== cur) || null;
+  }
+  return periods.find(p => p.id === compareId) || null;
+}
+function setCompare(v) { compareId = v === 'auto' || v === 'none' ? v : Number(v); renderDash(); }
+
+/* ════════════════ PANEL 3: DASHBOARD ════════════════ */
+function delta(cur, prev, { pp = false, goodUp = true } = {}) {
+  if (prev === null || prev === undefined || !isFinite(prev)) return '';
+  let d, txt;
+  if (pp) { d = cur - prev; txt = fmt(Math.abs(d), 1) + ' pp'; }
+  else { if (!prev) return ''; d = (cur - prev) / prev * 100; txt = fmtPct(Math.abs(d), 1); }
+  if (Math.abs(d) < 0.05) return `<span class="kpi-delta" style="color:var(--tinta-suave)">= ${t('kpi_same')}</span>`;
+  const up = d > 0;
+  return `<span class="kpi-delta ${up === goodUp ? 'st-pos' : 'st-neg'}">${up ? '▲ +' : '▼ −'}${txt}</span>`;
+}
+
 function renderDash() {
-  Object.values(charts).forEach(c => { try{ if(c && c !== charts.matrix) c.destroy() }catch(e){} });
-  const CAT = getCat();
+  ['pareto','fcChart'].forEach(k => { if (charts[k]) { charts[k].destroy(); delete charts[k]; } });
+  const { R, C, M, U, rows } = view;
+  const mPct = R ? M / R * 100 : 0;
+  const fcAvg = R ? C / R * 100 : 0;
+  const tg = targetFC() * 100;
 
-  const tRev    = results.reduce((a,r) => a+r.totalRevenue, 0);
-  const tCost   = results.reduce((a,r) => a+r.totalCost, 0);
-  const tMargin = results.reduce((a,r) => a+r.totalMargin, 0);
-  const tUnits  = results.reduce((a,r) => a+r.units, 0);
-  const ticket  = tRev / tUnits;
-  const mPct    = tMargin / tRev * 100;
-  
-  const cats = { star:0, horse:0, puzzle:0, dog:0 };
-  const catsMargin = { star:0, horse:0, puzzle:0, dog:0 };
-  
-  results.forEach(r => { 
-      cats[r.cat]++; 
-      catsMargin[r.cat] += r.totalMargin; 
+  // Periodo con el que comparar (misma sección y mismo método)
+  const cp = comparePeriod();
+  let prev = null, prevName = '';
+  if (cp) {
+    const pr = scope === 'all' ? cp.rows : cp.rows.filter(r => r.section === scope);
+    if (pr.length) { prev = classify(pr); prevName = periodName(cp); }
+  }
+  const pv = k => prev ? prev[k] : null;
+  const prevMPct = prev && prev.R ? prev.M / prev.R * 100 : null;
+  const prevFc = prev && prev.R ? prev.C / prev.R * 100 : null;
+
+  const fcDiff = fcAvg - tg;
+  const fcState = Math.abs(fcDiff) < 0.05 ? `<span class="st-pos">${t('kpi_fc_eq_s')}</span>`
+    : fcDiff > 0 ? `<span class="${fcDiff > 5 ? 'st-neg' : 'st-warn'}">${t('kpi_fc_over_s', { d: fmt(fcDiff, 1) })}</span>`
+    : `<span class="st-pos">${t('kpi_fc_under_s', { d: fmt(-fcDiff, 1) })}</span>`;
+
+  // Pareto
+  const byM = [...rows].sort((a, b) => b.totalMargin - a.totalMargin);
+  let acc = 0, nPareto = 0;
+  for (const r of byM) { acc += r.totalMargin; nPareto++; if (acc >= M * 0.8) break; }
+
+  // Peso de cada categoría
+  const share = { dishes: {}, units: {}, margin: {} };
+  CATS.forEach(k => {
+    const g = rows.filter(r => r.cat === k);
+    share.dishes[k] = g.length / rows.length * 100;
+    share.units[k] = U ? g.reduce((a, r) => a + r.units, 0) / U * 100 : 0;
+    share.margin[k] = M ? g.reduce((a, r) => a + r.totalMargin, 0) / M * 100 : 0;
   });
+  const wbar = key => `<div class="wbar-track">${CATS.filter(k => share[key][k] > 0).map(k =>
+    `<div class="wbar-seg" style="flex:${share[key][k]} 1 0;background:${CLR[k]}" title="${esc(t('cat_' + k + '_pl'))}: ${fmtPct(share[key][k], 0)}"></div>`).join('')}</div>`;
 
-  const html = `
-  <div class="kpi-row">
-    <div class="kpi k-rev">
-      <div class="kpi-lbl">${t('kpi_rev')}</div>
-      <div class="kpi-val">${fmtEur(tRev)}</div>
-    </div>
-    <div class="kpi k-cost">
-      <div class="kpi-lbl">${t('kpi_cost')}</div>
-      <div class="kpi-val">${fmtEur(tCost)}</div>
-    </div>
-    <div class="kpi k-margin">
-      <div class="kpi-lbl">${t('kpi_marg')}</div>
-      <div class="kpi-val">${fmtEur(tMargin)}</div>
-      <div class="kpi-sub">${fmt(mPct,1)}% ${t('kpi_sub')}</div>
-    </div>
-    <div class="kpi k-ticket">
-      <div class="kpi-lbl">${t('kpi_tix')}</div>
-      <div class="kpi-val">${fmt(ticket,2)} €</div>
-    </div>
-    <div class="kpi k-units">
-      <div class="kpi-lbl">${t('kpi_vol')}</div>
-      <div class="kpi-val">${fmt(tUnits)}</div>
-    </div>
-    <div class="kpi k-total">
-      <div class="kpi-lbl">${t('kpi_tot')}</div>
-      <div class="kpi-val">${results.length}</div>
-      <div class="kpi-sub">⭐${cats.star} 🐴${cats.horse} 🧩${cats.puzzle} 🐶${cats.dog}</div>
-    </div>
-  </div>
+  // Cambios frente al periodo comparado
+  let chgItems = null;
+  if (prev) {
+    const key = s => s.trim().toLowerCase();
+    const prevMap = new Map(prev.rows.map(r => [key(r.name), r]));
+    const curMap = new Map(rows.map(r => [key(r.name), r]));
+    const mini = k => `<span class="chip"><span class="dot d-${k}"></span>${t('cat_' + k)}</span>`;
+    chgItems = [
+      ...rows.filter(r => prevMap.has(key(r.name)) && prevMap.get(key(r.name)).cat !== r.cat)
+        .map(r => `<div class="chg"><span title="${esc(r.name)}">${esc(r.name)}</span><span class="chg-move">${mini(prevMap.get(key(r.name)).cat)}<span class="chg-arrow">▶</span>${mini(r.cat)}</span></div>`),
+      ...rows.filter(r => !prevMap.has(key(r.name)))
+        .map(r => `<div class="chg"><span title="${esc(r.name)}">${esc(r.name)}</span><span class="chg-move"><span class="chip">${t('chg_new')}</span></span></div>`),
+      ...prev.rows.filter(r => !curMap.has(key(r.name)))
+        .map(r => `<div class="chg"><span title="${esc(r.name)}">${esc(r.name)}</span><span class="chg-move"><span class="chip">${t('chg_removed')}</span></span></div>`)
+    ];
+  }
 
-  <div class="chart-card chart-card-full" style="margin-bottom: 16px;">
-    <div class="chart-lbl">${t('chart_rank')}</div>
-    <div class="chart-desc">${t('desc_rank')}</div>
-    <div class="toggle-group" id="dashToggle">
-      <button class="tog active" onclick="setDashView('margin',this)">${t('tog_marg')}</button>
-      <button class="tog" onclick="setDashView('revenue',this)">${t('tog_rev')}</button>
-      <button class="tog" onclick="setDashView('units',this)">${t('tog_units')}</button>
-    </div>
-    <div id="barsArea"></div>
-  </div>
+  // Ámbito y comparación en la cabecera
+  const secs = sections();
+  const scopeSeg = secs.length > 1 ? `<div class="seg">
+      <button class="seg-btn ${scope === 'all' ? 'on' : ''}" onclick="setScope('all')">${t('scope_all')}</button>
+      ${secs.map(s => `<button class="seg-btn ${scope === s ? 'on' : ''}" onclick="setScope(decodeURIComponent('${encodeURIComponent(s)}'))">${esc(s)}</button>`).join('')}
+    </div>` : '';
+  const opts = [...periods].sort((a, b) => b.savedAt.localeCompare(a.savedAt));
+  const cmpSel = periods.length ? `
+    <select class="ctrl select-sm" id="cmpSel" onchange="setCompare(this.value)" aria-label="${esc(t('cmp_lbl'))}">
+      <option value="auto">${t('cmp_lbl')}: ${t('cmp_auto')}</option>
+      <option value="none">${t('cmp_none')}</option>
+      ${opts.map(p => `<option value="${p.id}">${t('cmp_lbl')}: ${esc(periodName(p))}</option>`).join('')}
+    </select>` : '';
+  const chips = [];
+  if (settings.period.trim()) chips.push(`<span class="chip">${esc(settings.period.trim())}</span>`);
+  if (prev) chips.push(`<span class="chip">${t('vs', { p: esc(prevName) })}</span>`);
+  if (isSample) chips.push(`<span class="chip">${t('chip_sample')}</span>`);
 
-  <div class="chart-grid">
-    <!-- DONUT 1: Cantidad de platos -->
-    <div class="chart-card">
-      <div class="chart-lbl">${t('chart_dist')}</div>
-      <div class="chart-desc">${t('desc_dist')}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;font-size:12px;font-weight:600;color:var(--text2)">
-        ${['star','horse','puzzle','dog'].map(k=>`<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:${CAT[k].clr};display:inline-block"></span>${CAT[k].label.split(' ')[0]} <strong style="color:var(--text)">${cats[k]}</strong></span>`).join('')}
-      </div>
-      <div style="position:relative;height:240px">
-        <canvas id="donut" role="img"></canvas>
+  const kc = (lbl, val, foot = '') => `<div class="kc"><div class="kc-lbl" title="${esc(lbl)}">${lbl}</div><div class="kc-val">${val}</div><div class="kc-foot">${foot || '&nbsp;'}</div></div>`;
+  const fcOver = rows.filter(r => r.fc * 100 > tg).length;
+
+  document.getElementById('dashContent').innerHTML = `
+  <div class="dash">
+    <div class="dash-top">
+      <div class="dash-title"><h1>${t('dash_title')}</h1>${chips.join('')}</div>
+      <div class="dash-tools">
+        ${scopeSeg}${cmpSel}
+        <button class="btn btn-sm" onclick="savePeriod()">${t('btn_save_period')}</button>
       </div>
     </div>
-    
-    <!-- DONUT 2: Aporte real al margen -->
-    <div class="chart-card">
-      <div class="chart-lbl">${t('chart_marg_cont')}</div>
-      <div class="chart-desc">${t('desc_marg_cont')}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;font-size:12px;font-weight:600;color:var(--text2)">
-        ${['star','horse','puzzle','dog'].map(k=>`<span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:${CAT[k].clr};display:inline-block"></span>${CAT[k].label.split(' ')[0]}</span>`).join('')}
-      </div>
-      <div style="position:relative;height:240px">
-        <canvas id="marginDonut" role="img"></canvas>
-      </div>
-    </div>
-  </div>
+    <div class="stale-slot">${stale ? staleHTML() : ''}</div>
 
-  <!-- BAR CHART: COSTES + MARGEN APILADOS -->
-  <div class="chart-card chart-card-full">
-    <div class="chart-lbl">${t('chart_comp')}</div>
-    <div class="chart-desc">${t('desc_comp')}</div>
-    <div style="display:flex;gap:16px;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:20px;flex-wrap:wrap;">
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#94A3B8;display:inline-block"></span>${t('leg_cost')}</span>
-      <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#10B981;display:inline-block"></span>${t('leg_marg')}</span>
-      <span style="display:flex;align-items:center;gap:6px; margin-left: auto; color: var(--text3); font-weight: 500;">${currentLang === 'es' ? '(Coste + Margen = Ingresos)' : '(Cost + Margin = Revenue)'}</span>
-    </div>
-    <div style="position:relative;height:350px">
-      <canvas id="stackChart" role="img"></canvas>
+    <div class="dgrid">
+      <div class="c-kpis">
+        ${kc(t('kpi_rev'), fmtEur(R, 0), delta(R, pv('R')))}
+        ${kc(t('kpi_cost'), fmtEur(C, 0), delta(C, pv('C'), { goodUp: false }))}
+        ${kc(t('kpi_marg'), fmtEur(M, 0), delta(M, pv('M')))}
+        ${kc(t('kpi_marg_pct'), fmtPct(mPct), delta(mPct, prevMPct, { pp: true }))}
+        ${kc(t('kpi_fc'), fmtPct(fcAvg), (prev ? delta(fcAvg, prevFc, { pp: true, goodUp: false }) : '') + fcState)}
+        ${kc(t('kpi_vol'), fmt(U), delta(U, pv('U')) + `<span>${t('kpi_price_avg_s', { v: fmtEur(U ? R / U : 0) })}</span>`)}
+      </div>
+
+      <div class="dcard c-pareto">
+        <div class="dcard-hd"><h3>${t('pareto_title')}</h3><span class="aside">${t('pareto_aside', { n: nPareto, t: rows.length })}</span></div>
+        <div class="cv"><canvas id="paretoChart" role="img" aria-label="${esc(t('pareto_title'))}"></canvas></div>
+      </div>
+
+      <div class="dcard c-weight">
+        <div class="dcard-hd"><h3>${t('weight_title')}</h3></div>
+        <div class="wbar"><span class="wbar-lbl">${t('w_dishes')}</span>${wbar('dishes')}</div>
+        <div class="wbar"><span class="wbar-lbl">${t('w_units')}</span>${wbar('units')}</div>
+        <div class="wbar"><span class="wbar-lbl">${t('w_margin')}</span>${wbar('margin')}</div>
+        <table class="wtable">
+          <thead><tr><th></th><th>${t('w_dishes')}</th><th>${t('w_units')}</th><th>${t('w_margin')}</th></tr></thead>
+          <tbody>${CATS.map(k => `<tr>
+            <td><span class="nm"><span class="dot d-${k}"></span>${t('cat_' + k + '_pl')}</span></td>
+            <td>${fmtPct(share.dishes[k], 0)}</td><td>${fmtPct(share.units[k], 0)}</td><td>${fmtPct(share.margin[k], 0)}</td>
+          </tr>`).join('')}</tbody>
+        </table>
+      </div>
+
+      <div class="dcard c-rank">
+        <div class="dcard-hd"><h3>${t('chart_rank')}</h3></div>
+        <div class="seg" id="dashToggle" style="margin-bottom:10px">
+          <button class="seg-btn ${dashView === 'margin' ? 'on' : ''}" data-v="margin" onclick="setDashView('margin')">${t('tog_marg')}</button>
+          <button class="seg-btn ${dashView === 'revenue' ? 'on' : ''}" data-v="revenue" onclick="setDashView('revenue')">${t('tog_rev')}</button>
+          <button class="seg-btn ${dashView === 'units' ? 'on' : ''}" data-v="units" onclick="setDashView('units')">${t('tog_units')}</button>
+        </div>
+        <div class="scroll" id="barsArea"></div>
+      </div>
+
+      <div class="dcard c-fc ${chgItems ? '' : 'wide'}">
+        <div class="dcard-hd"><h3>${t('fc_title')}</h3><span class="aside">${fcOver ? t(fcOver === 1 ? 'fc_aside_1' : 'fc_aside_n', { n: fcOver, t: fmtPct(tg, 0) }) : t('fc_aside_ok', { t: fmtPct(tg, 0) })}</span></div>
+        <div style="position:relative;height:${Math.max(200, rows.length * 22 + 40)}px"><canvas id="fcChart" role="img" aria-label="${esc(t('fc_title'))}"></canvas></div>
+      </div>
+
+      ${chgItems ? `
+      <div class="dcard c-chg">
+        <div class="dcard-hd"><h3>${t('chg_title_s')}</h3></div>
+        <div class="scroll">${chgItems.length ? chgItems.join('') : `<p class="empty-mini">${t('chg_none')}</p>`}</div>
+      </div>` : ''}
     </div>
   </div>`;
 
-  document.getElementById('dashContent').innerHTML = html;
+  const sel = document.getElementById('cmpSel');
+  if (sel) sel.value = String(compareId);
   renderBars();
 
-  const donutOptions = {
-    responsive: true, 
-    maintainAspectRatio: false, 
-    plugins: { legend: { display: false } }, 
-    cutout: '70%',
-    layout: { padding: 10 }
-  };
+  const tip = { backgroundColor: '#18181b', cornerRadius: 8, padding: 10,
+    titleFont: { family: 'Merriweather', weight: '700', size: 12 }, bodyFont: { family: 'Roboto Mono', size: 11 } };
+  const grid = '#f0f0f2', axis = '#a1a1aa';
+  const small = { size: 10 };
 
-  charts.donut = new Chart(document.getElementById('donut'), {
-    type:'doughnut',
-    data:{ labels:[CAT.star.label, CAT.horse.label, CAT.puzzle.label, CAT.dog.label], datasets:[{
-      data:[cats.star,cats.horse,cats.puzzle,cats.dog],
-      backgroundColor:[CAT.star.clr, CAT.horse.clr, CAT.puzzle.clr, CAT.dog.clr],
-      borderWidth: 3, borderColor: '#fff', hoverOffset: 8
-    }]},
-    options: donutOptions
-  });
-
-  charts.marginDonut = new Chart(document.getElementById('marginDonut'), {
-    type:'doughnut',
-    data:{ labels:[CAT.star.label, CAT.horse.label, CAT.puzzle.label, CAT.dog.label], datasets:[{
-      data:[catsMargin.star, catsMargin.horse, catsMargin.puzzle, catsMargin.dog],
-      backgroundColor:[CAT.star.clr, CAT.horse.clr, CAT.puzzle.clr, CAT.dog.clr],
-      borderWidth: 3, borderColor: '#fff', hoverOffset: 8
-    }]},
-    options: {
-        ...donutOptions,
-        plugins: {
-            legend: { display: false },
-            tooltip: {
-                callbacks: {
-                    label: function(context) { return ' ' + context.label + ': ' + fmtEur(context.raw); }
-                }
-            } 
-        }
+  // Concentración del margen (Pareto)
+  let cum = 0;
+  const cumPct = byM.map(r => { cum += r.totalMargin; return M ? cum / M * 100 : 0; });
+  const cutIdx = nPareto - 1;
+  const line80 = {
+    id: 'line80',
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea: { left, right }, scales: { y1 } } = chart;
+      const y = y1.getPixelForValue(80);
+      ctx.save();
+      ctx.strokeStyle = '#71717a'; ctx.setLineDash([4, 4]); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(left, y); ctx.lineTo(right, y); ctx.stroke();
+      ctx.restore();
     }
-  });
-
-  const sorted = [...results].sort((a,b) => b.totalRevenue - a.totalRevenue);
-  charts.stack = new Chart(document.getElementById('stackChart'), {
-    type:'bar', // Barras en formato vertical, apiladas
-    data:{
-      labels: sorted.map(r => r.name.length>15 ? r.name.slice(0,14)+'…' : r.name),
-      datasets:[
-        { label:t('leg_cost'),   data:sorted.map(r=>Math.round(r.totalCost)),    backgroundColor:'#94A3B8', borderRadius:0, borderWidth:0 },
-        { label:t('leg_marg'),   data:sorted.map(r=>Math.round(r.totalMargin)),  backgroundColor:'#10B981', borderRadius:4, borderWidth:0 },
+  };
+  charts.pareto = new Chart(document.getElementById('paretoChart'), {
+    data: {
+      labels: byM.map(r => r.name.length > 12 ? r.name.slice(0, 11) + '…' : r.name),
+      datasets: [
+        { type: 'line', label: t('pareto_cum'), data: cumPct, yAxisID: 'y1', borderColor: '#18181b', borderWidth: 1.5,
+          pointRadius: cumPct.map((_, i) => i === cutIdx ? 4 : 2), pointBackgroundColor: cumPct.map((_, i) => i === cutIdx ? '#18181b' : '#fff'),
+          pointBorderColor: '#18181b', tension: .25, order: 0 },
+        { type: 'bar', label: t('tog_marg'), data: byM.map(r => Math.round(r.totalMargin)), yAxisID: 'y',
+          backgroundColor: byM.map((r, i) => i <= cutIdx ? CLR[r.cat] : CLR[r.cat] + '59'), borderRadius: 3, order: 1 }
       ]
     },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{ 
-        legend:{display:false},
-        tooltip: {
-            mode: 'index',
-            intersect: false,
-            callbacks: {
-                label: function(context) { return context.dataset.label + ': ' + fmtEur(context.raw); },
-                footer: function(items) {
-                    const total = items.reduce((sum, item) => sum + item.raw, 0);
-                    return t('leg_rev') + ': ' + fmtEur(total);
-                }
-            }
-        }
-      },
-      scales:{
-        x:{ stacked: true, grid:{display:false}, ticks:{font:{size:11, weight:'500'}} },
-        y:{ stacked: true, grid:{color:'rgba(0,0,0,.04)'}, ticks:{callback:v=>fmt(v)+' €', font:{size:12, weight:'500'}} }
+    options: {
+      responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+      plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: {
+        title: items => byM[items[0].dataIndex].name,
+        label: c => c.dataset.type === 'line' ? t('pareto_cum') + ': ' + fmtPct(c.raw) : t('tog_marg') + ': ' + fmtEur(c.raw, 0) } } },
+      scales: {
+        x: { grid: { display: false }, border: { color: grid }, ticks: { font: small, color: axis, maxRotation: 50, autoSkip: false } },
+        y: { grid: { color: grid }, border: { display: false }, ticks: { font: small, color: axis, maxTicksLimit: 5, callback: v => fmtEur(v, 0) } },
+        y1: { position: 'right', min: 0, max: 100, grid: { display: false }, border: { display: false }, ticks: { font: small, color: axis, stepSize: 20, callback: v => fmtPct(v, 0) } }
       }
+    },
+    plugins: [line80]
+  });
+
+  // Food cost por plato frente al objetivo
+  const byFc = [...rows].sort((a, b) => b.fc - a.fc);
+  const targetLine = {
+    id: 'target',
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+      const xp = x.getPixelForValue(tg);
+      ctx.save();
+      ctx.strokeStyle = '#18181b'; ctx.setLineDash([4, 4]); ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(xp, top); ctx.lineTo(xp, bottom); ctx.stroke();
+      ctx.restore();
     }
+  };
+  charts.fcChart = new Chart(document.getElementById('fcChart'), {
+    type: 'bar',
+    data: {
+      labels: byFc.map(r => r.name.length > 22 ? r.name.slice(0, 21) + '…' : r.name),
+      datasets: [{ data: byFc.map(r => +(r.fc * 100).toFixed(1)),
+        backgroundColor: byFc.map(r => r.fc * 100 > tg ? '#3f3f46' : '#d4d4d8'), borderRadius: 3, barThickness: 12 }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: {
+        title: items => byFc[items[0].dataIndex].name,
+        label: c => t('th_fc') + ': ' + fmtPct(c.raw) } } },
+      scales: {
+        x: { min: 0, suggestedMax: Math.max(tg * 1.4, ...byFc.map(r => r.fc * 100 + 5)), grid: { color: grid }, border: { display: false },
+             ticks: { font: small, color: axis, callback: v => fmtPct(v, 0) } },
+        y: { grid: { display: false }, border: { color: grid }, ticks: { font: { family: '"Roboto Mono", "Courier New", monospace', size: 11 }, color: '#18181b' } }
+      }
+    },
+    plugins: [targetLine]
   });
 }
 
-function setDashView(view, btn) {
-  dashView = view;
-  document.querySelectorAll('#dashToggle .tog').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+function setDashView(v) {
+  dashView = v;
+  document.querySelectorAll('#dashToggle .seg-btn').forEach(b => b.classList.toggle('on', b.dataset.v === v));
   renderBars();
 }
-
 function renderBars() {
-  const CAT = getCat();
-  const tMargin = results.reduce((a,r) => a+r.totalMargin,0);
-  const tRev    = results.reduce((a,r) => a+r.totalRevenue,0);
-  const tUnits  = results.reduce((a,r) => a+r.units,0);
+  const area = document.getElementById('barsArea');
+  if (!area) return;
+  const key = { margin: 'totalMargin', revenue: 'totalRevenue', units: 'units' }[dashView];
+  const f = dashView === 'units' ? (n => fmt(n)) : (n => fmtEur(n, 0));
+  const sorted = [...view.rows].sort((a, b) => b[key] - a[key]);
+  const max = sorted.length ? sorted[0][key] : 0;
+  area.innerHTML = sorted.map((r, i) => `
+    <div class="rank-row">
+      <span class="rank-n">${String(i + 1).padStart(2, '0')}</span>
+      <span class="rank-name" title="${esc(r.name)}"><span class="dot d-${r.cat}"></span><span>${esc(r.name)}</span></span>
+      <span class="rank-val">${f(r[key])}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${max > 0 ? Math.max(1, r[key] / max * 100) : 0}%;background:${CLR[r.cat]}"></div></div>
+    </div>`).join('');
+}
 
-  let key, total, fmtFn;
-  if (dashView === 'margin')  { key='totalMargin';  total=tMargin; fmtFn=fmtEur }
-  if (dashView === 'revenue') { key='totalRevenue'; total=tRev;    fmtFn=fmtEur }
-  if (dashView === 'units')   { key='units';        total=tUnits;  fmtFn=fmt }
+/* ════════════════ PANEL 4: CONSEJOS ════════════════ */
+function suggestedPrice(r) { return r.cost / targetFC(); }
 
-  const sorted = [...results].sort((a,b) => b[key] - a[key]);
-  const html = sorted.map(r => {
-    const pct = total > 0 ? r[key]/total*100 : 0;
-    return `<div class="bar-row">
-      <div class="bar-name" title="${r.name}">${r.name}</div>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:${Math.max(0.5,pct)}%;background:${CAT[r.cat].clr}"></div>
-      </div>
-      <div class="bar-val">${fmtFn(r[key])}</div>
-    </div>`;
-  }).join('');
-  document.getElementById('barsArea').innerHTML = html;
+function opportunities() {
+  const tg = targetFC();
+  const list = [];
+  view.rows.forEach(r => {
+    let gain = 0, act = '';
+    if (r.cat === 'star') { gain = r.totalMargin * 0.1; act = t('act_star'); }
+    else if (r.cat === 'horse' || r.cat === 'dog') {
+      if (r.fc > tg) { const sp = suggestedPrice(r); gain = (sp - r.price) * r.units; act = t('act_price', { p: fmtEur(sp) }); }
+      else if (r.cat === 'horse') { gain = r.cost * 0.1 * r.units; act = t('act_cost'); }
+    } else if (r.cat === 'puzzle') {
+      const need = Math.ceil(view.uThr) - r.units;
+      if (need > 0) { gain = need * r.margin; act = t('act_puzzle', { u: fmt(need) }); }
+    }
+    if (gain > 0) list.push({ r, gain, act });
+  });
+  return list.sort((a, b) => b.gain - a.gain).slice(0, 3);
+}
+
+function metricChips(r) {
+  return `<div class="adv-metrics">
+    ${catChip(r.cat)}
+    <span class="chip">${t('m_chip_margin', { v: fmtEur(r.margin) })}</span>
+    <span class="chip">${t('m_chip_fc', { v: fmtPct(r.fc * 100) })}</span>
+    <span class="chip">${t('m_chip_units', { v: fmt(r.units) })}</span>
+  </div>`;
 }
 
 function renderAdvice() {
-  const CAT = getCat();
-  const tMargin = results.reduce((a,r) => a+r.totalMargin,0);
-  const cats = { star:[], horse:[], puzzle:[], dog:[] };
-  results.forEach(r => cats[r.cat].push(r));
-  let html = '';
+  const tg = targetFC();
+  const groups = { star:[], horse:[], puzzle:[], dog:[] };
+  view.rows.forEach(r => groups[r.cat].push(r));
+  Object.values(groups).forEach(g => g.sort((a, b) => b.totalMargin - a.totalMargin));
+  const pctOf = r => fmtPct(r.margin / r.price * 100);
 
-  if (cats.star.length) {
-    html += `<div class="adv-section"><div class="adv-title">⭐ ${t('adv_star_hd')}</div>`;
-    cats.star.forEach(r => {
-      const marginPct = (r.price > 0 ? (r.margin / r.price) * 100 : 0).toFixed(1);
-      const adviceText = t(marginPct > 70 ? 'adv_star_top' : 'adv_star_ok').replace('{pct}', marginPct);
-      html += `<div class="adv-card">
-        <div class="adv-dish"><span class="badge badge-star">${CAT.star.label}</span>${r.name}</div>
-        <div class="adv-text">${adviceText}</div>
-        <div class="sim-box">
-          <div class="sim-title">${t('sim_title_star')}</div>
-          <div class="sim-row">
-            <span class="sim-lbl">${t('sim_inc')}</span>
-            <input type="range" class="sim-slider" min="0" max="50" step="5" value="10"
-              oninput="simStar(this,${r.units},${r.margin},'simStar-${r.name.replace(/\s/g,'_')}')">
-            <span class="sim-val" id="simStar-${r.name.replace(/\s/g,'_')}-lbl">+10%</span>
-          </div>
-          <div class="sim-result">
-            <span class="sim-now">${t('sim_now')} <strong>${fmtEur(r.totalMargin)}</strong></span>
-            <span class="sim-arrow">→</span>
-            <span class="sim-after" id="simStar-${r.name.replace(/\s/g,'_')}-res" style="color:${CAT.star.clr}">+${fmtEur(r.totalMargin*0.1)} ${t('sim_ext')}</span>
-          </div>
-        </div>
-      </div>`;
+  const ops = opportunities();
+  let html = toolbar() + `
+  <div class="card">
+    <h2 class="section-title">${t('plan_title')}</h2>
+    <p class="section-desc">${t('plan_desc')}</p>
+    ${ops.length ? `<div class="plan">${ops.map((o, i) => `
+      <div class="plan-item">
+        <div class="plan-n">${String(i + 1).padStart(2, '0')}</div>
+        <div><div class="plan-dish">${esc(o.r.name)}</div><div class="plan-act">${o.act}</div></div>
+        <div class="plan-gain">+${fmtEur(o.gain, 0)}</div>
+      </div>`).join('')}</div>
+      <p class="plan-foot">${t('plan_foot')}</p>` : `<p class="section-desc" style="margin:0">${t('plan_none')}</p>`}
+  </div>`;
+
+  const head = (k, title) => `<div class="adv-section"><h2 class="adv-title"><span class="dot d-${k}"></span>${title}</h2>`;
+  const card = (r, text, sim) => `
+    <div class="adv-card">
+      <div class="adv-hd"><div class="adv-dish">${esc(r.name)}</div>${metricChips(r)}</div>
+      <p class="adv-text">${text}</p>
+      <div class="sim-box">${sim}</div>
+    </div>`;
+  const nowLine = (r, id) => `
+    <div class="sim-result">
+      <span class="sim-now">${t('sim_now')} <strong>${fmtEur(r.totalMargin, 0)}</strong></span>
+      <span class="sim-now">${t('sim_after')}</span>
+      <span class="sim-after" id="${id}-res"></span>
+    </div>`;
+
+  if (groups.star.length) {
+    html += head('star', t('adv_star_hd'));
+    groups.star.forEach(r => {
+      const id = 'sS' + r.id;
+      html += card(r, t(r.margin / r.price > 0.7 ? 'adv_star_top' : 'adv_star_ok', { pct: pctOf(r) }), `
+        <div class="sim-title">${t('sim_title_star')}</div>
+        <div class="sim-row">
+          <span class="sim-lbl">${t('sim_inc')}</span>
+          <input type="range" class="sim-slider" min="0" max="50" step="5" value="10" oninput="simStar(${r.id},this.value)" aria-label="${esc(t('sim_inc'))}">
+          <span class="sim-val" id="${id}-lbl"></span>
+        </div>${nowLine(r, id)}`);
     });
     html += '</div>';
   }
 
-  if (cats.horse.length) {
-    html += `<div class="adv-section"><div class="adv-title">🐴 ${t('adv_horse_hd')}</div>`;
-    cats.horse.forEach(r => {
-      const marginPct = (r.price > 0 ? (r.margin / r.price) * 100 : 0).toFixed(1);
-      const adviceText = t(marginPct < 45 ? 'adv_horse_bad' : 'adv_horse_ok').replace('{pct}', marginPct);
-      const simId = 'simHorse-' + r.name.replace(/\s/g,'_');
-      html += `<div class="adv-card">
-        <div class="adv-dish"><span class="badge badge-horse">${CAT.horse.label}</span>${r.name}</div>
-        <div class="adv-text">${adviceText}</div>
-        <div class="sim-box">
-          <div class="sim-title">${t('sim_title_horse')}</div>
-          <div class="sim-row">
-            <span class="sim-lbl">${t('sim_red')}</span>
-            <input type="range" class="sim-slider" min="0" max="30" step="1" value="10"
-              oninput="simHorse(this,${r.price},${r.cost},${r.units},'${simId}')">
-            <span class="sim-val" id="${simId}-lbl">−10%</span>
-          </div>
-          <div class="sim-row">
-            <span class="sim-lbl">${t('sim_up')}</span>
-            <input type="range" class="sim-slider" min="0" max="3" step="0.25" value="0"
-              oninput="simHorse2(this,${r.price},${r.cost},${r.units},'${simId}')">
-            <span class="sim-val" id="${simId}-lbl2">+0.00 €</span>
-          </div>
-          <div class="sim-result">
-            <span class="sim-now">${t('sim_now')} <strong>${fmtEur(r.totalMargin)}</strong></span>
-            <span class="sim-arrow">→</span>
-            <span class="sim-after" id="${simId}-res" style="color:${CAT.horse.clr}">${t('sim_mov')}</span>
-          </div>
+  if (groups.horse.length) {
+    html += head('horse', t('adv_horse_hd'));
+    groups.horse.forEach(r => {
+      const id = 'sH' + r.id;
+      const sp = suggestedPrice(r);
+      const upNeeded = Math.max(0, sp - r.price);
+      const maxUp = Math.max(3, Math.ceil(upNeeded * 1.2 * 4) / 4);
+      html += card(r, t(r.margin / r.price < 0.45 ? 'adv_horse_bad' : 'adv_horse_ok', { pct: pctOf(r) }), `
+        <div class="sim-title">${t('sim_title_horse')}</div>
+        <div class="sim-row">
+          <span class="sim-lbl">${t('sim_red')}</span>
+          <input type="range" class="sim-slider" id="${id}-c" min="0" max="30" step="1" value="10" oninput="simHorse(${r.id})" aria-label="${esc(t('sim_red'))}">
+          <span class="sim-val" id="${id}-lbl"></span>
         </div>
-      </div>`;
+        <div class="sim-row">
+          <span class="sim-lbl">${t('sim_up')}</span>
+          <input type="range" class="sim-slider" id="${id}-p" min="0" max="${maxUp}" step="0.05" value="0" oninput="simHorse(${r.id})" aria-label="${esc(t('sim_up'))}">
+          <span class="sim-val" id="${id}-lbl2"></span>
+        </div>
+        ${nowLine(r, id)}
+        <div class="sim-state" id="${id}-fc"></div>
+        ${upNeeded > 0 ? `<div class="sim-actions"><button class="btn btn-sm" onclick="applySuggested(${r.id})">${t('sim_use_price', { p: fmtEur(sp) })}</button></div>` : ''}`);
     });
     html += '</div>';
   }
 
-  if (cats.puzzle.length) {
-    html += `<div class="adv-section"><div class="adv-title">🧩 ${t('adv_puzz_hd')}</div>`;
-    cats.puzzle.forEach(r => {
-      const marginPct = (r.price > 0 ? (r.margin / r.price) * 100 : 0).toFixed(1);
-      const adviceText = t(marginPct > 70 ? 'adv_puzz_top' : 'adv_puzz_ok').replace('{pct}', marginPct);
-      const simId = 'simPuzz-' + r.name.replace(/\s/g,'_');
-      html += `<div class="adv-card">
-        <div class="adv-dish"><span class="badge badge-puzzle">${CAT.puzzle.label}</span>${r.name}</div>
-        <div class="adv-text">${adviceText}</div>
-        <div class="sim-box">
-          <div class="sim-title">${t('sim_title_puzz')}</div>
-          <div class="sim-row">
-            <span class="sim-lbl">${t('sim_obj')}</span>
-            <input type="range" class="sim-slider" min="${r.units}" max="${r.units*4}" step="${Math.max(1,Math.round(r.units/20))}" value="${Math.round(r.units*1.5)}"
-              oninput="simPuzz(this,${r.margin},${r.totalMargin},'${simId}')">
-            <span class="sim-val" id="${simId}-lbl">${Math.round(r.units*1.5)} uds</span>
-          </div>
-          <div class="sim-result">
-            <span class="sim-now">${t('sim_now_sh')} ${fmtEur(r.totalMargin)}</span>
-            <span class="sim-arrow">→</span>
-            <span class="sim-after" id="${simId}-res" style="color:${CAT.puzzle.clr}">${fmtEur(Math.round(r.units*1.5)*r.margin)}</span>
-          </div>
+  if (groups.puzzle.length) {
+    html += head('puzzle', t('adv_puzzle_hd'));
+    groups.puzzle.forEach(r => {
+      const id = 'sP' + r.id;
+      const thr = Math.ceil(view.uThr);
+      const max = Math.max(r.units * 3, Math.ceil(thr * 1.5));
+      const start = Math.min(max, Math.max(thr, Math.round(r.units * 1.5)));
+      html += card(r, t(r.margin / r.price > 0.7 ? 'adv_puzzle_top' : 'adv_puzzle_ok', { pct: pctOf(r) }), `
+        <div class="sim-title">${t('sim_title_puzzle')}</div>
+        <div class="sim-row">
+          <span class="sim-lbl">${t('sim_obj')}</span>
+          <input type="range" class="sim-slider" min="${r.units}" max="${max}" step="1" value="${start}" oninput="simPuzzle(${r.id},this.value)" aria-label="${esc(t('sim_obj'))}">
+          <span class="sim-val" id="${id}-lbl"></span>
         </div>
-      </div>`;
+        ${nowLine(r, id)}
+        <div class="sim-state" id="${id}-st"></div>`);
     });
     html += '</div>';
   }
 
-  if (cats.dog.length) {
-    html += `<div class="adv-section"><div class="adv-title">🐶 ${t('adv_dog_hd')}</div>`;
-    cats.dog.forEach(r => {
-      const marginPct = (r.price > 0 ? (r.margin / r.price) * 100 : 0).toFixed(1);
-      const adviceText = t(marginPct < 50 ? 'adv_dog_bad' : 'adv_dog_ok').replace('{pct}', marginPct);
-      const pct = tMargin > 0 ? r.totalMargin/tMargin*100 : 0;
-      html += `<div class="adv-card">
-        <div class="adv-dish"><span class="badge badge-dog">${CAT.dog.label}</span>${r.name}</div>
-        <div class="adv-text">${adviceText}</div>
-        <div class="sim-box">
-          <div class="sim-title">${t('sim_title_dog')}</div>
-          <div class="sim-result" style="margin-top:0">
-            <span class="sim-now">${t('sim_cont')} <strong>${fmt(pct,1)}%</strong></span>
-            <span class="sim-arrow">→</span>
-            <span class="sim-after" style="color:${CAT.dog.clr}">${t('sim_free')}</span>
-          </div>
+  if (groups.dog.length) {
+    html += head('dog', t('adv_dog_hd'));
+    groups.dog.forEach(r => {
+      const share = view.M > 0 ? r.totalMargin / view.M * 100 : 0;
+      const reprice = r.fc > tg ? `<div class="sim-state">${t('sim_reprice', { p: fmtEur(suggestedPrice(r)) })}</div>` : '';
+      html += card(r, t(r.margin / r.price < 0.5 ? 'adv_dog_bad' : 'adv_dog_ok', { pct: pctOf(r) }), `
+        <div class="sim-title">${t('sim_title_dog')}</div>
+        <div class="sim-result" style="margin-top:0;padding-top:0;border-top:none">
+          <span class="sim-now">${t('sim_cont', { p: '<strong>' + fmtPct(share) + '</strong>' })}</span>
+          <span class="sim-after st-neg">${t('sim_lost', { v: fmtEur(-r.totalMargin, 0) })}</span>
         </div>
-      </div>`;
+        <div class="sim-state">${t('sim_free')}</div>${reprice}`);
     });
     html += '</div>';
   }
 
-  if (!html) html = `<div class="empty"><i class="ti ti-bulb"></i><span data-i18n="empty_adv">${t('empty_adv')}</span></div>`;
   document.getElementById('adviceContent').innerHTML = html;
+
+  // Estado inicial de los simuladores
+  groups.star.forEach(r => simStar(r.id, 10));
+  groups.horse.forEach(r => simHorse(r.id));
+  groups.puzzle.forEach(r => {
+    const s = document.querySelector(`#sP${r.id}-lbl`)?.parentElement.querySelector('input');
+    if (s) simPuzzle(r.id, s.value);
+  });
 }
 
-function simStar(slider, units, margin, id) {
-  const pct = parseFloat(slider.value);
-  document.getElementById(id+'-lbl').textContent = '+'+pct+'%';
-  const gain = units * margin * (pct/100);
-  document.getElementById(id+'-res').textContent = '+' + fmtEur(gain) + ' ' + t('sim_ext');
+function simStar(id, pct) {
+  const r = simData[id]; if (!r) return;
+  pct = Number(pct);
+  document.getElementById('sS' + id + '-lbl').textContent = '+' + fmtPct(pct, 0);
+  const gain = r.totalMargin * pct / 100;
+  const el = document.getElementById('sS' + id + '-res');
+  el.textContent = fmtEur(r.totalMargin + gain, 0) + '  (+' + fmtEur(gain, 0) + ')';
+  el.className = 'sim-after';
+}
+function simHorse(id) {
+  const r = simData[id]; if (!r) return;
+  const red = Number(document.getElementById('sH' + id + '-c').value);
+  const up = Number(document.getElementById('sH' + id + '-p').value);
+  document.getElementById('sH' + id + '-lbl').textContent = '−' + fmtPct(red, 0);
+  document.getElementById('sH' + id + '-lbl2').textContent = '+' + fmtEur(up);
+  const nc = r.cost * (1 - red / 100), np = r.price + up;
+  const nm = (np - nc) * r.units, gain = nm - r.totalMargin;
+  const el = document.getElementById('sH' + id + '-res');
+  el.textContent = fmtEur(nm, 0) + '  (' + (gain >= 0 ? '+' : '') + fmtEur(gain, 0) + ')';
+  el.className = 'sim-after' + (gain < 0 ? ' st-neg' : '');
+  const nfc = nc / np;
+  const fcEl = document.getElementById('sH' + id + '-fc');
+  fcEl.textContent = t('sim_fc_new', { v: fmtPct(nfc * 100) });
+  fcEl.className = 'sim-state ' + (nfc <= targetFC() ? 'st-pos' : 'st-warn');
+}
+function applySuggested(id) {
+  const r = simData[id]; if (!r) return;
+  const up = Math.max(0, suggestedPrice(r) - r.price);
+  document.getElementById('sH' + id + '-c').value = 0;
+  const p = document.getElementById('sH' + id + '-p');
+  p.value = Math.min(Number(p.max), Math.ceil(up / 0.05 - 1e-9) * 0.05);
+  simHorse(id);
+}
+function simPuzzle(id, units) {
+  const r = simData[id]; if (!r) return;
+  units = Number(units);
+  document.getElementById('sP' + id + '-lbl').textContent = fmt(units) + ' ' + t('uds');
+  const nm = units * r.margin, gain = nm - r.totalMargin;
+  const el = document.getElementById('sP' + id + '-res');
+  el.textContent = fmtEur(nm, 0) + '  (+' + fmtEur(gain, 0) + ')';
+  el.className = 'sim-after';
+  const thr = view.uThr;
+  const st = document.getElementById('sP' + id + '-st');
+  if (units >= thr) { st.textContent = t('sim_cross', { u: fmt(Math.ceil(thr)) }); st.className = 'sim-state st-pos'; }
+  else { st.textContent = t('sim_below', { u: fmt(Math.ceil(thr) - units), t: fmt(Math.ceil(thr)) }); st.className = 'sim-state'; }
 }
 
-const horseState = {};
-function simHorse(slider, price, cost, units, id) {
-  if (!horseState[id]) horseState[id] = { costRed:10, priceUp:0 };
-  horseState[id].costRed = parseFloat(slider.value);
-  document.getElementById(id+'-lbl').textContent = '−'+horseState[id].costRed+'%';
-  _updateHorseResult(price, cost, units, id);
-}
-function simHorse2(slider, price, cost, units, id) {
-  if (!horseState[id]) horseState[id] = { costRed:10, priceUp:0 };
-  horseState[id].priceUp = parseFloat(slider.value);
-  document.getElementById(id+'-lbl2').textContent = '+'+horseState[id].priceUp.toFixed(2)+' €';
-  _updateHorseResult(price, cost, units, id);
-}
-function _updateHorseResult(price, cost, units, id) {
-  const s = horseState[id] || { costRed:0, priceUp:0 };
-  const newCost  = cost  * (1 - s.costRed/100);
-  const newPrice = price + s.priceUp;
-  const newMargin = (newPrice - newCost) * units;
-  const orig = (price - cost) * units;
-  const gain = newMargin - orig;
-  document.getElementById(id+'-res').textContent = fmtEur(newMargin) + ' (+' + fmtEur(gain) + ')';
+/* ════════════════ ARRANQUE ════════════════ */
+if (window.Chart) {
+  Chart.defaults.font.family = '"IBM Plex Mono", "Courier New", monospace';
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = '#5c6370';
 }
 
-function simPuzz(slider, margin, origMargin, id) {
-  const units = parseInt(slider.value);
-  document.getElementById(id+'-lbl').textContent = units+' uds';
-  document.getElementById(id+'-res').textContent = fmtEur(units * margin);
-}
-
-updateStaticLang();
-addDish(); // Llama a la función una vez sin datos para crear la primera fila vacía
+loadPeriods();
+const restored = load();
+if (!restored) dishes = [newDish()];
+document.getElementById('setPeriod').value = settings.period;
+document.getElementById('setMethod').value = settings.method;
+document.getElementById('setTarget').value = settings.target;
+applyLang();
+renderDishList();
+renderHistory();
+renderEmpty();
 </script>
 </body>
 </html>
